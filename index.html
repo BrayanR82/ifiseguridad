@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de prueba IFI Seguridad</title>
+    <style>
+        /* Estilos internos */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        button {
+            background-color: #ff6f61;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff3b2e;
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Página de prueba IFI Seguridad</h1>
+    <p>Total libertad de diseño y funcionalidad</p>
+
+    <button onclick="mostrarMensaje()">Haz clic aquí</button>
+    <div id="mensaje"></div>
+
+    <script>
+        // JavaScript interno
+        function mostrarMensaje() {
+            const mensajeDiv = document.getElementById('mensaje');
+            mensajeDiv.textContent = "¡Bienvenido a la página de prueba de IFI Seguridad!";
+            mensajeDiv.style.fontWeight = "bold";
+        }
+
+        // Ejemplo adicional: cambiar el fondo cada 3 segundos
+        const colores = ["#0f2027", "#203a43", "#2c5364", "#1a2a3a", "#334455"];
+        let i = 0;
+        setInterval(() => {
+            document.body.style.background = `linear-gradient(to right, ${colores[i]}, ${colores[(i+1)%colores.length]})`;
+            i = (i + 1) % colores.length;
+        }, 3000);
+    </script>
+
+</body>
+</html>
