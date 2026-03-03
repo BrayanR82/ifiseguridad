@@ -3,68 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de prueba IFI Seguridad</title>
-    <style>
-        /* Estilos internos */
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
-            text-align: center;
-            padding: 50px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px #000000;
-        }
-
-        button {
-            background-color: #ff6f61;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #ff3b2e;
-        }
-
-        #mensaje {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #ffd700;
-        }
-    </style>
+    <title>IFI Seguridad | Seguridad Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">IFI <span>Seguridad</span></a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <h1>Página de prueba IFI Seguridad</h1>
-    <p>Total libertad de diseño y funcionalidad</p>
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="fade-in">Seguridad inteligente para un mundo conectado.</h1>
+            <p class="fade-in">Sistemas avanzados de monitoreo y licencias profesionales para empresas y hogares.</p>
+            <a href="#productos" class="btn btn-primary fade-in">Comprar Software</a>
+        </div>
+    </header>
 
-    <button onclick="mostrarMensaje()">Haz clic aquí</button>
-    <div id="mensaje"></div>
+    <section id="servicios" class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Cámaras</h3>
+                    <p>Instalación y mantenimiento de hardware de alta precisión.</p>
+                </div>
+                <div class="card">
+                    <h3>Remoto</h3>
+                    <p>Configuración y acceso desde cualquier lugar del mundo.</p>
+                </div>
+                <div class="card">
+                    <h3>Monitoreo</h3>
+                    <p>Software propietario con IA para detección de amenazas.</p>
+                </div>
+                <div class="card">
+                    <h3>Soporte</h3>
+                    <p>Asistencia técnica profesional las 24 horas del día.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        // JavaScript interno
-        function mostrarMensaje() {
-            const mensajeDiv = document.getElementById('mensaje');
-            mensajeDiv.textContent = "¡Bienvenido a la página de prueba de IFI Seguridad!";
-            mensajeDiv.style.fontWeight = "bold";
-        }
+    <section id="productos" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Soluciones de Software</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="badge">Popular</span>
+                    <h3>IFI Secure Pro</h3>
+                    <p class="price">49€</p>
+                    <p>Ideal para hogares y pequeñas oficinas. Licencia de por vida.</p>
+                    <button class="btn btn-buy" onclick="buyProduct(1)">Comprar Ahora</button>
+                </div>
+                <div class="product-card">
+                    <h3>IFI Enterprise Monitor</h3>
+                    <p class="price">99€</p>
+                    <p>Control total multi-sede y analítica avanzada para empresas.</p>
+                    <button class="btn btn-buy" onclick="buyProduct(2)">Comprar Ahora</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Ejemplo adicional: cambiar el fondo cada 3 segundos
-        const colores = ["#0f2027", "#203a43", "#2c5364", "#1a2a3a", "#334455"];
-        let i = 0;
-        setInterval(() => {
-            document.body.style.background = `linear-gradient(to right, ${colores[i]}, ${colores[(i+1)%colores.length]})`;
-            i = (i + 1) % colores.length;
-        }, 3000);
-    </script>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 IFI Seguridad. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
