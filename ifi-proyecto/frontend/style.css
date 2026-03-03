@@ -1,0 +1,308 @@
+:root {
+    --white: #ffffff;
+    --black: #1d1d1f;
+    --gray-light: #f5f5f7;
+    --gray-text: #86868b;
+    --blue: #0071e3;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--black);
+    line-height: 1.5;
+    background-color: var(--white);
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.logo span { color: var(--blue); }
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.nav-links a:hover { opacity: 1; color: var(--blue); }
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 60px;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: var(--gray-text);
+    margin-bottom: 40px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 980px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0077ed;
+    transform: scale(1.05);
+}
+
+.btn-buy {
+    background: var(--black);
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-buy:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* Cards & Sections */
+.section { padding: 100px 0; }
+.bg-light { background: var(--gray-light); }
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.grid, .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card, .product-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 20px;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.product-card {
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--blue);
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.badge {
+    background: var(--gray-light);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+    padding: 40px 0;
+    text-align: center;
+    color: var(--gray-text);
+    border-top: 1px solid var(--gray-light);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--blue);
+    display: block;
+}
+
+.stat-label {
+    color: var(--gray-text);
+    font-size: 1.1rem;
+}
+
+/* Bento Grid */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 300px;
+    gap: 20px;
+}
+
+.bento-item {
+    background: var(--gray-light);
+    border-radius: 30px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: var(--transition);
+    overflow: hidden;
+    position: relative;
+}
+
+.bento-item:hover {
+    transform: scale(1.02);
+}
+
+.large {
+    grid-column: span 2;
+}
+
+.tall {
+    grid-row: span 2;
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    background: #fbfbfd;
+    padding: 40px;
+    border-radius: 25px;
+    border: 1px solid #eee;
+}
+
+.quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* FAQ Item */
+.faq-item {
+    border-bottom: 1px solid #eee;
+    padding: 25px 0;
+    cursor: pointer;
+}
+
+.faq-question {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Final CTA */
+.final-cta {
+    background: var(--black);
+    color: white;
+    border-radius: 40px;
+    padding: 80px 40px;
+    text-align: center;
+    margin: 100px 0;
+}
+
+.final-cta h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+    
+    .large,
+    .tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
