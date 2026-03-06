@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     servicios: Servicio;
+    productos: Producto;
+    contactos: Contacto;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     servicios: ServiciosSelect<false> | ServiciosSelect<true>;
+    productos: ProductosSelect<false> | ProductosSelect<true>;
+    contactos: ContactosSelect<false> | ContactosSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -202,6 +206,46 @@ export interface Servicio {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productos".
+ */
+export interface Producto {
+  id: string;
+  nombre: string;
+  precio: number;
+  stock: number;
+  imagen: string | Media;
+  descripcion?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactos".
+ */
+export interface Contacto {
+  id: string;
+  nombre: string;
+  email: string;
+  mensaje: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -235,6 +279,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'servicios';
         value: string | Servicio;
+      } | null)
+    | ({
+        relationTo: 'productos';
+        value: string | Producto;
+      } | null)
+    | ({
+        relationTo: 'contactos';
+        value: string | Contacto;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -341,6 +393,30 @@ export interface ServiciosSelect<T extends boolean = true> {
   imagen?: T;
   resumen?: T;
   detalles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productos_select".
+ */
+export interface ProductosSelect<T extends boolean = true> {
+  nombre?: T;
+  precio?: T;
+  stock?: T;
+  imagen?: T;
+  descripcion?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactos_select".
+ */
+export interface ContactosSelect<T extends boolean = true> {
+  nombre?: T;
+  email?: T;
+  mensaje?: T;
   updatedAt?: T;
   createdAt?: T;
 }

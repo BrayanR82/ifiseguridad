@@ -1,0 +1,31 @@
+services:
+  payload-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/ifi-seguridad
+      - PAYLOAD_SECRET=ifi_seguridad_secreto_2026
+      - PAYLOAD_CONFIG_PATH=src/payload.config.ts
+    depends_on:
+      - mongo
+    volumes:
+      - ./backend/media:/home/node/app/backend/media
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # NUEVO: Tu servicio de Frontend (Nginx)
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+
+volumes:
+  mongo-data:

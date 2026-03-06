@@ -2,6 +2,46 @@
  * IFI Seguridad - Frontend Logic con Conexión a CMS
  */
 
+// 0. FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA
+function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (hamburger && mobileMenu) {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    }
+}
+
+// Cerrar menú al hacer click fuera
+document.addEventListener('click', function(event) {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (hamburger && mobileMenu) {
+        if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+    }
+});
+
+// Efecto de scroll en el navbar
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+        navbar.style.padding = '10px';
+    } else {
+        navbar.style.padding = '20px';
+    }
+    
+    lastScroll = currentScroll;
+});
+
 // 1. FUNCIÓN PARA CARGAR SERVICIOS DESDE PAYLOAD CMS
 async function cargarServiciosDesdeCMS() {
     try {
@@ -48,6 +88,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Función toggleFaq para uso con onclick
+function toggleFaq(element) {
+    // Si element es el faq-item directamente
+    const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
+    if (!item) return;
+    
+    const isActive = item.classList.contains('active');
+    
+    // Cerrar todos los items
+    document.querySelectorAll('.faq-item').forEach(faqItem => {
+        faqItem.classList.remove('active');
+    });
+    
+    // Abrir el item actual si estaba cerrado
+    if (!isActive) {
+        item.classList.add('active');
+    }
+}
 
 // 3. EJECUTAR AL CARGAR
 document.addEventListener('DOMContentLoaded', () => {
