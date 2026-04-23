@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFI Seguridad | Seguridad Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <a href="index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
+            <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#productos" class="nav-link">Planes</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="#inicio" onclick="toggleMenu()">Inicio</a></li>
+            <li><a href="#tecnologia" onclick="toggleMenu()">Tecnología</a></li>
+            <li><a href="#servicios" onclick="toggleMenu()">Servicios</a></li>
+            <li><a href="#productos" onclick="toggleMenu()">Planes</a></li>
+            <li><a href="tienda.html" onclick="toggleMenu()">Tienda</a></li>
+            <li><a href="contacto.html" onclick="toggleMenu()">Contacto</a></li>
+        </ul>
+    </div>
+
+    <header id="inicio" class="hero">
+        <div class="hero-content container" style="position: relative; z-index: 1;">
+            <div class="fade-in" style="display: inline-block; background: rgba(0, 33, 120, 0.08); border-radius: 50px; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; color: var(--blue); font-weight: 600;">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1 class="fade-in" style="margin-top: 20px;">La seguridad del futuro,<br>diseñada para hoy.</h1>
+            <p class="fade-in" style="font-size: 1.35rem; margin-bottom: 45px; max-width: 650px; margin-left: auto; margin-right: auto;">Protección inteligente que aprende, se adapta y te mantiene al mando. Monitoreo 24/7 con tecnología IA que distingue lo que importa.</p>
+            <div class="fade-in" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#productos" class="btn btn-primary" style="padding: 16px 40px; font-size: 1.05rem; box-shadow: 0 8px 24px rgba(0, 33, 120, 0.3);">Ver Soluciones</a>
+                <a href="contacto.html" class="btn" style="background: white; color: var(--black); border: 2px solid var(--gray-light); padding: 14px 40px; font-size: 1.05rem;">Hablar con Experto</a>
+            </div>
+        </div>
+        <div style="position: absolute; top: 20%; left: 5%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0, 33, 120, 0.1), transparent); border-radius: 50%; filter: blur(40px); pointer-events: none;"></div>
+        <div style="position: absolute; bottom: 15%; right: 5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 33, 120, 0.08), transparent); border-radius: 50%; filter: blur(50px); pointer-events: none;"></div>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div style="padding: 20px; border-radius: 20px; background: linear-gradient(135deg, rgba(0, 33, 120, 0.08), rgba(0, 33, 120, 0.03)); border: 1px solid rgba(0, 33, 120, 0.1);">
+                <span class="stat-number">99.9%</span>
+                <span class="stat-label">Uptime garantizado</span>
+                <div style="font-size: 2.5rem; margin-top: 15px; opacity: 0.3;">⚡</div>
+            </div>
+            <div style="padding: 20px; border-radius: 20px; background: linear-gradient(135deg, rgba(0, 33, 120, 0.08), rgba(0, 33, 120, 0.03)); border: 1px solid rgba(0, 33, 120, 0.1);">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Soporte en vivo</span>
+                <div style="font-size: 2.5rem; margin-top: 15px; opacity: 0.3;">🎯</div>
+            </div>
+            <div style="padding: 20px; border-radius: 20px; background: linear-gradient(135deg, rgba(0, 33, 120, 0.08), rgba(0, 33, 120, 0.03)); border: 1px solid rgba(0, 33, 120, 0.1);">
+                <span class="stat-number">15k+</span>
+                <span class="stat-label">Sistemas protegidos</span>
+                <div style="font-size: 2.5rem; margin-top: 15px; opacity: 0.3;">🔒</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="servicios" class="section bg-light">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 class="section-title">Servicios pensados para ti</h2>
+                <p style="color: var(--gray-text); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Acompañamiento completo desde la instalación hasta el monitoreo diario con expertos.</p>
+            </div>
+            <div class="grid">
+                <div class="card" style="border: 1px solid rgba(0,33,120,0.1); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; right: 0; font-size: 80px; opacity: 0.08;">👷</div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🔧</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Instalación Profesional</h3>
+                        <p style="color: var(--gray-text); line-height: 1.7;">Despliegue sin cables visibles, configuración optimizada y test completo de sistema.</p>
+                    </div>
+                </div>
+                <div class="card" style="border: 1px solid rgba(0,33,120,0.1); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; right: 0; font-size: 80px; opacity: 0.08;">🌍</div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🌐</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Acceso Global</h3>
+                        <p style="color: var(--gray-text); line-height: 1.7;">Visualiza tus cámaras desde cualquier lugar del mundo. Streaming en vivo sin lag.</p>
+                    </div>
+                </div>
+                <div class="card" style="border: 1px solid rgba(0,33,120,0.1); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; right: 0; font-size: 80px; opacity: 0.08;">🔔</div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🚨</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Smart Alerts</h3>
+                        <p style="color: var(--gray-text); line-height: 1.7;">Notificaciones inteligentes que solo te avisan cuando algo realmente importa.</p>
+                    </div>
+                </div>
+                <div class="card" style="border: 1px solid rgba(0,33,120,0.1); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; right: 0; font-size: 80px; opacity: 0.08;">💬</div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">☎️</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Soporte 24/7</h3>
+                        <p style="color: var(--gray-text); line-height: 1.7;">Equipo técnico disponible siempre. Resolución de incidencias en menos de 2 horas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container" style="max-width: 900px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                <p style="color: var(--gray-text); font-size: 1.05rem;">Empresas y familias que confían en nuestra tecnología</p>
+            </div>
+            <div class="grid">
+                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="quote">"La transición a IFI Secure fue increíblemente sencilla. La interfaz es tan intuitiva como un smartphone. Nuestro equipo se adaptó en cuestión de horas."</p>
+                    <p class="author">Carlos R.</p>
+                    <p style="font-size: 0.85rem; color: var(--gray-text);">Director de Operaciones, Empresa de Logística</p>
+                </div>
+                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="quote">"Por fin puedo dormir tranquilo sabiendo que mi hogar está bajo vigilancia inteligente. Las notificaciones son precisas y no molestas."</p>
+                    <p class="author">Elena G.</p>
+                    <p style="font-size: 0.85rem; color: var(--gray-text);">Propietaria, Distrito 3</p>
+                </div>
+                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="quote">"El soporte técnico es excepcional. Tuve un problema a las 3 AM y en 45 minutos estava todo resuelto. Muy recomendado."</p>
+                    <p class="author">Marco T.</p>
+                    <p style="font-size: 0.85rem; color: var(--gray-text);">Gerente de Seguridad, Retail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="productos" class="section bg-light">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 45px;">
+                <h2 class="section-title">Planes que se adaptan a ti</h2>
+                <p style="color: var(--gray-text); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Elige la solución perfecta para tu hogar o negocio</p>
+            </div>
+            <div class="product-grid" style="gap: 40px; max-width: 1000px; margin: 0 auto;">
+                <div class="product-card" style="box-shadow: 0 8px 30px rgba(0,0,0,0.08); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(0,33,120,0.05), transparent); border-radius: 50%; pointer-events: none;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="text-align: center; margin-bottom: 25px;">
+                            <span class="badge" style="background: rgba(0,33,120,0.1); color: var(--blue); font-weight: 600;">Para Hogares</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px;">IFI Secure Pro</h3>
+                        <p style="color: var(--gray-text); margin-bottom: 30px; min-height: 50px;">"Protección básica para toda la familia con almacenamiento en la nube"</p>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(0,33,120,0.05), transparent); padding: 20px; border-radius: 15px; margin-bottom: 25px;">
+                            <div class="price" style="margin: 0;">Gratis*</div>
+                            <small style="color: var(--gray-text); font-size: 0.85rem;">*Al contratar instalación</small>
+                        </div>
+                        
+                        <ul style="list-style: none; padding: 0; margin-bottom: 30px; color: var(--gray-text); line-height: 2.2;">
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Hasta 4 cámaras</strong></li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Grabación 24/7</strong></li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>30 días</strong> en la nube</li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Detección inteligente</strong></li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>App móvil</strong> iOS y Android</li>
+                            <li><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Soporte</strong> estándar</li>
+                        </ul>
+                        
+                        <a href="contacto.html" class="btn btn-buy" style="background: var(--black);">Comenzar Ahora</a>
+                    </div>
+                </div>
+
+                <div class="product-card" style="box-shadow: 0 12px 40px rgba(0,33,120,0.15); border: 2px solid var(--blue) !important; transform: translateY(-10px); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(90deg, var(--blue), #001650); color: white; padding: 10px; text-align: center; font-weight: 600; font-size: 0.9rem;">MÁS POPULAR</div>
+                    <div style="position: absolute; top: 0; right: 0; width: 250px; height: 250px; background: radial-gradient(circle, rgba(0,33,120,0.08), transparent); border-radius: 50%; pointer-events: none;"></div>
+                    
+                    <div style="position: relative; z-index: 1; padding-top: 30px;">
+                        <div style="text-align: center; margin-bottom: 25px;">
+                            <span class="badge" style="background: rgba(0,33,120,0.15); color: var(--blue); font-weight: 600;">Para Empresas</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px;">IFI Enterprise</h3>
+                        <p style="color: var(--gray-text); margin-bottom: 30px; min-height: 50px;">"Solución completa con monitoreo avanzado y soporte prioritario"</p>
+                        
+                        <div style="background: linear-gradient(135deg, var(--blue), #001650); color: white; padding: 20px; border-radius: 15px; margin-bottom: 25px;">
+                            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">Personalizado</div>
+                            <small style="opacity: 0.9;">Según tu escala</small>
+                        </div>
+                        
+                        <ul style="list-style: none; padding: 0; margin-bottom: 30px; color: var(--gray-text); line-height: 2.2;">
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Cámaras ilimitadas</strong></li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Almacenamiento</strong> ilimitado</li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Análisis avanzado</strong></li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Integración</strong> con sistemas</li>
+                            <li style="margin-bottom: 10px;"><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Acceso API</strong></li>
+                            <li><span style="color: var(--blue); font-weight: 700;">•</span> <strong>Soporte prioritario</strong> 24/7</li>
+                        </ul>
+                        
+                        <a href="contacto.html" class="btn btn-primary" style="width: 100%; padding: 16px; margin-top: 20px;">Hablar con Ventas</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px;">
+                <div style="text-align: center; margin-bottom: 45px;">
+                    <h2 class="section-title">Incluido en todos nuestros planes</h2>
+                    <p style="color: var(--gray-text); font-size: 1.05rem; max-width: 600px; margin: 0 auto;">Características fundamentales que garantizan la máxima seguridad y comodidad</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 30px;">
+                    <!-- Característica 1 -->
+                    <div style="background: linear-gradient(135deg, rgba(0,33,120,0.03), rgba(0,33,120,0.01)); padding: 30px; border-radius: 16px; border: 1px solid rgba(0,33,120,0.1); transition: var(--transition);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,33,120,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700; color: var(--blue);">99.9%</div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: var(--black);">Disponibilidad Garantizada</h4>
+                        <p style="color: var(--gray-text); font-size: 0.95rem; line-height: 1.6;">Monitoreo ininterrumpido 24/7 con SLA garantizado y redundancia en servidores</p>
+                    </div>
+                    
+                    <!-- Característica 2 -->
+                    <div style="background: linear-gradient(135deg, rgba(0,33,120,0.03), rgba(0,33,120,0.01)); padding: 30px; border-radius: 16px; border: 1px solid rgba(0,33,120,0.1); transition: var(--transition);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,33,120,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700; color: var(--blue);">AES-256</div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: var(--black);">Encriptación Militar</h4>
+                        <p style="color: var(--gray-text); font-size: 0.95rem; line-height: 1.6;">Protección de extremo a extremo en tus datos, transmisiones y almacenamiento</p>
+                    </div>
+                    
+                    <!-- Característica 3 -->
+                    <div style="background: linear-gradient(135deg, rgba(0,33,120,0.03), rgba(0,33,120,0.01)); padding: 30px; border-radius: 16px; border: 1px solid rgba(0,33,120,0.1); transition: var(--transition);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,33,120,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700; color: var(--blue);">3</div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: var(--black);">Plataformas Nativas</h4>
+                        <p style="color: var(--gray-text); font-size: 0.95rem; line-height: 1.6;">Control total desde iOS, Android y Web. Sincronización instantánea en todos tus dispositivos</p>
+                    </div>
+                    
+                    <!-- Característica 4 -->
+                    <div style="background: linear-gradient(135deg, rgba(0,33,120,0.03), rgba(0,33,120,0.01)); padding: 30px; border-radius: 16px; border: 1px solid rgba(0,33,120,0.1); transition: var(--transition);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,33,120,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700; color: var(--blue);">< 50ms</div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: var(--black);">Latencia Ultra Baja</h4>
+                        <p style="color: var(--gray-text); font-size: 0.95rem; line-height: 1.6;">Streaming en vivo sin lag desde cualquier lugar del mundo con conexiones óptimas</p>
+                    </div>
+                    
+                    <!-- Característica 5 -->
+                    <div style="background: linear-gradient(135deg, rgba(0,33,120,0.03), rgba(0,33,120,0.01)); padding: 30px; border-radius: 16px; border: 1px solid rgba(0,33,120,0.1); transition: var(--transition);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,33,120,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700; color: var(--blue);">24/7</div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: var(--black);">Soporte Profesional</h4>
+                        <p style="color: var(--gray-text); font-size: 0.95rem; line-height: 1.6;">Equipo técnico siempre disponible. Resolución garantizada en menos de 2 horas</p>
+                    </div>
+                    
+                    <!-- Característica 6 -->
+                    <div style="background: linear-gradient(135deg, rgba(0,33,120,0.03), rgba(0,33,120,0.01)); padding: 30px; border-radius: 16px; border: 1px solid rgba(0,33,120,0.1); transition: var(--transition);" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,33,120,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700; color: var(--blue);">API</div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: var(--black);">Integración Abierta</h4>
+                        <p style="color: var(--gray-text); font-size: 0.95rem; line-height: 1.6;">REST API documentada para integración con tus sistemas existentes. Webhooks incluidos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container" style="max-width: 850px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <p style="color: var(--gray-text); font-size: 1.05rem;">Resolvemos tus dudas sobre nuestra plataforma</p>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Es compatible con mis cámaras actuales?</span> <span class="faq-icon">+</span></div>
+                <div class="faq-answer">Sí, IFI Seguridad es compatible con la mayoría de cámaras IP del mercado. Nuestro equipo técnico puede evaluar tu sistema actual sin costo y determinar la mejor forma de integración. Además, ofrecemos adaptadores y conversores para modelos más antiguos.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Cómo funciona el almacenamiento en la nube?</span> <span class="faq-icon">+</span></div>
+                <div class="faq-answer">Todas las grabaciones se envían automáticamente a servidores seguros con encriptación de extremo a extremo. Puedes acceder a ellas desde cualquier dispositivo durante el período de retención de tu plan (30 días para Pro, ilimitado para Enterprise). La transferencia es automática y no requiere configuración.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Tienen servicio de respuesta física?</span> <span class="faq-icon">+</span></div>
+                <div class="faq-answer">Sí, contamos con convenios con empresas de seguridad física en las principales ciudades. Al detectarse una alarma crítica, nuestro centro de monitoreo puede coordinar el envío de personal especializado a tu ubicación en cuestión de minutos. Este servicio se contrata por separado.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Qué pasa si se corta internet?</span> <span class="faq-icon">+</span></div>
+                <div class="faq-answer">El sistema continúa grabando localmente en el almacenamiento interno de las cámaras. Cuando la conexión se restablece, todo se sincroniza automáticamente a la nube. Recibirás una notificación si se detecta una desconexión prolongada.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Cuánto cuesta la instalación?</span> <span class="faq-icon">+</span></div>
+                <div class="faq-answer">Ofrecemos instalación profesional desde $799. El costo varía según la cantidad de cámaras, cableado requerido y complejidad del proyecto. Realizamos una consulta gratuita para proporcionarte un presupuesto exacto.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="final-cta fade-in" style="background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,33,120,0.15), transparent); border-radius: 50%; pointer-events: none;"></div>
+            <div style="position: absolute; bottom: -80px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,33,120,0.1), transparent); border-radius: 50%; pointer-events: none;"></div>
+            
+            <div style="position: relative; z-index: 1;">
+                <h2 style="font-size: 2.8rem; margin-bottom: 15px;">Listo para sentirte seguro.</h2>
+                <p style="margin-bottom: 30px; opacity: 0.85; font-size: 1.1rem;">Únete a más de 5,000 familias y empresas que confían en IFI Seguridad para proteger lo que más importa.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="contacto.html" class="btn" style="background: white; color: var(--black); padding: 16px 40px; font-size: 1.05rem; font-weight: 600;">Empezar Ahora</a>
+                    <a href="#productos" class="btn" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 16px 40px; font-size: 1.05rem;">Ver Planes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <img src="img/logoifi.png" alt="IFI Seguridad" style="width: 50px; height: auto; margin-bottom: 12px;">
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem;">IFI Seguridad</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Protección inteligente para tu hogar y negocio.</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                        <strong style="color: rgba(255,255,255,0.8);">Teléfono:</strong> +34 900 123 456<br>
+                        <strong style="color: rgba(255,255,255,0.8);">Email:</strong> contacto@ifiseguridad.es
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Enlaces</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Inicio</a></li>
+                        <li style="margin-bottom: 10px;"><a href="index.html#productos" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Planes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="tienda.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Tienda</a></li>
+                        <li><a href="contacto.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Síguenos</h4>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">f</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">𝕏</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">In</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0;">© 2026 IFI Seguridad. Elevando los estándares de protección.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Indicador de sección activa */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), #001650);
+            border-radius: 2px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+    <script>
+        // Detector de sección activa en el viewport
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('section[id], header[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= sectionTop - 150) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Ejecutar al cargar y al hacer scroll
+        window.addEventListener('scroll', updateActiveSection);
+        window.addEventListener('load', updateActiveSection);
+    </script>
+</body>
+</html>
