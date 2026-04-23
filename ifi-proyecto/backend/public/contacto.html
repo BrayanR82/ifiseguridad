@@ -220,11 +220,12 @@
         };
 
         try {
-            // 3. Petición real a Payload
-            const respuesta = await fetch('http://localhost:3000/api/contactos', {
+            // 3. Peticion real a Formspree
+            const respuesta = await fetch('https://formspree.io/f/mpqkovrj', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(datos)
             });
@@ -235,19 +236,19 @@
                 btn.classList.add('success-btn');
                 btn.innerText = "¡Enviado!";
 
-                setTimeout(() => {
-                    formWrapper.style.display = 'none';
-                    successScreen.style.display = 'block';
-                    
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 },
-                        colors: ['#002178', '#2ecc71', '#ffffff']
-                    });
-                }, 600);
+                formWrapper.style.display = 'none';
+                successScreen.style.display = 'block';
+
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#002178', '#2ecc71', '#ffffff']
+                });
             } else {
-                throw new Error("Error en el servidor");
+                const errorData = await respuesta.json().catch(() => null);
+                const mensajeError = errorData?.errors?.[0]?.message || "Error al enviar el formulario";
+                throw new Error(mensajeError);
             }
 
         } catch (error) {
