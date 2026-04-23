@@ -1,6 +1,9 @@
 /**
- * IFI Seguridad - Lógica de la Tienda (Versión Adaptada a URL Externa)
+ * IFI Seguridad - Lógica de la Tienda (Versión Ultra-Segura)
  */
+
+// --- CONFIGURACIÓN ---
+const BASE_URL = 'https://ifiseguridad.vercel.app';
 
 // --- UTILIDADES ---
 function toggleMenu() {
@@ -12,15 +15,6 @@ function toggleMenu() {
     }
 }
 
-document.addEventListener('click', (e) => {
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (hamburger && mobileMenu && !hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-    }
-});
-
 // --- VARIABLES GLOBALES ---
 const grid = document.getElementById('productos-grid');
 const buscador = document.getElementById('buscador');
@@ -29,23 +23,21 @@ let carrito = JSON.parse(localStorage.getItem('carrito_ifi')) || [];
 // --- 1. CARGAR PRODUCTOS ---
 async function cargarProductos(filtro = '') {
     try {
-        // Usamos la ruta absoluta de tu Vercel para evitar fallos de conexión
-        const baseUrl = 'https://ifiseguridad.vercel.app'; 
         const url = filtro 
-            ? `${baseUrl}/api/productos?where[nombre][contains]=${filtro}`
-            : `${baseUrl}/api/productos`;
+            ? `${BASE_URL}/api/productos?where[nombre][contains]=${filtro}`
+            : `${BASE_URL}/api/productos`;
 
         const response = await fetch(url);
         if (!response.ok) throw new Error('Error en la respuesta del servidor');
         
         const data = await response.json();
 
-        if (data.docs) {
+        if (data && data.docs) {
             renderizarProductos(data.docs);
         }
     } catch (error) {
         console.error("Error al conectar con la API:", error);
-        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red;">Error al conectar con el servidor. Por favor, intenta más tarde.</p>';
+        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red;">Error al cargar productos. Por favor, intenta más tarde.</p>';
     }
 }
 
@@ -58,26 +50,29 @@ function renderizarProductos(productos) {
     }
 
     grid.innerHTML = productos.map(prod => {
-        // CAMBIO CLAVE: Ahora leemos 'imagenUrl' directamente del campo de texto
-        // Si el campo está vacío, usamos una imagen por defecto
+        // PROTECCIÓN: Imagen
         const urlImagen = prod.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
+        
+        // PROTECCIÓN: Precio (Si no hay precio, ponemos 0 para que no falle toLocaleString)
+        const precioSeguro = prod.precio || 0;
 
-        let descripcion = '';
+        // PROTECCIÓN: Descripción
+        let descripcionHtml = '';
         if (prod.descripcion) {
             const textoPlano = typeof prod.descripcion === 'string' ? prod.descripcion : 
                                (prod.descripcion.root?.children?.[0]?.children?.[0]?.text || '');
             const textoCorto = textoPlano.substring(0, 80) + (textoPlano.length > 80 ? '...' : '');
-            descripcion = `<p style="color: var(--gray-text); font-size: 0.9rem; line-height: 1.6;">${textoCorto}</p>`;
+            descripcionHtml = `<p style="color: var(--gray-text); font-size: 0.9rem;">${textoCorto}</p>`;
         }
 
         return `
             <div class="product-card" onclick="abrirProductoModal('${prod.id}')" style="cursor: pointer;">
-                <img src="${urlImagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Error+al+cargar'">
+                <img src="${urlImagen}" alt="${prod.nombre || 'Producto'}" onerror="this.src='https://via.placeholder.com/300x200?text=Error+Imagen'">
                 <div class="product-info">
-                    <h3>${prod.nombre}</h3>
-                    ${descripcion}
-                    <p class="product-price">$${prod.precio.toLocaleString()}</p>
-                    <p class="stock-badge">✓ ${prod.stock} disponibles</p>
+                    <h3>${prod.nombre || 'Producto sin nombre'}</h3>
+                    ${descripcionHtml}
+                    <p class="product-price">$${precioSeguro.toLocaleString()}</p>
+                    <p class="stock-badge">✓ ${prod.stock || 0} disponibles</p>
                     <button class="btn-comprar" onclick="agregarAlCarrito('${prod.id}'); event.stopPropagation();">
                         🛒 Añadir al carrito
                     </button>
@@ -105,9 +100,9 @@ function actualizarInterfazCarrito() {
     }
 
     carrito.forEach((item, index) => {
-        const subtotal = item.precio * item.cantidad;
+        const precioItem = item.precio || 0;
+        const subtotal = precioItem * item.cantidad;
         total += subtotal;
-        // CAMBIO: También aquí leemos imagenUrl
         const urlImagen = item.imagenUrl || 'https://via.placeholder.com/50x50?text=Error';
 
         contenedor.innerHTML += `
@@ -115,7 +110,7 @@ function actualizarInterfazCarrito() {
                 <img src="${urlImagen}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                 <div style="flex: 1;">
                     <h4 style="margin: 0; font-size: 0.9rem;">${item.nombre}</h4>
-                    <p style="margin: 5px 0; font-weight: bold;">$${item.precio.toLocaleString()}</p>
+                    <p style="margin: 5px 0; font-weight: bold;">$${precioItem.toLocaleString()}</p>
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <button onclick="cambiarCantidad('${item.id}', -1)">−</button>
                         <span>${item.cantidad}</span>
@@ -146,7 +141,7 @@ async function agregarAlCarrito(id) {
         abrirCarrito();
     } else {
         try {
-            const res = await fetch(`https://ifiseguridad.vercel.app/api/productos/${id}`);
+            const res = await fetch(`${BASE_URL}/api/productos/${id}`);
             const producto = await res.json();
             producto.cantidad = 1;
             carrito.push(producto);
@@ -164,21 +159,21 @@ let cantidadModalActual = 1;
 
 async function abrirProductoModal(productoId) {
     try {
-        const response = await fetch(`https://ifiseguridad.vercel.app/api/productos/${productoId}`);
+        const response = await fetch(`${BASE_URL}/api/productos/${productoId}`);
         const producto = await response.json();
         
         productoModalActual = producto;
         cantidadModalActual = 1;
 
-        // CAMBIO: Leemos imagenUrl para el modal
         const urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
+        const precioModal = producto.precio || 0;
         const desc = typeof producto.descripcion === 'string' ? producto.descripcion : 
                      (producto.descripcion?.root?.children?.[0]?.children?.[0]?.text || 'Sin descripción');
 
         document.getElementById('modal-imagen').src = urlImagen;
-        document.getElementById('modal-titulo').innerText = producto.nombre;
-        document.getElementById('modal-precio').innerText = `$${producto.precio.toLocaleString()}`;
-        document.getElementById('modal-stock').innerHTML = `✓ ${producto.stock} disponibles`;
+        document.getElementById('modal-titulo').innerText = producto.nombre || 'Sin nombre';
+        document.getElementById('modal-precio').innerText = `$${precioModal.toLocaleString()}`;
+        document.getElementById('modal-stock').innerHTML = `✓ ${producto.stock || 0} disponibles`;
         document.getElementById('modal-descripcion').innerText = desc;
         document.getElementById('modal-cantidad-valor').innerText = '1';
 
@@ -189,17 +184,25 @@ async function abrirProductoModal(productoId) {
     }
 }
 
-// --- FUNCIONES DE INTERFAZ ---
+// --- FUNCIONES DE NAVEGACIÓN ---
 function abrirCarrito() {
-    document.getElementById('carrito-sidebar').style.right = '0';
-    document.getElementById('carrito-overlay').style.display = 'block';
-    setTimeout(() => document.getElementById('carrito-overlay').style.opacity = '1', 10);
+    const sidebar = document.getElementById('carrito-sidebar');
+    const overlay = document.getElementById('carrito-overlay');
+    if(sidebar) sidebar.style.right = '0';
+    if(overlay) {
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.style.opacity = '1', 10);
+    }
 }
 
 function cerrarCarrito() {
-    document.getElementById('carrito-sidebar').style.right = '-420px';
-    document.getElementById('carrito-overlay').style.opacity = '0';
-    setTimeout(() => document.getElementById('carrito-overlay').style.display = 'none', 300);
+    const sidebar = document.getElementById('carrito-sidebar');
+    const overlay = document.getElementById('carrito-overlay');
+    if(sidebar) sidebar.style.right = '-420px';
+    if(overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 300);
+    }
 }
 
 function cerrarProductoModal(event) {
@@ -212,13 +215,16 @@ function cerrarProductoModal(event) {
 function irAPagar() {
     if (carrito.length === 0) return alert("El carrito está vacío");
     let mensaje = "*IFI Seguridad - Pedido*\n\n";
-    carrito.forEach(item => mensaje += `*${item.cantidad}x* ${item.nombre} - $${(item.precio * item.cantidad).toLocaleString()}\n`);
-    const total = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+    carrito.forEach(item => {
+        const p = item.precio || 0;
+        mensaje += `*${item.cantidad}x* ${item.nombre} - $${(p * item.cantidad).toLocaleString()}\n`;
+    });
+    const total = carrito.reduce((acc, item) => acc + ((item.precio || 0) * item.cantidad), 0);
     mensaje += `\n*TOTAL: $${total.toLocaleString()}*`;
     window.open(`https://wa.me/34641351122?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
-// INICIALIZACIÓN
+// --- EVENTOS ---
 if (buscador) buscador.addEventListener('input', (e) => cargarProductos(e.target.value));
 
 document.addEventListener('DOMContentLoaded', () => {
