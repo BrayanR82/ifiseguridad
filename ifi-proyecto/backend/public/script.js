@@ -129,24 +129,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Aplicar estilos al modal
+            
+
+            // Dentro de la función verMas(id), busca la parte de los estilos:
+
             Object.assign(modal.style, {
-                position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-                backgroundColor: '#fff', padding: '30px', borderRadius: '12px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.3)', zIndex: '1000',
-                maxWidth: '600px', width: '90%', border: '2px solid #007bff',
-                maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-                overflowY: 'auto', boxSizing: 'border-box'
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                backgroundColor: '#fff',
+                padding: '30px',
+                borderRadius: '12px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                zIndex: '1000',
+                maxWidth: '500px', // Un poco más estrecho para que sea cómodo
+                width: '90%',
+                maxHeight: '80vh', // Máximo 80% de la altura de la pantalla
+                display: 'block',  // Cambiamos flex por block para mejor manejo de scroll
+                overflowY: 'auto', // Scroll vertical si el texto es largo
+                overflowX: 'hidden', // BLOQUEA el scroll horizontal
+                boxSizing: 'border-box',
+                wordBreak: 'break-word' // ROMPE palabras largas (como eeeeeee...)
             });
 
+            // También asegúrate de que el contenedor de detalles tenga el ajuste:
             modal.innerHTML = `
-                <div style="width: 100%;">
-                    <h2 style="margin-top: 0; color: #333;">${servicio.titulo}</h2>
-                    <div style="color: #666; line-height: 1.6; margin-bottom: 20px;">
+                <div style="width: 100%; overflow-x: hidden;">
+                    <h2 style="margin-top: 0; color: #333; word-break: break-word;">${servicio.titulo}</h2>
+                    <div style="color: #666; line-height: 1.6; margin-bottom: 20px; word-break: break-word;">
                         <strong>Resumen:</strong> ${servicio.resumen || 'Sin resumen'}
                     </div>
                     <div style="border-top: 1px solid #eee; padding-top: 15px;">
                         <h4 style="margin-bottom: 10px;">Información:</h4>
-                        <div class="detalles-contenido" style="color: #444; line-height: 1.6;">
+                        <div class="detalles-contenido" style="color: #444; line-height: 1.6; word-break: break-word;">
                             ${detallesHTML}
                         </div>
                     </div>
@@ -155,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </button>
                 </div>
             `;
+
 
             const overlay = document.createElement('div');
             overlay.id = 'modal-overlay';
