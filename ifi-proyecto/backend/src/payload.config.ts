@@ -5,10 +5,6 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-// IMPORTACIONES CORREGIDAS PARA CLOUDINARY
-import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
-import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/dist/adapters/cloudinary/index.js'
-
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Servicios } from './collections/Servicios'
@@ -19,70 +15,23 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  // Eliminamos serverURL fijo para que use el dominio de Vercel automáticamente
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-
   collections: [Users, Media, Servicios, Productos, Contactos],
-
-  cors: [
-    'http://localhost:3000',
-    'http://localhost:5500',
-    'https://ifiseguridad.vercel.app',
-    'https://ifiseguridad-kmp4m9bzv-brayanr82s-projects.vercel.app',
-<<<<<<< HEAD
-    '*', 
-=======
-
->>>>>>> parent of 381d978 (tienda js)
-  ],
-
-  csrf: [
-<<<<<<< HEAD
-    'https://ifiseguridad.vercel.app',
-    'https://ifiseguridad-kmp4m9bzv-brayanr82s-projects.vercel.app'
-=======
-
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
-    'http://localhost:3001', // <--- TAMBIÉN AQUÍ
-    'http://127.0.0.1:3001',
-    'http://127.0.0.1:3000', 
-    'http://localhost:8080',
-
->>>>>>> parent of 381d978 (tienda js)
-  ],
-
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
-
+  secret: process.env.PAYLOAD_SECRET || 'temp-secret',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
-
   sharp,
-
-  plugins: [
-    cloudStorage({
-      collections: {
-        'media': {
-          adapter: cloudinaryAdapter({
-            config: {
-              cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-              api_key: process.env.CLOUDINARY_API_KEY,
-              api_secret: process.env.CLOUDINARY_API_SECRET,
-            },
-          }),
-        },
-      },
-    }),
-  ],
+  cors: ['https://ifiseguridad.vercel.app', 'http://localhost:3000', '*'],
+  csrf: ['https://ifiseguridad.vercel.app'],
+  plugins: [], // <--- Vaciamos los plugins
 })
