@@ -7,7 +7,7 @@ import sharp from 'sharp'
 
 // IMPORTACIONES PARA CLOUDINARY
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
-import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/cloudinary'
+import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/adapters/cloudinary'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
