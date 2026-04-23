@@ -34,12 +34,27 @@ export default buildConfig({
     'http://localhost:5500',
     'https://ifiseguridad.vercel.app',
     'https://ifiseguridad-kmp4m9bzv-brayanr82s-projects.vercel.app',
+<<<<<<< HEAD
     '*', 
+=======
+
+>>>>>>> parent of 381d978 (tienda js)
   ],
 
   csrf: [
+<<<<<<< HEAD
     'https://ifiseguridad.vercel.app',
     'https://ifiseguridad-kmp4m9bzv-brayanr82s-projects.vercel.app'
+=======
+
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+    'http://localhost:3001', // <--- TAMBIÉN AQUÍ
+    'http://127.0.0.1:3001',
+    'http://127.0.0.1:3000', 
+    'http://localhost:8080',
+
+>>>>>>> parent of 381d978 (tienda js)
   ],
 
   editor: lexicalEditor(),
