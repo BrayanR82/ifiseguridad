@@ -7,9 +7,7 @@ import sharp from 'sharp'
 
 // IMPORTACIONES CORREGIDAS PARA CLOUDINARY
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
-// CAMBIO CLAVE: Importamos el adaptador desde la ruta raíz si la otra falla
-import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/cloudinary'
-
+import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/dist/adapters/cloudinary/index.js'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
