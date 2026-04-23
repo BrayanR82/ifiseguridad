@@ -15,6 +15,35 @@ function toggleMenu() {
     }
 }
 
+// --- HEADER QUE SE OCULTA AL HACER SCROLL EN MÓVIL ---
+let lastScroll = 0;
+let scrollTicking = false;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    if (!navbar) return;
+
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    if (scrollTicking) return;
+    scrollTicking = true;
+
+    window.requestAnimationFrame(() => {
+        navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
+
+        if (isMobile) {
+            const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
+            navbar.classList.toggle('navbar-hidden', scrollingDown);
+        } else {
+            navbar.classList.remove('navbar-hidden');
+        }
+
+        lastScroll = currentScroll;
+        scrollTicking = false;
+    });
+});
+
 // --- VARIABLES GLOBALES ---
 const grid = document.getElementById('productos-grid');
 const buscador = document.getElementById('buscador');

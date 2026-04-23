@@ -26,16 +26,31 @@ document.addEventListener('click', function(event) {
 });
 
 let lastScroll = 0;
+let scrollTicking = false;
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    if (currentScroll > 50) {
-        navbar.style.padding = '10px';
-    } else {
-        navbar.style.padding = '20px';
-    }
-    lastScroll = currentScroll;
+    if (!navbar) return;
+
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    if (scrollTicking) return;
+    scrollTicking = true;
+
+    window.requestAnimationFrame(() => {
+        navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
+
+        if (isMobile) {
+            const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
+            navbar.classList.toggle('navbar-hidden', scrollingDown);
+        } else {
+            navbar.classList.remove('navbar-hidden');
+        }
+
+        lastScroll = currentScroll;
+        scrollTicking = false;
+    });
 });
 
 // 1. FUNCIÓN PARA CARGAR SERVICIOS DESDE PAYLOAD CMS

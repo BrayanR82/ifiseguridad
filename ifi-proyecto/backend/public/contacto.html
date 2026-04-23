@@ -129,10 +129,15 @@
             <a href="index.html" class="logo" style="flex: 0 0 auto;">
                 <img src="img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
             </a>
-            <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+            <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
                 <li><a href="index.html" class="nav-link">Inicio</a></li>
                 <li><a href="index.html#servicios" class="nav-link">Servicios</a></li>
                 <li><a href="index.html#productos" class="nav-link">Planes</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
+            </ul>
+            <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
                 <li><a href="tienda.html" class="nav-link">Tienda</a></li>
                 <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
             </ul>
@@ -143,17 +148,6 @@
             </button>
         </div>
     </nav>
-    <div class="mobile-menu" id="mobile-menu">
-        <ul>
-            <li><a href="index.html" onclick="toggleMenu()">Inicio</a></li>
-            <li><a href="index.html#tecnologia" onclick="toggleMenu()">Tecnología</a></li>
-            <li><a href="index.html#servicios" onclick="toggleMenu()">Servicios</a></li>
-            <li><a href="index.html#productos" onclick="toggleMenu()">Planes</a></li>
-            <li><a href="tienda.html" onclick="toggleMenu()">Tienda</a></li>
-            <li><a href="contacto.html" onclick="toggleMenu()">Contacto</a></li>
-        </ul>
-    </div>
-
     <div id="form-wrapper" class="contact-container fade-in">
         <div class="contact-header">
             <h1>Hablemos.</h1>
@@ -198,6 +192,35 @@
             mobileMenu.classList.toggle('active');
         }
     }
+
+    // --- HEADER QUE DESAPARECE AL HACER SCROLL EN MÓVIL ---
+    let lastScroll = 0;
+    let scrollTicking = false;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        if (!navbar) return;
+
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        if (scrollTicking) return;
+        scrollTicking = true;
+
+        window.requestAnimationFrame(() => {
+            navbar.style.padding = currentScroll > 50 ? '10px 0' : '15px 0';
+
+            if (isMobile) {
+                const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
+                navbar.classList.toggle('navbar-hidden', scrollingDown);
+            } else {
+                navbar.classList.remove('navbar-hidden');
+            }
+
+            lastScroll = currentScroll;
+            scrollTicking = false;
+        });
+    });
 
     // --- ENVÍO REAL AL BACKEND ---
     document.getElementById('contact-form').addEventListener('submit', async (e) => {
