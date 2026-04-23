@@ -37,6 +37,8 @@ export default buildConfig({
     'http://localhost:3000',
     'http://localhost:5500',
     'http://127.0.0.1:5500',
+    'https://ifiseguridad-git-main-brayanr82s-projects.vercel.app',
+    'https://ifiseguridad-i6plgy00t-brayanr82s-projects.vercel.app',
   ],
 
   csrf: [
@@ -44,6 +46,8 @@ export default buildConfig({
     'https://ifiseguridad-brayanr82s-projects.vercel.app', // <--- TAMBIÉN AQUÍ
     'http://localhost:3000',
     'http://localhost:5500',
+    'https://ifiseguridad-git-main-brayanr82s-projects.vercel.app',
+    'https://ifiseguridad-i6plgy00t-brayanr82s-projects.vercel.app',
   ],
   
   plugins: [], // <--- Vaciamos los plugins
