@@ -16,11 +16,25 @@ fields: [
     {
       name: 'titulo',
       type: 'text',
+      required: true,
     },
     {
       name: 'fotoServicio',
       type: 'text',
-      label: 'Enlace de la foto del servicio',
+      label: 'URL de la imagen (Link de PostImages)',
+      required: false,
+    },
+    {
+      name: 'resumen',
+      type: 'text',
+      label: 'Resumen corto (Aparece en la tarjeta)',
+      required: false,
+    },
+    {
+      name: 'detalles',
+      type: 'richText',
+      label: 'Información detallada (Aparece en el modal)',
+      required: false,
     },
   ],
 }

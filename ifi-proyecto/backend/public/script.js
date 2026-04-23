@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`${BASE_URL}/api/servicios/${id}`)
         .then(res => res.json())
         .then(servicio => {
-     
             let modal = document.getElementById('detalle-modal');
             if (!modal) {
                 modal = document.createElement('div');
@@ -118,23 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.appendChild(modal);
             }
 
+            // Procesar el texto enriquecido de Payload (Lexical)
             let detallesHTML = "";
             if (servicio.detalles && servicio.detalles.root && servicio.detalles.root.children) {
-                servicio.detalles.root.children.forEach(block => {
-                    if (block.children) {
-                        let parrafoTexto = block.children
-                            .map(child => child.text ? child.text : "")
-                            .join("");
-                        
-                        if (parrafoTexto.trim() !== "") {
-                            detallesHTML += `<p style="margin-bottom: 15px; display: block;">${parrafoTexto}</p>`;
-                        }
-                    }
-                });
+                detallesHTML = servicio.detalles.root.children.map(block => {
+                    const texto = block.children ? block.children.map(c => c.text || "").join("") : "";
+                    return texto ? `<p style="margin-bottom: 15px;">${texto}</p>` : "";
+                }).join("");
             } else {
                 detallesHTML = "<p>No hay detalles adicionales disponibles.</p>";
             }
 
+            // Aplicar estilos al modal
             Object.assign(modal.style, {
                 position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
                 backgroundColor: '#fff', padding: '30px', borderRadius: '12px',
@@ -146,17 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             modal.innerHTML = `
                 <div style="width: 100%;">
-                    <h2 style="margin-top: 0; color: #333; word-wrap: break-word;">${servicio.titulo}</h2>
-                    <div style="color: #666; line-height: 1.6; margin-bottom: 20px; word-wrap: break-word;">
-                        <strong>Resumen:</strong> ${servicio.resumen}
+                    <h2 style="margin-top: 0; color: #333;">${servicio.titulo}</h2>
+                    <div style="color: #666; line-height: 1.6; margin-bottom: 20px;">
+                        <strong>Resumen:</strong> ${servicio.resumen || 'Sin resumen'}
                     </div>
                     <div style="border-top: 1px solid #eee; padding-top: 15px;">
                         <h4 style="margin-bottom: 10px;">Información:</h4>
-                        <div class="detalles-contenido" style="color: #444; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">
+                        <div class="detalles-contenido" style="color: #444; line-height: 1.6;">
                             ${detallesHTML}
                         </div>
                     </div>
-                    <button class="btn" id="btn-cerrar-modal" style="width: 100%; background-color: #666; border: none; margin-top: 20px; cursor: pointer; color: white; padding: 12px; border-radius: 5px; font-weight: bold;">
+                    <button id="btn-cerrar-modal" style="width: 100%; background-color: #666; border: none; margin-top: 20px; cursor: pointer; color: white; padding: 12px; border-radius: 5px; font-weight: bold;">
                         Cerrar Detalle
                     </button>
                 </div>
@@ -173,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.onclick = cerrar;
             document.body.appendChild(overlay);
             document.getElementById('btn-cerrar-modal').onclick = cerrar;
-            modal.scrollTop = 0;
         })
         .catch(err => console.error("Error cargando detalles:", err));
 }
