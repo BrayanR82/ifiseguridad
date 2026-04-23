@@ -3,6 +3,8 @@
  */
 
 // FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA
+// Añade esto arriba del todo
+const BASE_URL = 'https://ifiseguridad.vercel.app';
 function toggleMenu() {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -42,12 +44,14 @@ const buscador = document.getElementById('buscador');
 // 1. CARGAR PRODUCTOS (Ruta relativa corregida)
 async function cargarProductos(filtro = '') {
     try {
-        // CAMBIO: Quitamos localhost para que funcione en Vercel
+        // Usamos la URL completa de Vercel
         const url = filtro 
-            ? `/api/productos?where[nombre][contains]=${filtro}`
-            : `/api/productos`;
+            ? `${BASE_URL}/api/productos?where[nombre][contains]=${filtro}`
+            : `${BASE_URL}/api/productos`;
 
         const response = await fetch(url);
+        if (!response.ok) throw new Error('Error en la respuesta del servidor');
+        
         const data = await response.json();
 
         if (data.docs) {
@@ -55,7 +59,7 @@ async function cargarProductos(filtro = '') {
         }
     } catch (error) {
         console.error("Error al conectar con la API de productos:", error);
-        if (grid) grid.innerHTML = '<p>Error al conectar con el servidor.</p>';
+        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Error al conectar con el servidor.</p>';
     }
 }
 
@@ -68,12 +72,9 @@ function renderizarProductos(productos) {
     }
 
     grid.innerHTML = productos.map(prod => {
-        let urlImagen = 'https://via.placeholder.com/300x200?text=Sin+Imagen';
-        
-        if (prod.imagen && prod.imagen.url) {
-            // CAMBIO: Usamos la URL tal cual la da Payload (ya es relativa o absoluta)
-            urlImagen = prod.imagen.url;
-        }
+        // --- CAMBIO AQUÍ: Usamos el campo de texto que creamos ---
+        // Si en tu colección de Productos pusiste name: 'imagenUrl', usa prod.imagenUrl
+        let urlImagen = prod.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
 
         let descripcion = '';
         if (prod.descripcion) {
@@ -85,7 +86,7 @@ function renderizarProductos(productos) {
 
         return `
             <div class="product-card" onclick="abrirProductoModal('${prod.id}')" style="cursor: pointer;">
-                <img src="${urlImagen}" alt="${prod.nombre}">
+                <img src="${urlImagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Error+Link'">
                 <div class="product-info">
                     <h3>${prod.nombre}</h3>
                     ${descripcion}
@@ -116,7 +117,7 @@ function agregarAlCarrito(id) {
         abrirCarrito();
     } else {
         // CAMBIO: Quitamos localhost
-        fetch(`/api/productos/${id}`)
+        fetch(`${BASE_URL}/api/productos/${id}`)
             .then(res => res.json())
             .then(producto => {
                 producto.cantidad = 1;
@@ -231,8 +232,7 @@ async function abrirProductoModal(productoId) {
         productoModalActual = producto;
         cantidadModalActual = 1;
 
-        let urlImagen = producto.imagen?.url || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
-        let desc = typeof producto.descripcion === 'string' ? producto.descripcion : 
+let urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';        let desc = typeof producto.descripcion === 'string' ? producto.descripcion : 
                    (producto.descripcion?.root?.children?.[0]?.children?.[0]?.text || 'Sin descripción');
 
         document.getElementById('modal-imagen').src = urlImagen;

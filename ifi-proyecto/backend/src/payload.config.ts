@@ -32,6 +32,10 @@ export default buildConfig({
   }),
   sharp,
   cors: ['https://ifiseguridad.vercel.app', 'http://localhost:3000', '*'],
-  csrf: ['https://ifiseguridad.vercel.app'],
+  csrf: [
+  'https://ifiseguridad.vercel.app',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500'
+  ],
   plugins: [], // <--- Vaciamos los plugins
 })
