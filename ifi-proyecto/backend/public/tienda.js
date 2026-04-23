@@ -19,6 +19,8 @@ function toggleMenu() {
 const grid = document.getElementById('productos-grid');
 const buscador = document.getElementById('buscador');
 let carrito = JSON.parse(localStorage.getItem('carrito_ifi')) || [];
+let productoModalActualId = null;
+let cantidadModal = 1;
 
 // --- 1. CARGAR PRODUCTOS ---
 async function cargarProductos(filtro = '') {
@@ -69,7 +71,7 @@ function renderizarProductos(productos) {
                     ${descripcionHtml}
                     <p class="product-price">$${precioSeguro.toLocaleString()}</p>
                     <p class="stock-badge">✓ ${prod.stock || 0} disponibles</p>
-                    <button class="btn-comprar" onclick="agregarAlCarrito('${prod.id}'); event.stopPropagation();">
+                    <button class="btn-comprar" onclick="agregarAlCarrito('${prod.id}', event)">
                         🛒 Añadir al carrito
                     </button>
                 </div>
@@ -129,7 +131,11 @@ function actualizarInterfazCarrito() {
     totalElemento.innerText = `Total: $${total.toLocaleString()}`;
 }
 
-async function agregarAlCarrito(id) {
+async function agregarAlCarrito(id, event) {
+    if (event && typeof event.stopPropagation === 'function') {
+        event.stopPropagation();
+    }
+
     const existente = carrito.find(item => item.id === id);
     if (existente) {
         existente.cantidad += 1;
@@ -154,6 +160,11 @@ async function abrirProductoModal(productoId) {
     try {
         const response = await fetch(`${BASE_URL}/api/productos/${productoId}`);
         const producto = await response.json();
+
+        productoModalActualId = productoId;
+        cantidadModal = 1;
+        const cantidadElemento = document.getElementById('modal-cantidad-valor');
+        if (cantidadElemento) cantidadElemento.innerText = cantidadModal;
         
         const urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
         const precioModal = producto.precio || 0;
@@ -228,7 +239,25 @@ function cerrarProductoModal(event) {
     if (!event || event.target.id === 'producto-modal' || event.target.id === 'btn-cerrar-modal') {
         document.getElementById('producto-modal').classList.remove('activa');
         document.body.style.overflow = 'auto';
+        productoModalActualId = null;
+        cantidadModal = 1;
     }
+}
+
+function cambiarCantidadModal(delta) {
+    cantidadModal = Math.max(1, cantidadModal + delta);
+    const cantidadElemento = document.getElementById('modal-cantidad-valor');
+    if (cantidadElemento) cantidadElemento.innerText = cantidadModal;
+}
+
+async function agregarAlCarritoDesdeModal() {
+    if (!productoModalActualId) return;
+
+    for (let i = 0; i < cantidadModal; i += 1) {
+        await agregarAlCarrito(productoModalActualId);
+    }
+
+    cerrarProductoModal();
 }
 
 function cambiarCantidad(id, delta) {
