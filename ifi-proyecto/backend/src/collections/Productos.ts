@@ -16,13 +16,34 @@ export const Productos: CollectionConfig = {
       name: 'nombre',
       type: 'text',
       required: true,
+      label: 'Nombre del Producto',
     },
-    // ... otros campos (precio, descripción) ...
     {
-      name: 'imagenUrl', // Cambiamos el nombre para que sea claro
+      name: 'imagenUrl',
       type: 'text',
-      label: 'URL de la Imagen (Link de internet)',
-      required: false, // Ponlo en true si quieres que siempre tenga foto
+      required: false,
+      label: 'URL de la Imagen (Link de PostImages)',
+    },
+    {
+      name: 'precio',
+      type: 'number', // Campo numérico para el precio
+      required: true,
+      label: 'Precio ($)',
+      admin: {
+        placeholder: 'Ej: 50000',
+      },
+    },
+    {
+      name: 'stock',
+      type: 'number', // Campo numérico para las unidades
+      required: false,
+      label: 'Unidades Disponibles',
+      defaultValue: 0,
+    },
+    {
+      name: 'descripcion',
+      type: 'richText', // Para que puedas poner negritas, listas, etc.
+      label: 'Descripción Detallada',
     },
   ],
 }
