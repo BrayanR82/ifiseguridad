@@ -9,6 +9,8 @@ import sharp from 'sharp'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
 import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/cloudinary' // <--- RUTA CORREGIDA
 
+import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/dist/adapters/cloudinary/index'
+
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Servicios } from './collections/Servicios'
