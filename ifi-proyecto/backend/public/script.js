@@ -1,5 +1,5 @@
 /**
- * IFI Seguridad - Frontend Logic con Conexión a CMS
+ * IFI Seguridad - Frontend Logic con Conexión a CMS (Versión Vercel)
  */
 
 // 0. FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA
@@ -13,7 +13,6 @@ function toggleMenu() {
     }
 }
 
-// Cerrar menú al hacer click fuera
 document.addEventListener('click', function(event) {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -26,25 +25,23 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Efecto de scroll en el navbar
 let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
     if (currentScroll > 50) {
         navbar.style.padding = '10px';
     } else {
         navbar.style.padding = '20px';
     }
-    
     lastScroll = currentScroll;
 });
 
 // 1. FUNCIÓN PARA CARGAR SERVICIOS DESDE PAYLOAD CMS
 async function cargarServiciosDesdeCMS() {
     try {
+        // CAMBIO: Usamos ruta relativa /api para que funcione en Vercel
         const response = await fetch('/api/servicios');
         const data = await response.json();
 
@@ -57,9 +54,10 @@ async function cargarServiciosDesdeCMS() {
                 let urlImagen = 'https://via.placeholder.com/300x200?text=IFI+Seguridad';
                 
                 if (servicio.imagen && servicio.imagen.url) {
+                    // CAMBIO: Si la imagen no es una URL externa, usamos la ruta relativa
                     urlImagen = servicio.imagen.url.startsWith('http') 
                         ? servicio.imagen.url 
-                        : `http://localhost:3000${servicio.imagen.url}`;
+                        : servicio.imagen.url; // Payload ya da la ruta correcta desde la raíz
                 }
 
                 const card = `
@@ -89,20 +87,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Función toggleFaq para uso con onclick
 function toggleFaq(element) {
-    // Si element es el faq-item directamente
     const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
     if (!item) return;
-    
     const isActive = item.classList.contains('active');
-    
-    // Cerrar todos los items
     document.querySelectorAll('.faq-item').forEach(faqItem => {
         faqItem.classList.remove('active');
     });
-    
-    // Abrir el item actual si estaba cerrado
     if (!isActive) {
         item.classList.add('active');
     }
@@ -115,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 4. FUNCIÓN PARA VER MÁS (MODAL)
 function verMas(id) {
-    fetch(`http://localhost:3000/api/servicios/${id}`)
+    // CAMBIO: Quitamos el localhost para que busque en el servidor de Vercel
+    fetch(`/api/servicios/${id}`)
         .then(res => res.json())
         .then(servicio => {
             let modal = document.getElementById('detalle-modal');
@@ -125,17 +117,15 @@ function verMas(id) {
                 document.body.appendChild(modal);
             }
 
-            // --- LÓGICA MEJORADA PARA EXTRAER EL TEXTO ---
             let detallesHTML = "";
             if (servicio.detalles && servicio.detalles.root && servicio.detalles.root.children) {
                 servicio.detalles.root.children.forEach(block => {
                     if (block.children) {
                         let parrafoTexto = block.children
                             .map(child => child.text ? child.text : "")
-                            .join(""); // Unimos el texto del mismo bloque
+                            .join("");
                         
                         if (parrafoTexto.trim() !== "") {
-                            // Usamos margin-bottom para separar párrafos visualmente
                             detallesHTML += `<p style="margin-bottom: 15px; display: block;">${parrafoTexto}</p>`;
                         }
                     }
@@ -144,26 +134,13 @@ function verMas(id) {
                 detallesHTML = "<p>No hay detalles adicionales disponibles.</p>";
             }
 
-            // Aplicamos los estilos al modal
             Object.assign(modal.style, {
-                position: 'fixed', 
-                top: '50%', 
-                left: '50%', 
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: '#fff', 
-                padding: '30px', 
-                borderRadius: '12px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.3)', 
-                zIndex: '1000',
-                maxWidth: '600px', 
-                width: '90%', 
-                border: '2px solid #007bff',
-                // Ajustes para el crecimiento vertical y scroll
-                maxHeight: '85vh', 
-                display: 'flex',
-                flexDirection: 'column',
-                overflowY: 'auto',
-                boxSizing: 'border-box'
+                position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                backgroundColor: '#fff', padding: '30px', borderRadius: '12px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.3)', zIndex: '1000',
+                maxWidth: '600px', width: '90%', border: '2px solid #007bff',
+                maxHeight: '85vh', display: 'flex', flexDirection: 'column',
+                overflowY: 'auto', boxSizing: 'border-box'
             });
 
             modal.innerHTML = `
@@ -184,7 +161,6 @@ function verMas(id) {
                 </div>
             `;
 
-            // Fondo oscuro (Overlay)
             const overlay = document.createElement('div');
             overlay.id = 'modal-overlay';
             Object.assign(overlay.style, {
@@ -196,8 +172,6 @@ function verMas(id) {
             overlay.onclick = cerrar;
             document.body.appendChild(overlay);
             document.getElementById('btn-cerrar-modal').onclick = cerrar;
-            
-            // Auto-scroll al inicio del modal al abrirse
             modal.scrollTop = 0;
         })
         .catch(err => console.error("Error cargando detalles:", err));
