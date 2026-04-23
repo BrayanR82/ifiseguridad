@@ -7,7 +7,9 @@ import sharp from 'sharp'
 
 // IMPORTACIONES CORREGIDAS PARA CLOUDINARY
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
-import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/cloudinary' // <--- RUTA CORREGIDA
+// CAMBIO CLAVE: Importamos el adaptador desde la ruta raíz si la otra falla
+import { cloudinaryAdapter } from '@payloadcms/plugin-cloud-storage/cloudinary'
+
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -58,7 +60,6 @@ export default buildConfig({
   plugins: [
     cloudStorage({
       collections: {
-        // Asegúrate de que el slug de tu colección sea 'media' (en minúsculas)
         'media': {
           adapter: cloudinaryAdapter({
             config: {
