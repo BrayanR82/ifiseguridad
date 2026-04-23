@@ -57,6 +57,7 @@ export default buildConfig({
     'http://127.0.0.1:3000',
     'http://localhost:8080',
     'https://ifiseguridad.vercel.app',
+    'https://ifiseguridad-kmp4m9bzv-brayanr82s-projects.vercel.app',
 
   ],
 

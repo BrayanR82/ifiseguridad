@@ -45,7 +45,7 @@ window.addEventListener('scroll', () => {
 // 1. FUNCIÓN PARA CARGAR SERVICIOS DESDE PAYLOAD CMS
 async function cargarServiciosDesdeCMS() {
     try {
-        const response = await fetch('http://localhost:3000/api/servicios');
+        const response = await fetch('/api/servicios');
         const data = await response.json();
 
         const serviciosGrid = document.querySelector('#servicios .grid');
