@@ -1,53 +1,39 @@
 /**
- * IFI Seguridad - Lógica de la Tienda (Versión Vercel/Producción)
+ * IFI Seguridad - Lógica de la Tienda (Versión Adaptada a URL Externa)
  */
 
-// FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA
-// Añade esto arriba del todo
-const BASE_URL = 'https://ifiseguridad.vercel.app';
+// --- UTILIDADES ---
 function toggleMenu() {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    
     if (hamburger && mobileMenu) {
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
     }
 }
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', (e) => {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (hamburger && mobileMenu) {
-        if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-        }
+    if (hamburger && mobileMenu && !hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
     }
 });
 
-let lastScroll = 0;
-const navbar = document.querySelector('.navbar');
-
-if (navbar) {
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
-        lastScroll = currentScroll;
-    });
-}
-
+// --- VARIABLES GLOBALES ---
 const grid = document.getElementById('productos-grid');
 const buscador = document.getElementById('buscador');
+let carrito = JSON.parse(localStorage.getItem('carrito_ifi')) || [];
 
-// 1. CARGAR PRODUCTOS (Ruta relativa corregida)
+// --- 1. CARGAR PRODUCTOS ---
 async function cargarProductos(filtro = '') {
     try {
-        // Usamos la URL completa de Vercel
+        // Usamos la ruta absoluta de tu Vercel para evitar fallos de conexión
+        const baseUrl = 'https://ifiseguridad.vercel.app'; 
         const url = filtro 
-            ? `${BASE_URL}/api/productos?where[nombre][contains]=${filtro}`
-            : `${BASE_URL}/api/productos`;
+            ? `${baseUrl}/api/productos?where[nombre][contains]=${filtro}`
+            : `${baseUrl}/api/productos`;
 
         const response = await fetch(url);
         if (!response.ok) throw new Error('Error en la respuesta del servidor');
@@ -58,12 +44,12 @@ async function cargarProductos(filtro = '') {
             renderizarProductos(data.docs);
         }
     } catch (error) {
-        console.error("Error al conectar con la API de productos:", error);
-        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Error al conectar con el servidor.</p>';
+        console.error("Error al conectar con la API:", error);
+        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red;">Error al conectar con el servidor. Por favor, intenta más tarde.</p>';
     }
 }
 
-// 2. RENDERIZAR PRODUCTOS
+// --- 2. RENDERIZAR PRODUCTOS ---
 function renderizarProductos(productos) {
     if (!grid) return;
     if (productos.length === 0) {
@@ -72,9 +58,9 @@ function renderizarProductos(productos) {
     }
 
     grid.innerHTML = productos.map(prod => {
-        // --- CAMBIO AQUÍ: Usamos el campo de texto que creamos ---
-        // Si en tu colección de Productos pusiste name: 'imagenUrl', usa prod.imagenUrl
-        let urlImagen = prod.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
+        // CAMBIO CLAVE: Ahora leemos 'imagenUrl' directamente del campo de texto
+        // Si el campo está vacío, usamos una imagen por defecto
+        const urlImagen = prod.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
 
         let descripcion = '';
         if (prod.descripcion) {
@@ -86,7 +72,7 @@ function renderizarProductos(productos) {
 
         return `
             <div class="product-card" onclick="abrirProductoModal('${prod.id}')" style="cursor: pointer;">
-                <img src="${urlImagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Error+Link'">
+                <img src="${urlImagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Error+al+cargar'">
                 <div class="product-info">
                     <h3>${prod.nombre}</h3>
                     ${descripcion}
@@ -101,53 +87,7 @@ function renderizarProductos(productos) {
     }).join('');
 }
 
-if (buscador) {
-    buscador.addEventListener('input', (e) => cargarProductos(e.target.value));
-}
-
-// --- LÓGICA DEL CARRITO ---
-let carrito = JSON.parse(localStorage.getItem('carrito_ifi')) || [];
-
-function agregarAlCarrito(id) {
-    const productoExistente = carrito.find(item => item.id === id);
-
-    if (productoExistente) {
-        productoExistente.cantidad += 1;
-        actualizarInterfazCarrito();
-        abrirCarrito();
-    } else {
-        // CAMBIO: Quitamos localhost
-        fetch(`${BASE_URL}/api/productos/${id}`)
-            .then(res => res.json())
-            .then(producto => {
-                producto.cantidad = 1;
-                carrito.push(producto);
-                actualizarInterfazCarrito();
-                abrirCarrito();
-            });
-    }
-}
-
-function abrirCarrito() {
-    const sidebar = document.getElementById('carrito-sidebar');
-    const overlay = document.getElementById('carrito-overlay');
-    if (sidebar && overlay) {
-        sidebar.style.right = '0';
-        overlay.style.display = 'block';
-        setTimeout(() => overlay.style.opacity = '1', 10);
-    }
-}
-
-function cerrarCarrito() {
-    const sidebar = document.getElementById('carrito-sidebar');
-    const overlay = document.getElementById('carrito-overlay');
-    if (sidebar && overlay) {
-        sidebar.style.right = '-420px';
-        overlay.style.opacity = '0';
-        setTimeout(() => overlay.style.display = 'none', 300);
-    }
-}
-
+// --- 3. LÓGICA DEL CARRITO ---
 function actualizarInterfazCarrito() {
     const contenedor = document.getElementById('carrito-items');
     const totalElemento = document.getElementById('carrito-total');
@@ -159,14 +99,16 @@ function actualizarInterfazCarrito() {
     if (carrito.length === 0) {
         contenedor.innerHTML = `<div style="text-align: center; padding: 60px 20px; color: var(--gray-text);">Tu carrito está vacío</div>`;
         totalElemento.innerText = 'Total: $0';
-        document.getElementById('carrito-count').style.display = 'none';
+        const contador = document.getElementById('carrito-count');
+        if (contador) contador.style.display = 'none';
         return;
     }
 
     carrito.forEach((item, index) => {
         const subtotal = item.precio * item.cantidad;
         total += subtotal;
-        let urlImagen = item.imagen?.url || 'https://via.placeholder.com/50x50?text=Error';
+        // CAMBIO: También aquí leemos imagenUrl
+        const urlImagen = item.imagenUrl || 'https://via.placeholder.com/50x50?text=Error';
 
         contenedor.innerHTML += `
             <div class="carrito-item" style="padding: 15px 0; border-bottom: 1px solid #eee; display: flex; gap: 10px;">
@@ -196,44 +138,42 @@ function actualizarInterfazCarrito() {
     totalElemento.innerText = `Total: $${total.toLocaleString()}`;
 }
 
-function cambiarCantidad(id, cambio) {
-    const producto = carrito.find(item => item.id === id);
-    if (producto) {
-        producto.cantidad += cambio;
-        if (producto.cantidad <= 0) carrito = carrito.filter(item => item.id !== id);
+async function agregarAlCarrito(id) {
+    const existente = carrito.find(item => item.id === id);
+    if (existente) {
+        existente.cantidad += 1;
         actualizarInterfazCarrito();
+        abrirCarrito();
+    } else {
+        try {
+            const res = await fetch(`https://ifiseguridad.vercel.app/api/productos/${id}`);
+            const producto = await res.json();
+            producto.cantidad = 1;
+            carrito.push(producto);
+            actualizarInterfazCarrito();
+            abrirCarrito();
+        } catch (e) {
+            console.error("Error al añadir al carrito:", e);
+        }
     }
 }
 
-function eliminarDelCarrito(index) {
-    carrito.splice(index, 1);
-    actualizarInterfazCarrito();
-}
-
-function irAPagar() {
-    if (carrito.length === 0) return alert("El carrito está vacío");
-    let mensaje = "*IFI Seguridad - Pedido*\n\n";
-    carrito.forEach(item => mensaje += `*${item.cantidad}x* ${item.nombre} - $${(item.precio * item.cantidad).toLocaleString()}\n`);
-    const total = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-    mensaje += `\n*TOTAL: $${total.toLocaleString()}*`;
-    window.open(`https://wa.me/34641351122?text=${encodeURIComponent(mensaje)}`, '_blank');
-}
-
-// --- MODAL DE PRODUCTO ---
+// --- 4. MODAL DE PRODUCTO ---
 let productoModalActual = null;
 let cantidadModalActual = 1;
 
 async function abrirProductoModal(productoId) {
     try {
-        // CAMBIO: Quitamos localhost
-        const response = await fetch(`/api/productos/${productoId}`);
+        const response = await fetch(`https://ifiseguridad.vercel.app/api/productos/${productoId}`);
         const producto = await response.json();
         
         productoModalActual = producto;
         cantidadModalActual = 1;
 
-let urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';        let desc = typeof producto.descripcion === 'string' ? producto.descripcion : 
-                   (producto.descripcion?.root?.children?.[0]?.children?.[0]?.text || 'Sin descripción');
+        // CAMBIO: Leemos imagenUrl para el modal
+        const urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
+        const desc = typeof producto.descripcion === 'string' ? producto.descripcion : 
+                     (producto.descripcion?.root?.children?.[0]?.children?.[0]?.text || 'Sin descripción');
 
         document.getElementById('modal-imagen').src = urlImagen;
         document.getElementById('modal-titulo').innerText = producto.nombre;
@@ -245,8 +185,21 @@ let urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=
         document.getElementById('producto-modal').classList.add('activa');
         document.body.style.overflow = 'hidden';
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error al abrir modal:', error);
     }
+}
+
+// --- FUNCIONES DE INTERFAZ ---
+function abrirCarrito() {
+    document.getElementById('carrito-sidebar').style.right = '0';
+    document.getElementById('carrito-overlay').style.display = 'block';
+    setTimeout(() => document.getElementById('carrito-overlay').style.opacity = '1', 10);
+}
+
+function cerrarCarrito() {
+    document.getElementById('carrito-sidebar').style.right = '-420px';
+    document.getElementById('carrito-overlay').style.opacity = '0';
+    setTimeout(() => document.getElementById('carrito-overlay').style.display = 'none', 300);
 }
 
 function cerrarProductoModal(event) {
@@ -256,27 +209,18 @@ function cerrarProductoModal(event) {
     }
 }
 
-function cambiarCantidadModal(cambio) {
-    cantidadModalActual += cambio;
-    if (cantidadModalActual < 1) cantidadModalActual = 1;
-    if (productoModalActual && cantidadModalActual > productoModalActual.stock) cantidadModalActual = productoModalActual.stock;
-    document.getElementById('modal-cantidad-valor').innerText = cantidadModalActual;
-}
-
-function agregarAlCarritoDesdeModal() {
-    if (!productoModalActual) return;
-    const existente = carrito.find(item => item.id === productoModalActual.id);
-    if (existente) existente.cantidad += cantidadModalActual;
-    else {
-        productoModalActual.cantidad = cantidadModalActual;
-        carrito.push(productoModalActual);
-    }
-    actualizarInterfazCarrito();
-    cerrarProductoModal();
-    abrirCarrito();
+function irAPagar() {
+    if (carrito.length === 0) return alert("El carrito está vacío");
+    let mensaje = "*IFI Seguridad - Pedido*\n\n";
+    carrito.forEach(item => mensaje += `*${item.cantidad}x* ${item.nombre} - $${(item.precio * item.cantidad).toLocaleString()}\n`);
+    const total = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+    mensaje += `\n*TOTAL: $${total.toLocaleString()}*`;
+    window.open(`https://wa.me/34641351122?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
 // INICIALIZACIÓN
+if (buscador) buscador.addEventListener('input', (e) => cargarProductos(e.target.value));
+
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
     actualizarInterfazCarrito();
