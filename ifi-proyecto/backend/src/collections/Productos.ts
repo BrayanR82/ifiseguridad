@@ -22,7 +22,7 @@ export const Productos: CollectionConfig = {
       name: 'imagenUrl', // Cambiamos el nombre para que sea claro
       type: 'text',
       label: 'URL de la Imagen (Link de internet)',
-      required: true, // Ponlo en true si quieres que siempre tenga foto
+      required: false, // Ponlo en true si quieres que siempre tenga foto
     },
   ],
 }
