@@ -17,25 +17,12 @@ export const Productos: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    // ... otros campos (precio, descripción) ...
     {
-      name: 'precio',
-      type: 'number',
-      required: true,
-    },
-    {
-      name: 'stock',
-      type: 'number',
-      required: true,
-    },
-    {
-      name: 'imagen',
-      type: 'upload',
-      relationTo: 'media', // Asegúrate de que tu colección de imágenes se llame 'media'
-      required: true,
-    },
-    {
-      name: 'descripcion',
-      type: 'richText',
+      name: 'imagenUrl', // Cambiamos el nombre para que sea claro
+      type: 'text',
+      label: 'URL de la Imagen (Link de internet)',
+      required: true, // Ponlo en true si quieres que siempre tenga foto
     },
   ],
 }

@@ -12,26 +12,15 @@ export const Servicios: CollectionConfig = {
     update: () => true, // Permite editar
     delete: () => true, // Permite borrar
   },
-  fields: [
+fields: [
     {
       name: 'titulo',
       type: 'text',
-      required: true,
     },
     {
-      name: 'imagen', // Campo para la foto
-      type: 'upload',
-      relationTo: 'media', // Se conecta con la carpeta de fotos
-      required: true,
-    },
-    {
-      name: 'resumen', // Una descripción corta para la tarjeta
-      type: 'textarea',
-      required: true,
-    },
-    {
-      name: 'detalles', // Aquí puedes poner TODA la información extra
-      type: 'richText', // Esto te permite poner negritas, links, etc.
+      name: 'fotoServicio',
+      type: 'text',
+      label: 'Enlace de la foto del servicio',
     },
   ],
 }
