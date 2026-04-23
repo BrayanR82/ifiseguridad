@@ -31,11 +31,20 @@ export default buildConfig({
     url: process.env.DATABASE_URL || '',
   }),
   sharp,
-  cors: ['https://ifiseguridad.vercel.app', 'http://localhost:3000', '*'],
-  csrf: [
-  'https://ifiseguridad.vercel.app',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
+  cors: [
+    'https://ifiseguridad.vercel.app',
+    'https://ifiseguridad-brayanr82s-projects.vercel.app', // <--- ESTA ES LA QUE FALTA
+    'http://localhost:3000',
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
   ],
+
+  csrf: [
+    'https://ifiseguridad.vercel.app',
+    'https://ifiseguridad-brayanr82s-projects.vercel.app', // <--- TAMBIÉN AQUÍ
+    'http://localhost:3000',
+    'http://localhost:5500',
+  ],
+  
   plugins: [], // <--- Vaciamos los plugins
 })
