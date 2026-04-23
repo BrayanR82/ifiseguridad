@@ -1,5 +1,5 @@
 /**
- * IFI Seguridad - Lógica de la Tienda (Versión Ultra-Segura)
+ * IFI Seguridad - Lógica de la Tienda (Versión Ultra-Segura y Adaptativa)
  */
 
 // --- CONFIGURACIÓN ---
@@ -37,7 +37,7 @@ async function cargarProductos(filtro = '') {
         }
     } catch (error) {
         console.error("Error al conectar con la API:", error);
-        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red;">Error al cargar productos. Por favor, intenta más tarde.</p>';
+        if (grid) grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red;">Error al cargar productos.</p>';
     }
 }
 
@@ -50,26 +50,22 @@ function renderizarProductos(productos) {
     }
 
     grid.innerHTML = productos.map(prod => {
-        // PROTECCIÓN: Imagen
         const urlImagen = prod.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
-        
-        // PROTECCIÓN: Precio (Si no hay precio, ponemos 0 para que no falle toLocaleString)
         const precioSeguro = prod.precio || 0;
 
-        // PROTECCIÓN: Descripción
         let descripcionHtml = '';
         if (prod.descripcion) {
             const textoPlano = typeof prod.descripcion === 'string' ? prod.descripcion : 
                                (prod.descripcion.root?.children?.[0]?.children?.[0]?.text || '');
             const textoCorto = textoPlano.substring(0, 80) + (textoPlano.length > 80 ? '...' : '');
-            descripcionHtml = `<p style="color: var(--gray-text); font-size: 0.9rem;">${textoCorto}</p>`;
+            descripcionHtml = `<p style="color: var(--gray-text); font-size: 0.9rem; word-break: break-word;">${textoCorto}</p>`;
         }
 
         return `
             <div class="product-card" onclick="abrirProductoModal('${prod.id}')" style="cursor: pointer;">
                 <img src="${urlImagen}" alt="${prod.nombre || 'Producto'}" onerror="this.src='https://via.placeholder.com/300x200?text=Error+Imagen'">
                 <div class="product-info">
-                    <h3>${prod.nombre || 'Producto sin nombre'}</h3>
+                    <h3 style="word-break: break-word;">${prod.nombre || 'Producto sin nombre'}</h3>
                     ${descripcionHtml}
                     <p class="product-price">$${precioSeguro.toLocaleString()}</p>
                     <p class="stock-badge">✓ ${prod.stock || 0} disponibles</p>
@@ -109,7 +105,7 @@ function actualizarInterfazCarrito() {
             <div class="carrito-item" style="padding: 15px 0; border-bottom: 1px solid #eee; display: flex; gap: 10px;">
                 <img src="${urlImagen}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                 <div style="flex: 1;">
-                    <h4 style="margin: 0; font-size: 0.9rem;">${item.nombre}</h4>
+                    <h4 style="margin: 0; font-size: 0.9rem; word-break: break-word;">${item.nombre}</h4>
                     <p style="margin: 5px 0; font-weight: bold;">$${precioItem.toLocaleString()}</p>
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <button onclick="cambiarCantidad('${item.id}', -1)">−</button>
@@ -153,31 +149,54 @@ async function agregarAlCarrito(id) {
     }
 }
 
-// --- 4. MODAL DE PRODUCTO ---
-let productoModalActual = null;
-let cantidadModalActual = 1;
-
+// --- 4. MODAL DE PRODUCTO (CORREGIDO CON SCROLL Y WORD-BREAK) ---
 async function abrirProductoModal(productoId) {
     try {
         const response = await fetch(`${BASE_URL}/api/productos/${productoId}`);
         const producto = await response.json();
         
-        productoModalActual = producto;
-        cantidadModalActual = 1;
-
         const urlImagen = producto.imagenUrl || 'https://via.placeholder.com/300x200?text=Sin+Imagen';
         const precioModal = producto.precio || 0;
-        const desc = typeof producto.descripcion === 'string' ? producto.descripcion : 
-                     (producto.descripcion?.root?.children?.[0]?.children?.[0]?.text || 'Sin descripción');
+        
+        // Procesar descripción para que no falle si es objeto Lexical o String
+        let desc = "";
+        if (producto.descripcion) {
+            if (typeof producto.descripcion === 'string') {
+                desc = producto.descripcion;
+            } else if (producto.descripcion.root?.children) {
+                desc = producto.descripcion.root.children.map(block => 
+                    block.children ? block.children.map(c => c.text || "").join("") : ""
+                ).join("\n");
+            }
+        } else {
+            desc = 'Sin descripción disponible.';
+        }
 
+        // Elementos del Modal
+        const modal = document.getElementById('producto-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        const descElement = document.getElementById('modal-descripcion');
+
+        // Configurar contenido
         document.getElementById('modal-imagen').src = urlImagen;
         document.getElementById('modal-titulo').innerText = producto.nombre || 'Sin nombre';
         document.getElementById('modal-precio').innerText = `$${precioModal.toLocaleString()}`;
         document.getElementById('modal-stock').innerHTML = `✓ ${producto.stock || 0} disponibles`;
-        document.getElementById('modal-descripcion').innerText = desc;
-        document.getElementById('modal-cantidad-valor').innerText = '1';
+        
+        // Aplicar descripción con estilos de ruptura de palabras
+        descElement.innerText = desc;
+        descElement.style.wordBreak = 'break-word';
+        descElement.style.whiteSpace = 'pre-wrap';
 
-        document.getElementById('producto-modal').classList.add('activa');
+        // AJUSTES DE SCROLL Y ESTILO PARA EVITAR DESBORDE HORIZONTAL
+        Object.assign(modalContent.style, {
+            maxHeight: '85vh',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            wordBreak: 'break-word'
+        });
+
+        modal.classList.add('activa');
         document.body.style.overflow = 'hidden';
     } catch (error) {
         console.error('Error al abrir modal:', error);
@@ -210,6 +229,22 @@ function cerrarProductoModal(event) {
         document.getElementById('producto-modal').classList.remove('activa');
         document.body.style.overflow = 'auto';
     }
+}
+
+function cambiarCantidad(id, delta) {
+    const item = carrito.find(p => p.id === id);
+    if (item) {
+        item.cantidad += delta;
+        if (item.cantidad <= 0) {
+            carrito = carrito.filter(p => p.id !== id);
+        }
+        actualizarInterfazCarrito();
+    }
+}
+
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    actualizarInterfazCarrito();
 }
 
 function irAPagar() {
