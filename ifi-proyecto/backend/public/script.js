@@ -41,8 +41,11 @@ window.addEventListener('scroll', () => {
 // 1. FUNCIÓN PARA CARGAR SERVICIOS DESDE PAYLOAD CMS
 async function cargarServiciosDesdeCMS() {
     try {
-        // CAMBIO: Usamos ruta relativa /api para que funcione en Vercel
-        const response = await fetch('/api/servicios');
+        // Usamos la URL absoluta para asegurar la conexión
+        const BASE_URL = 'https://ifiseguridad.vercel.app';
+        const response = await fetch(`${BASE_URL}/api/servicios`);
+        
+        if (!response.ok) throw new Error('Error en la respuesta');
         const data = await response.json();
 
         const serviciosGrid = document.querySelector('#servicios .grid');
@@ -51,18 +54,15 @@ async function cargarServiciosDesdeCMS() {
             serviciosGrid.innerHTML = '';
 
             data.docs.forEach(servicio => {
-                let urlImagen = 'https://via.placeholder.com/300x200?text=IFI+Seguridad';
-                
-                if (servicio.imagen && servicio.imagen.url) {
-                    // CAMBIO: Si la imagen no es una URL externa, usamos la ruta relativa
-                    urlImagen = servicio.imagen.url.startsWith('http') 
-                        ? servicio.imagen.url 
-                        : servicio.imagen.url; // Payload ya da la ruta correcta desde la raíz
-                }
+                // CAMBIO CLAVE: Leemos el campo de texto directo 'fotoServicio' o 'imagenUrl'
+                // Ajusta el nombre según cómo lo pusiste en Servicios.ts (fotoServicio es el que sugerí antes)
+                let urlImagen = servicio.fotoServicio || servicio.imagenUrl || 'https://via.placeholder.com/300x200?text=IFI+Seguridad';
 
                 const card = `
                     <div class="card" style="text-align: center;">
-                        <img src="${urlImagen}" alt="${servicio.titulo}" style="width:100%; max-width:200px; border-radius: 8px; display: block; margin: 0 auto; margin-bottom: 15px;">
+                        <img src="${urlImagen}" alt="${servicio.titulo}" 
+                             style="width:100%; max-width:200px; border-radius: 8px; display: block; margin: 0 auto; margin-bottom: 15px;"
+                             onerror="this.src='https://via.placeholder.com/300x200?text=Error+al+cargar'">
                         <h3>${servicio.titulo}</h3>
                         <p>${servicio.resumen || 'Sin descripción disponible'}</p>
                         <button class="btn" onclick="verMas('${servicio.id}')" style="margin: 10px auto; display: block;">Leer más</button>
@@ -75,7 +75,6 @@ async function cargarServiciosDesdeCMS() {
         console.error("Error cargando servicios:", error);
     }
 }
-
 // 2. SCROLL SUAVE
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -105,11 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 4. FUNCIÓN PARA VER MÁS (MODAL)
-function verMas(id) {
-    // CAMBIO: Quitamos el localhost para que busque en el servidor de Vercel
-    fetch(`/api/servicios/${id}`)
+    
+    function verMas(id) {
+    const BASE_URL = 'https://ifiseguridad.vercel.app';
+    fetch(`${BASE_URL}/api/servicios/${id}`)
         .then(res => res.json())
         .then(servicio => {
+     
             let modal = document.getElementById('detalle-modal');
             if (!modal) {
                 modal = document.createElement('div');
