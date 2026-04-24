@@ -51,6 +51,22 @@ let carrito = JSON.parse(localStorage.getItem('carrito_ifi')) || [];
 let productoModalActualId = null;
 let cantidadModal = 1;
 
+function actualizarContadoresCarrito(totalProductos) {
+    const contadorHeader = document.getElementById('carrito-count');
+    const contadorFlotante = document.getElementById('cart-float-count');
+
+    [contadorHeader, contadorFlotante].forEach((contador) => {
+        if (!contador) return;
+
+        if (totalProductos > 0) {
+            contador.innerText = totalProductos;
+            contador.style.display = 'flex';
+        } else {
+            contador.style.display = 'none';
+        }
+    });
+}
+
 // --- 1. CARGAR PRODUCTOS ---
 async function cargarProductos(filtro = '') {
     try {
@@ -119,10 +135,9 @@ function actualizarInterfazCarrito() {
     contenedor.innerHTML = '';
 
     if (carrito.length === 0) {
-        contenedor.innerHTML = `<div style="text-align: center; padding: 60px 20px; color: var(--gray-text);">Tu carrito está vacío</div>`;
+        contenedor.innerHTML = `<div class="cart-empty">Tu carrito está vacío</div>`;
         totalElemento.innerText = 'Total: $0';
-        const contador = document.getElementById('carrito-count');
-        if (contador) contador.style.display = 'none';
+        actualizarContadoresCarrito(0);
         return;
     }
 
@@ -133,30 +148,29 @@ function actualizarInterfazCarrito() {
         const urlImagen = item.imagenUrl || 'https://via.placeholder.com/50x50?text=Error';
 
         contenedor.innerHTML += `
-            <div class="carrito-item" style="padding: 15px 0; border-bottom: 1px solid #eee; display: flex; gap: 10px;">
-                <img src="${urlImagen}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-                <div style="flex: 1;">
-                    <h4 style="margin: 0; font-size: 0.9rem; word-break: break-word;">${item.nombre}</h4>
-                    <p style="margin: 5px 0; font-weight: bold;">$${precioItem.toLocaleString()}</p>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <button onclick="cambiarCantidad('${item.id}', -1)">−</button>
-                        <span>${item.cantidad}</span>
-                        <button onclick="cambiarCantidad('${item.id}', 1)">+</button>
+            <div class="cart-item">
+                <img src="${urlImagen}" class="cart-item-image" alt="${item.nombre || 'Producto'}">
+                <div class="cart-item-info">
+                    <h4 class="cart-item-title">${item.nombre}</h4>
+                    <p class="cart-item-price">$${precioItem.toLocaleString()}</p>
+                    <div class="cart-item-controls">
+                        <button class="cart-qty-btn" onclick="cambiarCantidad('${item.id}', -1)" aria-label="Disminuir cantidad">−</button>
+                        <span class="cart-qty-value">${item.cantidad}</span>
+                        <button class="cart-qty-btn" onclick="cambiarCantidad('${item.id}', 1)" aria-label="Aumentar cantidad">+</button>
                     </div>
                 </div>
-                <button onclick="eliminarDelCarrito(${index})" style="color: #dc2626; background: none; border: none; cursor: pointer; font-weight: 600;">Quitar</button>
+                <div class="cart-item-actions">
+                    <p class="cart-item-subtotal">$${subtotal.toLocaleString()}</p>
+                    <button class="cart-remove-btn" onclick="eliminarDelCarrito(${index})">Quitar</button>
+                </div>
             </div>
         `;
     });
 
     localStorage.setItem('carrito_ifi', JSON.stringify(carrito));
-    const contador = document.getElementById('carrito-count');
     const totalProductos = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    
-    if (contador) {
-        contador.innerText = totalProductos;
-        contador.style.display = totalProductos > 0 ? 'block' : 'none';
-    }
+
+    actualizarContadoresCarrito(totalProductos);
     totalElemento.innerText = `Total: $${total.toLocaleString()}`;
 }
 
@@ -247,7 +261,7 @@ async function abrirProductoModal(productoId) {
 function abrirCarrito() {
     const sidebar = document.getElementById('carrito-sidebar');
     const overlay = document.getElementById('carrito-overlay');
-    if(sidebar) sidebar.style.right = '0';
+    if (sidebar) sidebar.style.transform = 'translateX(0)';
     if(overlay) {
         overlay.style.display = 'block';
         setTimeout(() => overlay.style.opacity = '1', 10);
@@ -257,7 +271,7 @@ function abrirCarrito() {
 function cerrarCarrito() {
     const sidebar = document.getElementById('carrito-sidebar');
     const overlay = document.getElementById('carrito-overlay');
-    if(sidebar) sidebar.style.right = '-420px';
+    if (sidebar) sidebar.style.transform = 'translateX(100%)';
     if(overlay) {
         overlay.style.opacity = '0';
         setTimeout(() => overlay.style.display = 'none', 300);
