@@ -9,29 +9,40 @@
     <style>
         /* Estilos específicos para la tienda */
         body {
-            background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 40%);
+            background:
+                radial-gradient(800px 320px at 10% 0%, rgba(0, 33, 120, 0.08), transparent 65%),
+                linear-gradient(180deg, #f8f9ff 0%, #ffffff 30%);
         }
 
         .tienda-header {
-            background: linear-gradient(135deg, #002178 0%, #001650 50%, #000d33 100%);
-            padding: 120px 20px 140px 20px;
+            background:
+                radial-gradient(900px 400px at 12% 18%, rgba(0, 33, 120, 0.14) 0%, rgba(0, 33, 120, 0) 65%),
+                radial-gradient(800px 360px at 90% 85%, rgba(0, 33, 120, 0.08) 0%, rgba(0, 33, 120, 0) 70%),
+                linear-gradient(180deg, #eef3ff 0%, #f8faff 65%, #ffffff 100%);
+            padding: 118px 20px 120px 20px;
             text-align: center;
             margin-top: 0;
             position: relative;
             overflow: hidden;
+            isolation: isolate;
         }
 
         .tienda-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
+                linear-gradient(130deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0) 100%),
+                repeating-linear-gradient(
+                    -18deg,
+                    rgba(0,33,120,0.05) 0px,
+                    rgba(0,33,120,0.05) 1px,
+                    transparent 1px,
+                    transparent 18px
+                );
+            opacity: 0.5;
             pointer-events: none;
+            z-index: 0;
         }
 
         .tienda-header::after {
@@ -40,37 +51,76 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 120px;
+            height: 130px;
             background: linear-gradient(to bottom, 
-                rgba(0, 86, 179, 0) 0%, 
-                rgba(200, 220, 255, 0.15) 25%,
-                rgba(240, 245, 255, 0.6) 50%,
-                rgba(250, 252, 255, 0.9) 75%,
+                rgba(240, 245, 255, 0) 0%, 
+                rgba(230, 238, 255, 0.6) 42%,
+                rgba(245, 249, 255, 0.88) 70%,
                 #ffffff 100%);
             pointer-events: none;
+            z-index: 0;
         }
 
         .tienda-header .container {
             position: relative;
+            z-index: 2;
+        }
+
+        .tienda-header .container::before,
+        .tienda-header .container::after {
+            content: '';
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(3px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .tienda-header .container::before {
+            width: 180px;
+            height: 180px;
+            top: -45px;
+            left: 8%;
+            background: radial-gradient(circle, rgba(84, 143, 255, 0.2) 0%, rgba(84, 143, 255, 0) 72%);
+        }
+
+        .tienda-header .container::after {
+            width: 230px;
+            height: 230px;
+            bottom: -30px;
+            right: 10%;
+            background: radial-gradient(circle, rgba(74, 134, 255, 0.18) 0%, rgba(74, 134, 255, 0) 74%);
         }
 
         .tienda-header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: white;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600;
+            color: var(--black);
+            margin-top: 20px;
             margin-bottom: 20px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-shadow: none;
             letter-spacing: -0.02em;
         }
 
         .tienda-header p {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.35rem;
+            color: var(--gray-text);
             margin-bottom: 45px;
-            max-width: 600px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
+        }
+
+        .tienda-kicker {
+            display: inline-block;
+            background: rgba(0, 33, 120, 0.08);
+            border-radius: 50px;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--blue);
+            font-weight: 600;
         }
 
         .search-box {
@@ -80,20 +130,8 @@
             position: relative;
         }
 
-        .search-box::before {
-            content: '🔍';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-240px);
-            top: 50%;
-            transform: translate(-240px, -50%);
-            font-size: 1.2rem;
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
         .search-box input {
-            padding: 18px 30px 18px 55px;
+            padding: 18px 30px;
             width: 100%;
             max-width: 550px;
             border: none;
@@ -101,14 +139,33 @@
             font-size: 1.05rem;
             outline: none;
             transition: var(--transition);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            background: white;
+            box-shadow: 0 12px 35px rgba(0, 33, 120, 0.14);
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(0, 33, 120, 0.12);
             font-family: 'Inter', sans-serif;
         }
 
         .search-box input:focus {
-            box-shadow: 0 15px 50px rgba(0, 33, 120, 0.35);
+            box-shadow: 0 18px 45px rgba(0, 33, 120, 0.2);
             transform: translateY(-2px);
+        }
+
+        .cart-trigger {
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(0, 33, 120, 0.18);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--blue);
+            background: rgba(0, 33, 120, 0.05);
+            transition: var(--transition);
+        }
+
+        .cart-trigger:hover {
+            background: rgba(0, 33, 120, 0.1);
+            transform: translateY(-1px);
         }
 
         .search-box input::placeholder {
@@ -551,9 +608,9 @@
 
         /* Carrito Sidebar mejorado */
         #carrito-sidebar {
-            background: white;
-            border-left: none;
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+            border-left: 1px solid rgba(0, 33, 120, 0.12);
+            box-shadow: -14px 0 40px rgba(0, 17, 82, 0.16);
         }
 
         #carrito-sidebar h2 {
@@ -562,14 +619,58 @@
             color: var(--black);
         }
 
+        .cart-panel-title {
+            margin: 0;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--black);
+            letter-spacing: -0.01em;
+        }
+
+        .cart-close-btn {
+            cursor: pointer;
+            border: none;
+            background: rgba(0, 33, 120, 0.06);
+            font-size: 24px;
+            color: var(--black);
+            transition: var(--transition);
+            padding: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-close-btn:hover {
+            background: rgba(0, 33, 120, 0.12);
+        }
+
         /* Responsive mejorado */
         @media (max-width: 768px) {
+            .tienda-header {
+                padding: 96px 18px 122px 18px;
+            }
+
+            .tienda-header .container::before {
+                width: 120px;
+                height: 120px;
+                left: 2%;
+            }
+
+            .tienda-header .container::after {
+                width: 150px;
+                height: 150px;
+                right: 2%;
+            }
+
             .tienda-header h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
             .tienda-header p {
-                font-size: 1.05rem;
+                font-size: 1.2rem;
             }
 
             .grid-productos {
@@ -580,11 +681,7 @@
 
             .search-box input {
                 font-size: 1rem;
-                padding: 16px 25px 16px 50px;
-            }
-
-            .search-box::before {
-                transform: translate(-220px, -50%);
+                padding: 16px 25px;
             }
 
             .product-card {
@@ -594,15 +691,33 @@
             .productos-section-title {
                 font-size: 1.6rem;
             }
+
+            #carrito-sidebar {
+                width: min(360px, 92vw) !important;
+            }
         }
 
         @media (max-width: 480px) {
             .tienda-header {
-                padding: 80px 15px 120px 15px;
+                padding: 82px 15px 112px 15px;
+            }
+
+            .tienda-header::before {
+                opacity: 0.3;
+            }
+
+            .tienda-header .container::before,
+            .tienda-header .container::after {
+                display: none;
             }
 
             .grid-productos {
                 grid-template-columns: 1fr;
+            }
+
+            #carrito-sidebar {
+                width: 100vw !important;
+                max-width: 100vw;
             }
         }
 
@@ -639,12 +754,12 @@
                 <li><a href="index.html#productos" class="nav-link">Planes</a></li>
                 <li><a href="tienda.html" class="nav-link active">Tienda</a></li>
                 <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li style="position: relative; cursor: pointer;" onclick="abrirCarrito()">
-                    <span style="font-size: 1.3rem;">🛒</span>
+                <li class="cart-trigger" onclick="abrirCarrito()">
+                    <span>Carrito</span>
                     <span id="carrito-count" style="
                         position: absolute; 
-                        top: -8px; 
-                        right: -10px; 
+                        top: -6px; 
+                        right: -8px; 
                         background: #ff4d4d; 
                         color: white; 
                         border-radius: 50%; 
@@ -669,16 +784,17 @@
             <li><a href="index.html#productos" onclick="toggleMenu()">Planes</a></li>
             <li><a href="tienda.html" onclick="toggleMenu()">Tienda</a></li>
             <li><a href="contacto.html" onclick="toggleMenu()">Contacto</a></li>
-            <li style="border-bottom: none;"><a href="#" onclick="abrirCarrito(); toggleMenu();" style="color: var(--blue);">🛒 Carrito</a></li>
+            <li style="border-bottom: none;"><a href="#" onclick="abrirCarrito(); toggleMenu();" style="color: var(--blue);">Carrito</a></li>
         </ul>
     </div>
 
     <section class="tienda-header fade-in">
         <div class="container">
-            <h1>Tienda</h1>
+            <div class="tienda-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1>Tienda.</h1>
             <p>Encuentra la mejor tecnología para proteger tu hogar o empresa</p>
             <div class="search-box">
-                <input type="text" id="buscador" placeholder="Buscar por nombre (ej: cámara, sensor...)">
+                <input type="text" id="buscador" placeholder="Buscar en tienda...">
             </div>
         </div>
     </section>
@@ -693,20 +809,20 @@
 
     <script src="tienda.js"></script>
 
-    <div id="carrito-sidebar" style="position: fixed; right: -400px; top: 0; width: 360px; height: 100%; background: linear-gradient(to bottom, #ffffff, #f8f9ff); box-shadow: -10px 0 40px rgba(0,0,0,0.2); z-index: 10000; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 25px; display: flex; flex-direction: column; overflow: hidden;">
+    <div id="carrito-sidebar" style="position: fixed; right: -400px; top: 0; width: 380px; height: 100%; z-index: 10000; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 25px; display: flex; flex-direction: column; overflow: hidden;">
         
         <div id="paypal-button-container" style="margin-top: 15px;"></div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e8eaf5; padding-bottom: 20px; margin-bottom: 20px;">
-            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--black);">🛒 Tu Carrito</h2>
-            <button onclick="cerrarCarrito()" style="cursor: pointer; border: none; background: rgba(0, 0, 0, 0.05); font-size: 24px; color: var(--black); transition: var(--transition); padding: 0; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(0, 0, 0, 0.1)'" onmouseout="this.style.background='rgba(0, 0, 0, 0.05)'">&times;</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 33, 120, 0.15); padding-bottom: 18px; margin-bottom: 20px;">
+            <h2 class="cart-panel-title">Tu carrito</h2>
+            <button onclick="cerrarCarrito()" class="cart-close-btn">&times;</button>
         </div>
 
         <div id="carrito-items" style="flex: 1; overflow-y: auto; margin: 0; padding-right: 10px;"></div>
 
-        <div style="border-top: 2px solid #e8eaf5; padding-top: 25px; margin-top: auto; background: white; margin-left: -25px; margin-right: -25px; padding-left: 25px; padding-right: 25px; padding-bottom: 10px;">
+        <div style="border-top: 1px solid rgba(0, 33, 120, 0.15); padding-top: 22px; margin-top: auto; background: white; margin-left: -25px; margin-right: -25px; padding-left: 25px; padding-right: 25px; padding-bottom: 10px;">
             <h3 id="carrito-total" style="font-size: 1.5rem; margin-bottom: 20px; background: linear-gradient(135deg, var(--blue), #001650); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Total: $0</h3>
-            <button class="btn-comprar" style="width: 100%; padding: 16px; font-size: 1.05rem;" onclick="irAPagar()">💳 Finalizar Compra</button>
+            <button class="btn-comprar" style="width: 100%; padding: 16px; font-size: 1.05rem;" onclick="irAPagar()">Finalizar compra</button>
         </div>
     </div>
 
@@ -727,7 +843,7 @@
                     <span id="modal-cantidad-valor">1</span>
                     <button onclick="cambiarCantidadModal(1)">+</button>
                 </div>
-                <button class="modal-btn-comprar" onclick="agregarAlCarritoDesdeModal()">🛒 Agregar al Carrito</button>
+                <button class="modal-btn-comprar" onclick="agregarAlCarritoDesdeModal()">Agregar al carrito</button>
             </div>
         </div>
     </div>

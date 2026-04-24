@@ -316,6 +316,81 @@ footer {
     border: 1px solid #eee;
 }
 
+.testimonial-carousel {
+    --slides-per-view: 2;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+}
+
+.testimonial-viewport {
+    overflow: hidden;
+    border-radius: 26px;
+}
+
+.testimonial-track {
+    display: flex;
+    transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+}
+
+.testimonial-slide {
+    flex: 0 0 calc(100% / var(--slides-per-view));
+    min-width: calc(100% / var(--slides-per-view));
+    padding: 0 10px;
+}
+
+.testimonial-slide .testimonial-card {
+    min-height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 33, 120, 0.08);
+}
+
+.carousel-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 33, 120, 0.22);
+    background: #fff;
+    color: var(--blue);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    line-height: 1;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.carousel-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 24px rgba(0, 33, 120, 0.2);
+    background: rgba(0, 33, 120, 0.06);
+}
+
+.carousel-dots {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(0, 33, 120, 0.25);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.carousel-dot.active {
+    width: 26px;
+    background: var(--blue);
+}
+
 .quote {
     font-size: 1.2rem;
     font-style: italic;
@@ -523,6 +598,24 @@ footer {
     
     .hero h1 {
         font-size: 2.5rem;
+    }
+
+    .testimonial-carousel {
+        --slides-per-view: 1;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .testimonial-slide {
+        padding: 0 2px;
+    }
+
+    .carousel-btn {
+        display: none;
+    }
+
+    .testimonial-card {
+        padding: 28px;
     }
 }
 

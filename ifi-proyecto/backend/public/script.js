@@ -113,9 +113,111 @@ function toggleFaq(element) {
     }
 }
 
+function initTestimonialCarousel() {
+    const carousel = document.querySelector('[data-testimonial-carousel]');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('[data-carousel-track]');
+    const viewport = carousel.querySelector('[data-carousel-viewport]');
+    const prevBtn = carousel.querySelector('[data-direction="prev"]');
+    const nextBtn = carousel.querySelector('[data-direction="next"]');
+    const dotsContainer = document.querySelector('[data-carousel-dots]');
+
+    if (!track || !viewport || !prevBtn || !nextBtn || !dotsContainer) return;
+
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+    let slidesPerView = 1;
+
+    function getSlidesPerView() {
+        return window.matchMedia('(max-width: 768px)').matches ? 1 : 2;
+    }
+
+    function getMaxIndex() {
+        return Math.max(0, slides.length - slidesPerView);
+    }
+
+    function createDots() {
+        const pageCount = getMaxIndex() + 1;
+        dotsContainer.innerHTML = '';
+
+        for (let i = 0; i < pageCount; i += 1) {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'carousel-dot';
+            dot.setAttribute('aria-label', `Ir a reseña ${i + 1}`);
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarousel();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    function updateCarousel() {
+        const offsetPercent = (100 / slidesPerView) * currentIndex;
+        track.style.transform = `translateX(-${offsetPercent}%)`;
+        updateDots();
+    }
+
+    function goToIndex(index) {
+        const maxIndex = getMaxIndex();
+
+        if (index > maxIndex) {
+            currentIndex = 0;
+        } else if (index < 0) {
+            currentIndex = maxIndex;
+        } else {
+            currentIndex = index;
+        }
+
+        updateCarousel();
+    }
+
+    function syncLayout() {
+        slidesPerView = getSlidesPerView();
+        carousel.style.setProperty('--slides-per-view', String(slidesPerView));
+        currentIndex = Math.min(currentIndex, getMaxIndex());
+        createDots();
+        updateCarousel();
+    }
+
+    prevBtn.addEventListener('click', () => goToIndex(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToIndex(currentIndex + 1));
+
+    let touchStartX = 0;
+    viewport.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (event) => {
+        const touchEndX = event.changedTouches[0].clientX;
+        const delta = touchEndX - touchStartX;
+
+        if (Math.abs(delta) < 40) return;
+
+        if (delta > 0) {
+            goToIndex(currentIndex - 1);
+        } else {
+            goToIndex(currentIndex + 1);
+        }
+    }, { passive: true });
+
+    window.addEventListener('resize', syncLayout);
+    syncLayout();
+}
+
 // 3. EJECUTAR AL CARGAR
 document.addEventListener('DOMContentLoaded', () => {
     cargarServiciosDesdeCMS();
+    initTestimonialCarousel();
 });
 
 // 4. FUNCIÓN PARA VER MÁS (MODAL)

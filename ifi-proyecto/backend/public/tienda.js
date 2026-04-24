@@ -101,7 +101,7 @@ function renderizarProductos(productos) {
                     <p class="product-price">$${precioSeguro.toLocaleString()}</p>
                     <p class="stock-badge">✓ ${prod.stock || 0} disponibles</p>
                     <button class="btn-comprar" onclick="agregarAlCarrito('${prod.id}', event)">
-                        🛒 Añadir al carrito
+                        Añadir al carrito
                     </button>
                 </div>
             </div>
@@ -144,7 +144,7 @@ function actualizarInterfazCarrito() {
                         <button onclick="cambiarCantidad('${item.id}', 1)">+</button>
                     </div>
                 </div>
-                <button onclick="eliminarDelCarrito(${index})" style="color: red; background: none; border: none; cursor: pointer;">🗑️</button>
+                <button onclick="eliminarDelCarrito(${index})" style="color: #dc2626; background: none; border: none; cursor: pointer; font-weight: 600;">Quitar</button>
             </div>
         `;
     });

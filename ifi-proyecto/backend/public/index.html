@@ -43,7 +43,7 @@
     <header id="inicio" class="hero">
         <div class="hero-content container" style="position: relative; z-index: 1;">
             <div class="fade-in" style="display: inline-block; background: rgba(0, 33, 120, 0.08); border-radius: 50px; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; color: var(--blue); font-weight: 600;">IFI <span style="color: var(--blue);">Seguridad</span></div>
-            <h1 class="fade-in" style="margin-top: 20px;">La seguridad del futuro,<br>diseñada para hoy.</h1>
+            <h1 class="fade-in" style="margin-top: 20px; line-height: 1.08;">La seguridad del futuro,<br>diseñada para hoy.</h1>
             <p class="fade-in" style="font-size: 1.35rem; margin-bottom: 45px; max-width: 650px; margin-left: auto; margin-right: auto;">Protección inteligente que aprende, se adapta y te mantiene al mando. Monitoreo 24/7 con tecnología IA que distingue lo que importa.</p>
             <div class="fade-in" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="#productos" class="btn btn-primary" style="padding: 16px 40px; font-size: 1.05rem; box-shadow: 0 8px 24px rgba(0, 33, 120, 0.3);">Ver Soluciones</a>
@@ -98,14 +98,6 @@
                     </div>
                 </div>
                 <div class="card" style="border: 1px solid rgba(0,33,120,0.1); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 0; right: 0; font-size: 80px; opacity: 0.08;">🔔</div>
-                    <div style="position: relative; z-index: 1;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🚨</div>
-                        <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Smart Alerts</h3>
-                        <p style="color: var(--gray-text); line-height: 1.7;">Notificaciones inteligentes que solo te avisan cuando algo realmente importa.</p>
-                    </div>
-                </div>
-                <div class="card" style="border: 1px solid rgba(0,33,120,0.1); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: 0; right: 0; font-size: 80px; opacity: 0.08;">💬</div>
                     <div style="position: relative; z-index: 1;">
                         <div style="font-size: 2.5rem; margin-bottom: 15px;">☎️</div>
@@ -123,31 +115,109 @@
                 <h2 class="section-title">Lo que dicen nuestros clientes</h2>
                 <p style="color: var(--gray-text); font-size: 1.05rem;">Empresas y familias que confían en nuestra tecnología</p>
             </div>
-            <div class="grid">
-                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                <div class="testimonial-carousel" data-testimonial-carousel>
+                    <button class="carousel-btn" data-direction="prev" aria-label="Ver reseña anterior">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+
+                    <div class="testimonial-viewport" data-carousel-viewport>
+                        <div class="testimonial-track" data-carousel-track>
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"La transición a IFI Secure fue increíblemente sencilla. La interfaz es tan intuitiva como un smartphone. Nuestro equipo se adaptó en cuestión de horas."</p>
+                                    <p class="author">Carlos R.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Director de Operaciones, Empresa de Logística</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"Por fin puedo dormir tranquilo sabiendo que mi hogar está bajo vigilancia inteligente. Las notificaciones son precisas y no molestas."</p>
+                                    <p class="author">Elena G.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Propietaria, Distrito 3</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"El soporte técnico es excepcional. Tuve un problema a las 3 AM y en 45 minutos estava todo resuelto. Muy recomendado."</p>
+                                    <p class="author">Marco T.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Gerente de Seguridad, Retail</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"Nos instalaron 12 cámaras en una semana sin afectar la operación. La calidad de imagen nocturna superó nuestras expectativas."</p>
+                                    <p class="author">Laura M.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Administradora, Condominio Residencial</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"La app es rápida y muy estable. Puedo revisar mi negocio desde el móvil en segundos y recibir alertas útiles de verdad."</p>
+                                    <p class="author">Javier P.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Dueño, Cadena de Cafeterías</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"Teníamos falsas alarmas cada noche con nuestro sistema anterior. Con IFI bajaron casi a cero y ganamos tranquilidad."</p>
+                                    <p class="author">Sofía N.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Jefa de Planta, Industria Alimentaria</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"El equipo técnico nos acompañó desde la cotización hasta la configuración final. Todo claro, profesional y sin sorpresas."</p>
+                                    <p class="author">Andrés V.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Director General, Distribuidora Regional</p>
+                                </div>
+                            </article>
+
+                            <article class="testimonial-slide">
+                                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
+                                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <p class="quote">"Excelente relación calidad-precio. En casa nos sentimos más seguros y el soporte responde rápido cuando tenemos dudas."</p>
+                                    <p class="author">Patricia L.</p>
+                                    <p style="font-size: 0.85rem; color: var(--gray-text);">Cliente Residencial</p>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                    <p class="quote">"La transición a IFI Secure fue increíblemente sencilla. La interfaz es tan intuitiva como un smartphone. Nuestro equipo se adaptó en cuestión de horas."</p>
-                    <p class="author">Carlos R.</p>
-                    <p style="font-size: 0.85rem; color: var(--gray-text);">Director de Operaciones, Empresa de Logística</p>
+
+                    <button class="carousel-btn" data-direction="next" aria-label="Ver siguiente reseña">
+                        <span aria-hidden="true">›</span>
+                    </button>
                 </div>
-                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <p class="quote">"Por fin puedo dormir tranquilo sabiendo que mi hogar está bajo vigilancia inteligente. Las notificaciones son precisas y no molestas."</p>
-                    <p class="author">Elena G.</p>
-                    <p style="font-size: 0.85rem; color: var(--gray-text);">Propietaria, Distrito 3</p>
-                </div>
-                <div class="testimonial-card" style="border-left: 4px solid var(--blue); position: relative;">
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <span style="font-size: 1.5rem;">⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <p class="quote">"El soporte técnico es excepcional. Tuve un problema a las 3 AM y en 45 minutos estava todo resuelto. Muy recomendado."</p>
-                    <p class="author">Marco T.</p>
-                    <p style="font-size: 0.85rem; color: var(--gray-text);">Gerente de Seguridad, Retail</p>
-                </div>
+
+                <div class="carousel-dots" data-carousel-dots aria-label="Navegación de reseñas"></div>
             </div>
         </div>
     </section>

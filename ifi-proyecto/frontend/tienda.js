@@ -103,7 +103,7 @@ function renderizarProductos(productos) {
                     <p class="product-price">$${prod.precio.toLocaleString()}</p>
                     <p class="stock-badge">✓ ${prod.stock} disponibles</p>
                     <button class="btn-comprar" onclick="agregarAlCarrito('${prod.id}'); event.stopPropagation();">
-                        🛒 Añadir al carrito
+                        Añadir al carrito
                     </button>
                 </div>
             </div>
@@ -184,7 +184,6 @@ function actualizarInterfazCarrito() {
     if (carrito.length === 0) {
         contenedor.innerHTML = `
             <div style="text-align: center; padding: 60px 20px; color: var(--gray-text);">
-                <div style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;">🛒</div>
                 <h3 style="font-size: 1.2rem; color: var(--black); margin-bottom: 10px; font-weight: 600;">Tu carrito está vacío</h3>
                 <p style="font-size: 0.95rem; line-height: 1.6;">Añade productos para empezar tu compra</p>
             </div>
@@ -223,7 +222,7 @@ function actualizarInterfazCarrito() {
                 </div>
                 <div style="text-align: right; flex-shrink: 0;">
                     <p style="margin: 0 0 12px 0; font-size: 1.05rem; font-weight: 700; color: var(--black);">$${subtotal.toLocaleString()}</p>
-                    <button onclick="eliminarDelCarrito(${index})" style="background: rgba(239, 68, 68, 0.1); border: none; color: #ef4444; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: var(--transition); padding: 6px 12px; border-radius: 15px;" onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'" onmouseout="this.style.background='rgba(239, 68, 68, 0.1)'">🗑️ Quitar</button>
+                    <button onclick="eliminarDelCarrito(${index})" style="background: rgba(239, 68, 68, 0.1); border: none; color: #ef4444; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: var(--transition); padding: 6px 12px; border-radius: 15px;" onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'" onmouseout="this.style.background='rgba(239, 68, 68, 0.1)'">Quitar</button>
                 </div>
             </div>
         `;
@@ -268,7 +267,7 @@ function eliminarDelCarrito(index) {
 // 6. Finalizar compra (WhatsApp mejorado con cantidades)
 function irAPagar() {
     if (carrito.length === 0) {
-        alert("❌ El carrito está vacío. Añade productos antes de continuar.");
+        alert("El carrito está vacío. Añade productos antes de continuar.");
         return;
     }
     
