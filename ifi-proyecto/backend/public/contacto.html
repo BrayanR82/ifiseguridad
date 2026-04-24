@@ -157,8 +157,6 @@
             </a>
             <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
                 <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="index.html#servicios" class="nav-link">Servicios</a></li>
-                <li><a href="index.html#productos" class="nav-link">Planes</a></li>
                 <li><a href="tienda.html" class="nav-link">Tienda</a></li>
                 <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
             </ul>
@@ -220,7 +218,7 @@
         }
     }
 
-    // --- HEADER QUE DESAPARECE AL HACER SCROLL EN MÓVIL ---
+    // --- HEADER QUE DESAPARECE AL HACER SCROLL EN TODAS LAS VISTAS ---
     let lastScroll = 0;
     let scrollTicking = false;
     const navbar = document.querySelector('.navbar');
@@ -229,7 +227,6 @@
         if (!navbar) return;
 
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
         if (scrollTicking) return;
         scrollTicking = true;
@@ -237,12 +234,8 @@
         window.requestAnimationFrame(() => {
             navbar.style.padding = currentScroll > 50 ? '10px 0' : '15px 0';
 
-            if (isMobile) {
-                const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
-                navbar.classList.toggle('navbar-hidden', scrollingDown);
-            } else {
-                navbar.classList.remove('navbar-hidden');
-            }
+            const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
+            navbar.classList.toggle('navbar-hidden', scrollingDown);
 
             lastScroll = currentScroll;
             scrollTicking = false;

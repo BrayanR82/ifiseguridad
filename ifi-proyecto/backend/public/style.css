@@ -39,12 +39,14 @@ body {
     background: transparent;
     display: flex;
     justify-content: center;
-    transition: transform 0.35s ease, padding 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease, opacity 0.35s ease;
     will-change: transform;
 }
 
 .navbar.navbar-hidden {
-    transform: translateY(-120%);
+    transform: translateY(-135%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 .nav-content {
@@ -66,12 +68,19 @@ body {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
     font-weight: 600;
     font-size: 1.25rem;
     text-decoration: none;
     color: var(--black);
+    line-height: 0;
     flex-shrink: 0;
     transition: var(--transition);
+}
+
+.logo img {
+    display: block;
 }
 
 .logo:hover {

@@ -15,7 +15,7 @@ function toggleMenu() {
     }
 }
 
-// --- HEADER QUE SE OCULTA AL HACER SCROLL EN MÓVIL ---
+// --- HEADER QUE SE OCULTA AL HACER SCROLL EN TODAS LAS VISTAS ---
 let lastScroll = 0;
 let scrollTicking = false;
 const navbar = document.querySelector('.navbar');
@@ -32,12 +32,8 @@ window.addEventListener('scroll', () => {
     window.requestAnimationFrame(() => {
         navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
 
-        if (isMobile) {
-            const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
-            navbar.classList.toggle('navbar-hidden', scrollingDown);
-        } else {
-            navbar.classList.remove('navbar-hidden');
-        }
+        const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
+        navbar.classList.toggle('navbar-hidden', scrollingDown);
 
         lastScroll = currentScroll;
         scrollTicking = false;
