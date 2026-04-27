@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -53,7 +53,9 @@
             <p data-page-subtitle>Selecciona una guía, usa el buscador para priorizar resultados y navega con el carrusel inferior.</p>
         </section>
 
-        <section data-current-guide></section>
+        <section class="guias-back-actions" data-back-index>
+            <a href="../guias.html" class="guias-back-index">Volver al índice</a>
+        </section>
 
         <section class="guias-search-block">
             <div class="guias-search-box">
@@ -79,7 +81,95 @@
 
             <div class="carousel-dots" data-carousel-dots aria-label="Navegación de guías"></div>
         </section>
+
+        <section class="guide-content-heading fade-in">
+            <span class="guias-current-label" id="current-guide-title">Contenido de la guia</span>
+        </section>
+
+        <section class="guias-current fade-in" aria-labelledby="current-guide-title">
+            <div class="guide-overview">
+                <figure class="guide-visual">
+                    <img src="images/configuracion-camaras-ip/1.jpg" alt="Ilustración de configuración de cámara IP con red y monitoreo" loading="lazy">
+                </figure>
+                <div class="guide-overview-text">
+                    <h3 class="guias-current-title">Configuración de cámaras IP</h3>
+                    <p class="guias-current-intro">Guía técnica para implementar una cámara IP con calidad de imagen estable, red segura y acceso remoto controlado.</p>
+                    <p class="guide-context">Este flujo está orientado a instalaciones residenciales y comerciales pequeñas donde importa la claridad en evidencia, la continuidad de grabación y una puesta en marcha rápida sin perder seguridad.</p>
+                </div>
+            </div>
+
+            <div class="guide-content-grid">
+                <article class="guide-mini-card">
+                    <h3>Antes de empezar</h3>
+                    <ul class="guide-list">
+                        <li>Cámara IP con firmware actualizado, switch PoE o fuente certificada y cableado validado.</li>
+                        <li>Acceso a red local con direccionamiento definido y permisos de administración.</li>
+                        <li>Credenciales seguras y criterio de calidad (resolución, fps y retención) acordado con el cliente.</li>
+                    </ul>
+                </article>
+
+                <article class="guide-main-card">
+                    <h3>Paso a paso</h3>
+                    <ol class="guias-current-steps">
+                        <li>Conecta la cámara al switch PoE o a su fuente y verifica el enlace físico.</li>
+                        <li>Detecta el dispositivo con la herramienta del fabricante o un escaneo de red.</li>
+                        <li>Asigna IP fija en el rango de la instalación y configura puerta de enlace y DNS.</li>
+                        <li>Cambia las credenciales por defecto y activa autenticación fuerte.</li>
+                        <li>Ajusta resolución, FPS, compresión y perfiles de grabación según el escenario.</li>
+                        <li>Valida el stream principal y secundario desde VMS o NVR y documenta los parámetros finales.</li>
+                    </ol>
+                </article>
+
+                <article class="guide-mini-card">
+                    <h3>Buenas prácticas</h3>
+                    <ul class="guide-list">
+                        <li>Prioriza perfiles diferenciados para visualización en vivo y grabación para optimizar ancho de banda.</li>
+                        <li>Configura zonas de privacidad y máscaras cuando exista exposición a espacios sensibles.</li>
+                        <li>Documenta en acta final IP, puerto, usuario técnico, versión de firmware y posición física.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
     </main>
+
+    <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <img src="../img/logoifi.png" alt="IFI Seguridad" style="width: 50px; height: auto; margin-bottom: 12px;">
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem;">IFI Seguridad</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Protección inteligente para tu hogar y negocio.</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                        <strong style="color: rgba(255,255,255,0.8);">Teléfono:</strong> +34 900 123 456<br>
+                        <strong style="color: rgba(255,255,255,0.8);">Email:</strong> contacto@ifiseguridad.es
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Enlaces</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="../index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Inicio</a></li>
+                        <li style="margin-bottom: 10px;"><a href="../index.html#productos" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Planes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="../tienda.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Tienda</a></li>
+                        <li><a href="../contacto.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Síguenos</h4>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">f</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">𝕏</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">In</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0;">© 2026 IFI Seguridad. Elevando los estándares de protección.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="guias-data.js"></script>
     <script src="guias-shared.js"></script>

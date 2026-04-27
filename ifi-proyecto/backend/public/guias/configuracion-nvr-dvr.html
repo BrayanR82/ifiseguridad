@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,20 +12,28 @@
 <body class="guias-page" data-guide-id="grabadores">
     <nav class="navbar">
         <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-            <a href="../index.html" class="logo" style="flex: 0 0 auto;"><img src="../img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;"></a>
+            <a href="../index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="../img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
             <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
                 <li><a href="../index.html" class="nav-link">Inicio</a></li>
                 <li><a href="../tienda.html" class="nav-link">Tienda</a></li>
                 <li><a href="../contacto.html" class="nav-link">Contacto</a></li>
             </ul>
-            <div class="nav-action-links"><a href="../guias.html" class="nav-pill-link">Guias</a></div>
+            <div class="nav-action-links">
+                <a href="../guias.html" class="nav-pill-link">Guias</a>
+            </div>
             <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
                 <li><a href="../index.html" class="nav-link">Inicio</a></li>
                 <li><a href="../tienda.html" class="nav-link">Tienda</a></li>
                 <li><a href="../contacto.html" class="nav-link">Contacto</a></li>
                 <li><a href="../guias.html" class="nav-pill-link">Guias</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;"><span></span><span></span><span></span></button>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -44,18 +52,125 @@
             <h1 data-page-heading>Guias.</h1>
             <p data-page-subtitle>Selecciona una guía, usa el buscador para priorizar resultados y navega con el carrusel inferior.</p>
         </section>
-        <section data-current-guide></section>
-        <section class="guias-search-block"><div class="guias-search-box"><input id="guias-search" type="search" placeholder="Buscar guía..." aria-label="Buscar guía"></div></section>
+
+        <section class="guias-back-actions" data-back-index>
+            <a href="../guias.html" class="guias-back-index">Volver al índice</a>
+        </section>
+
+        <section class="guias-search-block">
+            <div class="guias-search-box">
+                <input id="guias-search" type="search" placeholder="Buscar guía..." aria-label="Buscar guía">
+            </div>
+        </section>
+
         <section class="guias-carousel-section">
-            <div class="guias-carousel-header"><div><h2>Explorar todas las guías</h2><p data-results-info>9 guías disponibles</p></div></div>
+            <div class="guias-carousel-header">
+                <div>
+                    <h2>Explorar todas las guías</h2>
+                    <p data-results-info>9 guías disponibles</p>
+                </div>
+            </div>
+
             <div class="guias-carousel" data-guide-carousel>
                 <button class="carousel-btn" data-direction="prev" aria-label="Ver guía anterior"><span aria-hidden="true">‹</span></button>
-                <div class="guias-carousel-viewport" data-carousel-viewport><div class="guias-carousel-track" data-carousel-track></div></div>
+                <div class="guias-carousel-viewport" data-carousel-viewport>
+                    <div class="guias-carousel-track" data-carousel-track></div>
+                </div>
                 <button class="carousel-btn" data-direction="next" aria-label="Ver siguiente guía"><span aria-hidden="true">›</span></button>
             </div>
+
             <div class="carousel-dots" data-carousel-dots aria-label="Navegación de guías"></div>
         </section>
+
+        <section class="guide-content-heading fade-in">
+            <span class="guias-current-label" id="current-guide-title">Contenido de la guia</span>
+        </section>
+
+        <section class="guias-current fade-in" aria-labelledby="current-guide-title">
+            <div class="guide-overview">
+                <figure class="guide-visual">
+                    <img src="images/configuracion-nvr-dvr/1.jpg" alt="Ilustración de grabador NVR DVR con múltiples canales de video" loading="lazy">
+                </figure>
+                <div class="guide-overview-text">
+                    <h3 class="guias-current-title">Configuración de grabadores NVR y DVR</h3>
+                    <p class="guias-current-intro">Proceso completo para dejar un NVR/DVR operativo, con grabación confiable, usuarios por rol y exportación de evidencia.</p>
+                    <p class="guide-context">La meta es asegurar que el grabador no solo funcione, sino que también cumpla criterios de trazabilidad y disponibilidad para revisión de incidentes en campo.</p>
+                </div>
+            </div>
+
+            <div class="guide-content-grid">
+                <article class="guide-mini-card">
+                    <h3>Antes de empezar</h3>
+                    <ul class="guide-list">
+                        <li>Grabador con discos compatibles, cámaras previamente dadas de alta y red estable.</li>
+                        <li>Sincronización horaria (NTP) disponible y política de almacenamiento definida.</li>
+                        <li>Matriz de usuarios y permisos aprobada por responsable del sitio.</li>
+                    </ul>
+                </article>
+
+                <article class="guide-main-card">
+                    <h3>Paso a paso</h3>
+                    <ol class="guias-current-steps">
+                        <li>Actualiza el firmware del grabador y reinicia en una ventana de mantenimiento.</li>
+                        <li>Define fecha, zona horaria y NTP para preservar la trazabilidad de eventos.</li>
+                        <li>Configura discos, política de sobreescritura y alertas de capacidad.</li>
+                        <li>Agrega cámaras por protocolo compatible y verifica el estado de cada canal.</li>
+                        <li>Crea usuarios por rol y restringe permisos de borrado o exportación.</li>
+                        <li>Prueba reproducción, exportación de evidencia y notificaciones críticas.</li>
+                    </ol>
+                </article>
+
+                <article class="guide-mini-card">
+                    <h3>Buenas prácticas</h3>
+                    <ul class="guide-list">
+                        <li>Reserva canales de contingencia para crecimiento futuro y reemplazos rápidos.</li>
+                        <li>Activa alertas por caída de canal, pérdida de disco y eventos críticos del sistema.</li>
+                        <li>Valida exportación de clips en formato reproducible fuera del ecosistema del fabricante.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
     </main>
+
+    <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <img src="../img/logoifi.png" alt="IFI Seguridad" style="width: 50px; height: auto; margin-bottom: 12px;">
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem;">IFI Seguridad</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Protección inteligente para tu hogar y negocio.</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                        <strong style="color: rgba(255,255,255,0.8);">Teléfono:</strong> +34 900 123 456<br>
+                        <strong style="color: rgba(255,255,255,0.8);">Email:</strong> contacto@ifiseguridad.es
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Enlaces</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="../index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Inicio</a></li>
+                        <li style="margin-bottom: 10px;"><a href="../index.html#productos" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Planes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="../tienda.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Tienda</a></li>
+                        <li><a href="../contacto.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Síguenos</h4>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">f</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">𝕏</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">In</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0;">© 2026 IFI Seguridad. Elevando los estándares de protección.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="guias-data.js"></script>
     <script src="guias-shared.js"></script>
 </body>

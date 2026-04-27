@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -10,9 +10,168 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="guias-page" data-guide-id="montajePc">
-    <nav class="navbar"><div class="container nav-content" style="display:flex;justify-content:space-between;align-items:center;position:relative;"><a href="../index.html" class="logo" style="flex:0 0 auto;"><img src="../img/logoifi.png" alt="IFI Seguridad" style="height:32px;width:auto;"></a><ul class="nav-links desktop-nav" style="position:absolute;left:50%;transform:translateX(-50%);margin:0;"><li><a href="../index.html" class="nav-link">Inicio</a></li><li><a href="../tienda.html" class="nav-link">Tienda</a></li><li><a href="../contacto.html" class="nav-link">Contacto</a></li></ul><div class="nav-action-links"><a href="../guias.html" class="nav-pill-link">Guias</a></div><ul class="nav-links mobile-nav-links" style="display:none;margin:0;"><li><a href="../index.html" class="nav-link">Inicio</a></li><li><a href="../tienda.html" class="nav-link">Tienda</a></li><li><a href="../contacto.html" class="nav-link">Contacto</a></li><li><a href="../guias.html" class="nav-pill-link">Guias</a></li></ul><button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex:0 0 auto;"><span></span><span></span><span></span></button></div></nav>
-    <div class="mobile-menu" id="mobile-menu"><ul><li><a href="../index.html" onclick="toggleMenu()">Inicio</a></li><li><a href="../tienda.html" onclick="toggleMenu()">Tienda</a></li><li><a href="../contacto.html" onclick="toggleMenu()">Contacto</a></li><li><a href="../guias.html" onclick="toggleMenu()">Guias</a></li></ul></div>
-    <main class="guias-browser fade-in"><section class="guias-hero"><div class="guias-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div><h1 data-page-heading>Guias.</h1><p data-page-subtitle>Selecciona una guía, usa el buscador para priorizar resultados y navega con el carrusel inferior.</p></section><section data-current-guide></section><section class="guias-search-block"><div class="guias-search-box"><input id="guias-search" type="search" placeholder="Buscar guía..." aria-label="Buscar guía"></div></section><section class="guias-carousel-section"><div class="guias-carousel-header"><div><h2>Explorar todas las guías</h2><p data-results-info>9 guías disponibles</p></div></div><div class="guias-carousel" data-guide-carousel><button class="carousel-btn" data-direction="prev" aria-label="Ver guía anterior"><span aria-hidden="true">‹</span></button><div class="guias-carousel-viewport" data-carousel-viewport><div class="guias-carousel-track" data-carousel-track></div></div><button class="carousel-btn" data-direction="next" aria-label="Ver siguiente guía"><span aria-hidden="true">›</span></button></div><div class="carousel-dots" data-carousel-dots aria-label="Navegación de guías"></div></section></main>
-    <script src="guias-data.js"></script><script src="guias-shared.js"></script>
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <a href="../index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="../img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
+            <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+                <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                <li><a href="../tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="../contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-action-links">
+                <a href="../guias.html" class="nav-pill-link">Guias</a>
+            </div>
+            <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
+                <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                <li><a href="../tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="../contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="../guias.html" class="nav-pill-link">Guias</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="../index.html" onclick="toggleMenu()">Inicio</a></li>
+            <li><a href="../tienda.html" onclick="toggleMenu()">Tienda</a></li>
+            <li><a href="../contacto.html" onclick="toggleMenu()">Contacto</a></li>
+            <li><a href="../guias.html" onclick="toggleMenu()">Guias</a></li>
+        </ul>
+    </div>
+
+    <main class="guias-browser fade-in">
+        <section class="guias-hero">
+            <div class="guias-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1 data-page-heading>Guias.</h1>
+            <p data-page-subtitle>Selecciona una guía, usa el buscador para priorizar resultados y navega con el carrusel inferior.</p>
+        </section>
+
+        <section class="guias-back-actions" data-back-index>
+            <a href="../guias.html" class="guias-back-index">Volver al índice</a>
+        </section>
+
+        <section class="guias-search-block">
+            <div class="guias-search-box">
+                <input id="guias-search" type="search" placeholder="Buscar guía..." aria-label="Buscar guía">
+            </div>
+        </section>
+
+        <section class="guias-carousel-section">
+            <div class="guias-carousel-header">
+                <div>
+                    <h2>Explorar todas las guías</h2>
+                    <p data-results-info>9 guías disponibles</p>
+                </div>
+            </div>
+
+            <div class="guias-carousel" data-guide-carousel>
+                <button class="carousel-btn" data-direction="prev" aria-label="Ver guía anterior"><span aria-hidden="true">‹</span></button>
+                <div class="guias-carousel-viewport" data-carousel-viewport>
+                    <div class="guias-carousel-track" data-carousel-track></div>
+                </div>
+                <button class="carousel-btn" data-direction="next" aria-label="Ver siguiente guía"><span aria-hidden="true">›</span></button>
+            </div>
+
+            <div class="carousel-dots" data-carousel-dots aria-label="Navegación de guías"></div>
+        </section>
+
+        <section class="guide-content-heading fade-in">
+            <span class="guias-current-label" id="current-guide-title">Contenido de la guia</span>
+        </section>
+
+        <section class="guias-current fade-in" aria-labelledby="current-guide-title">
+            <div class="guide-overview">
+                <figure class="guide-visual">
+                    <img src="images/montaje-reparacion-pcs/1.jpeg" alt="Ilustración de montaje y reparación de computadora de escritorio" loading="lazy">
+                </figure>
+                <div class="guide-overview-text">
+                    <h3 class="guias-current-title">Montaje y reparación de PCs</h3>
+                    <p class="guias-current-intro">Guía de ensamblaje y reparación orientada a estabilidad, rendimiento térmico y diagnóstico ordenado de fallas comunes.</p>
+                    <p class="guide-context">Pensada para estaciones de trabajo y equipos administrativos que necesitan operación continua con mantenimientos preventivos y correctivos bien documentados.</p>
+                </div>
+            </div>
+
+            <div class="guide-content-grid">
+                <article class="guide-mini-card">
+                    <h3>Antes de empezar</h3>
+                    <ul class="guide-list">
+                        <li>Componentes validados por compatibilidad y fuente con margen de potencia seguro.</li>
+                        <li>Herramientas ESD, pasta térmica y kit de limpieza para montaje técnico.</li>
+                        <li>Medio de instalación de sistema operativo y controladores actualizados.</li>
+                    </ul>
+                </article>
+
+                <article class="guide-main-card">
+                    <h3>Paso a paso</h3>
+                    <ol class="guias-current-steps">
+                        <li>Valida compatibilidad de placa base, CPU, RAM, fuente y almacenamiento.</li>
+                        <li>Monta componentes con medidas ESD y aplica pasta térmica correctamente.</li>
+                        <li>Realiza POST inicial, revisa BIOS/UEFI y ajusta el orden de arranque.</li>
+                        <li>Instala sistema operativo, drivers y utilidades de monitorización.</li>
+                        <li>Ejecuta pruebas de estrés en CPU, RAM y disco para detectar inestabilidad.</li>
+                        <li>Entrega informe técnico con piezas reemplazadas y recomendaciones de uso.</li>
+                    </ol>
+                </article>
+
+                <article class="guide-mini-card">
+                    <h3>Buenas prácticas</h3>
+                    <ul class="guide-list">
+                        <li>Asegura flujo de aire frontal a posterior y gestión de cables para mejor temperatura.</li>
+                        <li>Ejecuta pruebas de memoria y almacenamiento antes de entrega final.</li>
+                        <li>Registra seriales de piezas críticas para facilitar garantías y futuros cambios.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <img src="../img/logoifi.png" alt="IFI Seguridad" style="width: 50px; height: auto; margin-bottom: 12px;">
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem;">IFI Seguridad</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Protección inteligente para tu hogar y negocio.</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                        <strong style="color: rgba(255,255,255,0.8);">Teléfono:</strong> +34 900 123 456<br>
+                        <strong style="color: rgba(255,255,255,0.8);">Email:</strong> contacto@ifiseguridad.es
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Enlaces</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="../index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Inicio</a></li>
+                        <li style="margin-bottom: 10px;"><a href="../index.html#productos" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Planes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="../tienda.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Tienda</a></li>
+                        <li><a href="../contacto.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Síguenos</h4>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">f</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">𝕏</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">In</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0;">© 2026 IFI Seguridad. Elevando los estándares de protección.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="guias-data.js"></script>
+    <script src="guias-shared.js"></script>
 </body>
 </html>

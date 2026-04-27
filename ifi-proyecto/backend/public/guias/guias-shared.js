@@ -53,9 +53,6 @@ window.addEventListener('scroll', () => {
   const isInsideGuidesFolder = pathname.includes('/guias/');
   const isGuideDetailPage = isInsideGuidesFolder;
   const basePath = isInsideGuidesFolder ? '' : 'guias/';
-  const parentPath = isInsideGuidesFolder ? '../' : '';
-
-  let currentGuideContainer = document.querySelector('[data-current-guide]');
   const searchInput = document.getElementById('guias-search');
   const carousel = document.querySelector('[data-guide-carousel]');
 
@@ -108,122 +105,6 @@ window.addEventListener('scroll', () => {
 
   function getGuideUrl(guide) {
     return `${basePath}${guide.slug}.html`;
-  }
-
-  function getBackUrl() {
-    return `${parentPath}guias.html`;
-  }
-
-  function getGuideImageUrl(guide) {
-    if (!guide.image) return '';
-    return `${basePath}${guide.image}`;
-  }
-
-  function ensureCurrentGuideContainer() {
-    if (currentGuideContainer) return currentGuideContainer;
-
-    const main = document.querySelector('.guias-browser');
-    if (!main) return null;
-
-    currentGuideContainer = document.createElement('section');
-    currentGuideContainer.setAttribute('data-current-guide', '');
-    main.appendChild(currentGuideContainer);
-    return currentGuideContainer;
-  }
-
-  function ensureBackButton() {
-    if (!isGuideDetailPage) return;
-    if (document.querySelector('[data-back-index]')) return;
-
-    const searchBlock = document.querySelector('.guias-search-block');
-    if (!searchBlock) return;
-
-    const backActions = document.createElement('section');
-    backActions.className = 'guias-back-actions';
-    backActions.setAttribute('data-back-index', '');
-    backActions.innerHTML = `<a href="${getBackUrl()}" class="guias-back-index">Volver al índice</a>`;
-
-    searchBlock.insertAdjacentElement('beforebegin', backActions);
-  }
-
-  function moveCurrentGuideBelowCarousel() {
-    if (!isGuideDetailPage) return;
-
-    const container = ensureCurrentGuideContainer();
-    const carouselSection = document.querySelector('.guias-carousel-section');
-
-    if (container && carouselSection) {
-      carouselSection.insertAdjacentElement('afterend', container);
-    }
-  }
-
-  function renderCurrentGuide(guide) {
-    const container = ensureCurrentGuideContainer();
-    if (!container) return;
-
-    const requirements = guide.requirements || [];
-    const bestPractices = guide.bestPractices || [];
-    const stepsHtml = guide.steps.map((step) => `<li>${step}</li>`).join('');
-    const requirementsHtml = requirements.map((item) => `<li>${item}</li>`).join('');
-    const bestPracticesHtml = bestPractices.map((item) => `<li>${item}</li>`).join('');
-    const imageSrc = getGuideImageUrl(guide);
-    const imageHtml = imageSrc
-      ? `<figure class="guide-visual"><img src="${imageSrc}" alt="${guide.imageAlt || guide.title}" loading="lazy"></figure>`
-      : '';
-
-    const contentBlocks = [];
-
-    if (requirements.length) {
-      contentBlocks.push(`
-        <article class="guide-mini-card">
-          <h3>Antes de empezar</h3>
-          <ul class="guide-list">
-            ${requirementsHtml}
-          </ul>
-        </article>
-      `);
-    }
-
-    contentBlocks.push(`
-      <article class="guide-main-card">
-        <h3>Paso a paso</h3>
-        <ol class="guias-current-steps">
-          ${stepsHtml}
-        </ol>
-      </article>
-    `);
-
-    if (bestPractices.length) {
-      contentBlocks.push(`
-        <article class="guide-mini-card">
-          <h3>Buenas prácticas</h3>
-          <ul class="guide-list">
-            ${bestPracticesHtml}
-          </ul>
-        </article>
-      `);
-    }
-
-    container.innerHTML = `
-      <section class="guide-content-heading fade-in">
-        <span class="guias-current-label" id="current-guide-title">Contenido de la guia</span>
-      </section>
-
-      <section class="guias-current fade-in" aria-labelledby="current-guide-title">
-        <div class="guide-overview">
-          ${imageHtml}
-          <div class="guide-overview-text">
-            <h3 class="guias-current-title">${guide.title}</h3>
-            <p class="guias-current-intro">${guide.intro}</p>
-            <p class="guide-context">${guide.context || ''}</p>
-          </div>
-        </div>
-
-        <div class="guide-content-grid">
-          ${contentBlocks.join('')}
-        </div>
-      </section>
-    `;
   }
 
   function renderCarouselSlides(list) {
@@ -382,12 +263,6 @@ window.addEventListener('scroll', () => {
     const initialGuideId = getInitialGuideId();
     const initialGuide = guidesById[initialGuideId] || guides[0];
     currentGuideId = initialGuide.id;
-
-    if (isGuideDetailPage) {
-      ensureBackButton();
-      moveCurrentGuideBelowCarousel();
-      renderCurrentGuide(initialGuide);
-    }
 
     updatePageMeta(initialGuide);
 
