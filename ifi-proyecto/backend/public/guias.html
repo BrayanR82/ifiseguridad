@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guias | IFI Seguridad</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logoifi.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .guias-container {
+            max-width: 860px;
+            margin: 120px auto 70px;
+            padding: 0 20px;
+        }
+
+        .guias-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .guias-kicker {
+            display: inline-block;
+            background: rgba(0, 33, 120, 0.08);
+            border-radius: 50px;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .guias-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .guias-header p {
+            color: var(--gray-text);
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .guias-placeholder {
+            background: linear-gradient(135deg, rgba(0, 33, 120, 0.06), rgba(0, 33, 120, 0.02));
+            border: 1px solid rgba(0, 33, 120, 0.12);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .guias-placeholder h2 {
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+
+        .guias-placeholder p {
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <a href="index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
+            <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-action-links">
+                <a href="guias.html" class="nav-pill-link">Guias</a>
+            </div>
+            <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="guias.html" class="nav-pill-link">Guias</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="guias-container fade-in">
+        <div class="guias-header">
+            <div class="guias-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1>Guias</h1>
+            <p>Encuentra recomendaciones y recursos para sacar el maximo provecho a tu sistema de seguridad.</p>
+        </div>
+
+        <section class="guias-placeholder">
+            <h2>Proximamente</h2>
+            <p>Este espacio esta listo para que agregues tus guias paso a paso, consejos y contenido educativo.</p>
+        </section>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburger && mobileMenu) {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            }
+        }
+
+        let lastScroll = 0;
+        let scrollTicking = false;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            if (!navbar) return;
+
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTicking) return;
+            scrollTicking = true;
+
+            window.requestAnimationFrame(() => {
+                navbar.style.padding = currentScroll > 50 ? '10px 0' : '15px 0';
+
+                const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
+                navbar.classList.toggle('navbar-hidden', scrollingDown);
+
+                lastScroll = currentScroll;
+                scrollTicking = false;
+            });
+        });
+    </script>
+</body>
+</html>
