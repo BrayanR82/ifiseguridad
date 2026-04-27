@@ -8,15 +8,48 @@
     <link rel="icon" type="image/png" href="img/logoifi.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        body {
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
+            background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 30%);
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::before {
+            top: 14%;
+            left: 4%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(0, 33, 120, 0.10), transparent 70%);
+        }
+
+        body::after {
+            bottom: 10%;
+            right: 4%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(0, 33, 120, 0.08), transparent 72%);
+        }
+
         .guias-container {
-            max-width: 860px;
+            max-width: 1040px;
             margin: 120px auto 70px;
             padding: 0 20px;
         }
 
         .guias-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .guias-kicker {
@@ -41,26 +74,279 @@
         .guias-header p {
             color: var(--gray-text);
             font-size: 1.2rem;
-            max-width: 650px;
+            max-width: 760px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .guias-placeholder {
+        .guias-module {
             background: linear-gradient(135deg, rgba(0, 33, 120, 0.06), rgba(0, 33, 120, 0.02));
             border: 1px solid rgba(0, 33, 120, 0.12);
             border-radius: 20px;
-            padding: 30px;
+            padding: 24px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .guias-module-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .guias-module-toolbar p {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            margin: 0;
+        }
+
+        .guias-menu-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: 1px solid rgba(0, 33, 120, 0.22);
+            background: #fff;
+            color: var(--blue);
+            border-radius: 999px;
+            padding: 10px 16px;
+            width: 210px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            line-height: 1.2;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .guias-menu-toggle:hover {
+            transform: translateY(-1px);
+            background: rgba(0, 33, 120, 0.04);
+            box-shadow: 0 8px 20px rgba(0, 33, 120, 0.14);
+        }
+
+        .guias-toolbar-link {
+            text-decoration: none;
+            color: var(--blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .guias-toolbar-link:visited,
+        .guias-toolbar-link:hover,
+        .guias-toolbar-link:active,
+        .guias-toolbar-link:focus {
+            color: var(--blue);
+        }
+
+        .guias-menu-icon {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .guias-menu-icon span {
+            width: 18px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--blue);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .guias-menu-panel {
+            position: relative;
+            top: auto;
+            left: auto;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid rgba(0, 33, 120, 0.14);
+            border-radius: 16px;
+            box-shadow: 0 18px 40px rgba(0, 33, 120, 0.16);
+            padding: 14px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-8px);
+            transition: max-height 0.32s ease, opacity 0.32s ease, transform 0.32s ease;
+            z-index: 10;
+            margin-top: 12px;
+        }
+
+        .guias-menu-panel.active {
+            max-height: 1200px;
+            opacity: 1;
+            transform: translateY(0);
+            overflow-y: auto;
+        }
+
+        .guias-topic-button {
+            width: 100%;
+            border: 1px solid transparent;
+            background: transparent;
+            text-align: left;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin: 2px 0;
+            color: var(--black);
+            cursor: pointer;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .guias-topic-button:hover {
+            background: rgba(0, 33, 120, 0.05);
+            border-color: rgba(0, 33, 120, 0.12);
+        }
+
+        .guias-topic-button.active {
+            background: rgba(0, 33, 120, 0.08);
+            border-color: rgba(0, 33, 120, 0.24);
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .guias-tutorial {
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            padding: 6px 2px 0;
+            margin-top: 8px;
+            min-height: auto;
+        }
+
+        .guias-tutorial h2 {
+            margin: 0 0 12px;
+            font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+            letter-spacing: -0.01em;
+        }
+
+        .guias-tutorial-header-card {
+            background: #fff;
+            border: 1px solid rgba(0, 33, 120, 0.14);
+            border-radius: 18px;
+            padding: 26px 22px;
             text-align: center;
+            box-shadow: 0 12px 28px rgba(0, 33, 120, 0.08);
+            animation: guiaCardIn 0.45s ease both;
         }
 
-        .guias-placeholder h2 {
-            margin-bottom: 12px;
-            font-size: 1.4rem;
+        .guias-tutorial-header-card h2 {
+            margin: 0 0 10px;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            line-height: 1.2;
         }
 
-        .guias-placeholder p {
+        .guias-tutorial-header-card p {
+            margin: 0;
             color: var(--gray-text);
             line-height: 1.7;
+            font-size: 1.02rem;
+        }
+
+        @keyframes guiaCardIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .guias-tutorial p {
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .guias-tutorial h3 {
+            margin: 20px 0 10px;
+            font-size: 1rem;
+            color: var(--blue);
+        }
+
+        .guias-tutorial ol {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--black);
+        }
+
+        .guias-tutorial li {
+            margin-bottom: 8px;
+            line-height: 1.55;
+        }
+
+        .guias-tutorial-empty {
+            text-align: center;
+            color: var(--gray-text);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            padding: 0;
+            border: 0;
+            background: transparent;
+        }
+
+        @media (max-width: 768px) {
+            body::before {
+                top: 10%;
+                left: -8%;
+                width: 240px;
+                height: 240px;
+            }
+
+            body::after {
+                bottom: 12%;
+                right: -12%;
+                width: 280px;
+                height: 280px;
+            }
+
+            .guias-container {
+                margin-top: 100px;
+            }
+
+            .guias-module {
+                padding: 16px;
+            }
+
+            .guias-module-toolbar {
+                flex-direction: column-reverse;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .guias-menu-toggle {
+                width: 100%;
+            }
+
+            .guias-menu-panel {
+                width: 100%;
+            }
+
+            .guias-tutorial {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body::before {
+                top: 9%;
+                left: -18%;
+                width: 200px;
+                height: 200px;
+            }
+
+            body::after {
+                bottom: 14%;
+                right: -20%;
+                width: 220px;
+                height: 220px;
+            }
         }
     </style>
 </head>
@@ -95,13 +381,53 @@
     <main class="guias-container fade-in">
         <div class="guias-header">
             <div class="guias-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div>
-            <h1>Guias</h1>
-            <p>Encuentra recomendaciones y recursos para sacar el maximo provecho a tu sistema de seguridad.</p>
+            <h1>Guias.</h1>
+            <p>
+                Esta seccion reune tutoriales tecnicos sobre instalacion, configuracion y mantenimiento de
+                sistemas de videovigilancia, redes y equipos informaticos, para que tu operativa diaria sea
+                estable, segura y facil de escalar.
+            </p>
         </div>
 
-        <section class="guias-placeholder">
-            <h2>Proximamente</h2>
-            <p>Este espacio esta listo para que agregues tus guias paso a paso, consejos y contenido educativo.</p>
+        <section class="guias-module" id="guias-module">
+            <div class="guias-module-toolbar">
+                <button
+                    type="button"
+                    class="guias-menu-toggle"
+                    id="guias-menu-toggle"
+                    aria-controls="guias-menu-panel"
+                    aria-expanded="false"
+                    aria-label="Abrir menu de guias"
+                >
+                    <span class="guias-menu-icon" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    Menu de guias
+                </button>
+                <a href="index.html" class="guias-menu-toggle guias-toolbar-link" aria-label="Ir a inicio">
+                    IFI Seguridad
+                </a>
+            </div>
+
+            <aside class="guias-menu-panel" id="guias-menu-panel" aria-label="Apartados de guias">
+                <button class="guias-topic-button" type="button" data-topic="camarasIp">Configuracion de camaras IP</button>
+                <button class="guias-topic-button" type="button" data-topic="grabadores">Configuracion de grabadores NVR y DVR</button>
+                <button class="guias-topic-button" type="button" data-topic="lectoras">Configuracion de lectoras de control de acceso</button>
+                <button class="guias-topic-button" type="button" data-topic="direccionesIp">Asignacion de direcciones IP a dispositivos</button>
+                <button class="guias-topic-button" type="button" data-topic="montajePc">Montaje y reparacion de PCs</button>
+                <button class="guias-topic-button" type="button" data-topic="mantenimiento">Mantenimiento de sistemas de videovigilancia</button>
+                <button class="guias-topic-button" type="button" data-topic="backups">Copias de seguridad (backups)</button>
+                <button class="guias-topic-button" type="button" data-topic="dockerDeploy">Despliegue de la web mediante Docker</button>
+                <button class="guias-topic-button" type="button" data-topic="gitlabUbuntu">Gestion del repositorio con GitLab desde Ubuntu Server</button>
+            </aside>
+
+            <article class="guias-tutorial" id="guias-tutorial" aria-live="polite">
+                <div class="guias-tutorial-empty" id="guias-tutorial-empty">
+                    Selecciona una guia del menu para ver aqui las instrucciones.
+                </div>
+            </article>
         </section>
     </main>
 
@@ -137,6 +463,198 @@
                 scrollTicking = false;
             });
         });
+
+        const tutorialesGuias = {
+            camarasIp: {
+                titulo: 'Configuracion de camaras IP',
+                intro: 'Guia para dejar una camara IP operativa con acceso local y remoto seguro.',
+                pasos: [
+                    'Conecta la camara al switch PoE o a su fuente y verifica enlace fisico.',
+                    'Detecta el dispositivo con la herramienta del fabricante o un escaneo de red.',
+                    'Asigna IP fija en el rango de la instalacion y configura puerta de enlace y DNS.',
+                    'Cambia credenciales por defecto y activa autenticacion fuerte.',
+                    'Ajusta resolucion, FPS, compresion y perfiles de grabacion segun el escenario.',
+                    'Valida stream principal y secundario desde VMS o NVR y documenta parametros finales.'
+                ]
+            },
+            grabadores: {
+                titulo: 'Configuracion de grabadores NVR y DVR',
+                intro: 'Checklist practico para alta de canales, almacenamiento y acceso de administracion.',
+                pasos: [
+                    'Actualiza firmware del grabador y reinicia en ventana de mantenimiento.',
+                    'Define fecha, zona horaria y NTP para preservar trazabilidad de eventos.',
+                    'Configura discos, politica de sobreescritura y alertas de capacidad.',
+                    'Agrega camaras por protocolo compatible y verifica estado de cada canal.',
+                    'Crea usuarios por rol y restringe permisos de borrado o exportacion.',
+                    'Prueba reproduccion, exportacion de evidencia y notificaciones criticas.'
+                ]
+            },
+            lectoras: {
+                titulo: 'Configuracion de lectoras de control de acceso',
+                intro: 'Procedimiento para integrar lectoras, controladoras y politicas de acceso seguras.',
+                pasos: [
+                    'Revisa cableado Wiegand/OSDP, alimentacion y tierra antes de energizar.',
+                    'Registra la lectora en la controladora y asigna puerta o zona correspondiente.',
+                    'Configura horarios, niveles de acceso y reglas anti-passback si aplica.',
+                    'Da de alta tarjetas o credenciales y asocia usuarios con su perfil.',
+                    'Valida aperturas, rechazos, evento de puerta forzada y bloqueo remoto.',
+                    'Respalda configuracion y deja evidencia de pruebas de aceptacion.'
+                ]
+            },
+            direccionesIp: {
+                titulo: 'Asignacion de direcciones IP a dispositivos',
+                intro: 'Estandar para ordenar direccionamiento y evitar conflictos en campo.',
+                pasos: [
+                    'Reserva un segmento por tipo de dispositivo (camaras, NVR, control de acceso).',
+                    'Define convencion de nombres y tabla de inventario con MAC e IP.',
+                    'Configura IP estatica o reservas DHCP segun politica del cliente.',
+                    'Comprueba conectividad con ping, traceroute y acceso por puertos de gestion.',
+                    'Aplica VLAN y ACL cuando se requiera separar trafico de videovigilancia.',
+                    'Actualiza documentacion de red con cambios y responsables.'
+                ]
+            },
+            montajePc: {
+                titulo: 'Montaje y reparacion de PCs',
+                intro: 'Flujo tecnico para ensamblar equipos y resolver fallos frecuentes de hardware.',
+                pasos: [
+                    'Valida compatibilidad de placa base, CPU, RAM, fuente y almacenamiento.',
+                    'Monta componentes con medidas ESD y aplica pasta termica correctamente.',
+                    'Realiza POST inicial, revisa BIOS/UEFI y ajusta orden de arranque.',
+                    'Instala sistema operativo, drivers y utilidades de monitorizacion.',
+                    'Ejecuta pruebas de estres en CPU, RAM y disco para detectar inestabilidad.',
+                    'Entrega informe tecnico con piezas reemplazadas y recomendaciones de uso.'
+                ]
+            },
+            mantenimiento: {
+                titulo: 'Mantenimiento de sistemas de videovigilancia',
+                intro: 'Rutina preventiva para mantener calidad de imagen, disponibilidad y seguridad.',
+                pasos: [
+                    'Limpia opticas y carcasas, revisando humedad, polvo y sellado.',
+                    'Verifica enfoque, angulos y zonas ciegas frente a cambios del entorno.',
+                    'Comprueba salud de discos, logs del NVR y estado de grabaciones.',
+                    'Actualiza firmware bajo plan controlado y confirma compatibilidad.',
+                    'Evalua consumo, UPS y protecciones para evitar caidas por energia.',
+                    'Cierra visita con acta de hallazgos, acciones y fecha del siguiente ciclo.'
+                ]
+            },
+            backups: {
+                titulo: 'Copias de seguridad (backups)',
+                intro: 'Practica recomendada para proteger configuraciones, evidencias y datos criticos.',
+                pasos: [
+                    'Clasifica que respaldar: configuraciones, base de datos, clips y reportes.',
+                    'Define estrategia 3-2-1 con cifrado y retencion por criticidad.',
+                    'Automatiza tareas con cron o scheduler y monitorea ejecuciones.',
+                    'Valida integridad con checksums y pruebas de restauracion parciales.',
+                    'Replica en almacenamiento externo o nube segun politica de seguridad.',
+                    'Documenta procedimiento de recuperacion con tiempos objetivo (RTO/RPO).'
+                ]
+            },
+            dockerDeploy: {
+                titulo: 'Despliegue de la web mediante Docker',
+                intro: 'Guia base para desplegar la aplicacion en contenedores de forma repetible.',
+                pasos: [
+                    'Construye imagen con Dockerfile versionado y variables externas.',
+                    'Levanta servicios con docker compose y red privada dedicada.',
+                    'Configura volumentes para persistencia de datos y logs.',
+                    'Publica puertos estrictamente necesarios y aplica politicas restart.',
+                    'Ejecuta healthchecks y verifica endpoints de aplicacion y CMS.',
+                    'Automatiza despliegues con tags, rollback y checklist post-release.'
+                ]
+            },
+            gitlabUbuntu: {
+                titulo: 'Gestion del repositorio con GitLab desde Ubuntu Server',
+                intro: 'Flujo operativo para trabajar con ramas, despliegues y control de cambios en servidor.',
+                pasos: [
+                    'Instala Git y claves SSH en Ubuntu Server para acceso seguro al remoto.',
+                    'Clona repositorio, configura usuario local y estrategia de ramas.',
+                    'Sincroniza cambios con pull rebase y resuelve conflictos de forma limpia.',
+                    'Versiona con commits atomicos y mensajes descriptivos orientados a trazabilidad.',
+                    'Empuja ramas a GitLab y usa merge requests con revision tecnica.',
+                    'Integra pipeline CI para pruebas y despliegue controlado en produccion.'
+                ]
+            }
+        };
+
+        const botonMenuGuias = document.getElementById('guias-menu-toggle');
+        const panelMenuGuias = document.getElementById('guias-menu-panel');
+        const contenedorTutorial = document.getElementById('guias-tutorial');
+        const botonesTema = document.querySelectorAll('.guias-topic-button');
+
+        function renderizarTutorialGuias(topicKey) {
+            const tutorial = tutorialesGuias[topicKey];
+            if (!tutorial || !contenedorTutorial) return;
+
+            const pasosHTML = tutorial.pasos.map((paso) => `<li>${paso}</li>`).join('');
+            contenedorTutorial.innerHTML = `
+                <div class="guias-tutorial-header-card">
+                    <h2>${tutorial.titulo}</h2>
+                    <p>${tutorial.intro}</p>
+                </div>
+                <h3>Pasos recomendados</h3>
+                <ol>${pasosHTML}</ol>
+            `;
+        }
+
+        function mostrarEstadoInicialGuias() {
+            if (!contenedorTutorial) return;
+
+            contenedorTutorial.innerHTML = `
+                <div class="guias-tutorial-empty" id="guias-tutorial-empty">
+                    Selecciona una guia del menu para ver aqui las instrucciones.
+                </div>
+            `;
+        }
+
+        function marcarTemaActivo(topicKey) {
+            botonesTema.forEach((boton) => {
+                boton.classList.toggle('active', boton.dataset.topic === topicKey);
+            });
+        }
+
+        function cambiarEstadoMenuGuias(forceState) {
+            if (!botonMenuGuias || !panelMenuGuias) return;
+            const nuevoEstado = typeof forceState === 'boolean'
+                ? forceState
+                : !panelMenuGuias.classList.contains('active');
+
+            panelMenuGuias.classList.toggle('active', nuevoEstado);
+            botonMenuGuias.setAttribute('aria-expanded', String(nuevoEstado));
+        }
+
+        if (botonMenuGuias && panelMenuGuias && contenedorTutorial) {
+            botonMenuGuias.addEventListener('click', () => {
+                cambiarEstadoMenuGuias();
+            });
+
+            botonesTema.forEach((boton) => {
+                boton.addEventListener('click', () => {
+                    const topicKey = boton.dataset.topic;
+                    if (!topicKey) return;
+
+                    renderizarTutorialGuias(topicKey);
+                    marcarTemaActivo(topicKey);
+                    cambiarEstadoMenuGuias(false);
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!panelMenuGuias.classList.contains('active')) return;
+                const target = event.target;
+                if (!(target instanceof Node)) return;
+
+                if (!panelMenuGuias.contains(target) && !botonMenuGuias.contains(target)) {
+                    cambiarEstadoMenuGuias(false);
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    cambiarEstadoMenuGuias(false);
+                }
+            });
+
+            mostrarEstadoInicialGuias();
+        }
     </script>
 </body>
 </html>
