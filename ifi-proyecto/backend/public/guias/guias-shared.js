@@ -65,7 +65,10 @@ window.addEventListener('scroll', () => {
   const viewport = carousel.querySelector('[data-carousel-viewport]');
   const prevBtn = carousel.querySelector('[data-direction="prev"]');
   const nextBtn = carousel.querySelector('[data-direction="next"]');
-  const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+  const carouselSection = carousel.closest('.guias-carousel-section');
+  const dotsContainer = carouselSection
+    ? carouselSection.querySelector('[data-carousel-dots]')
+    : document.querySelector('[data-carousel-dots]');
   const resultsInfo = document.querySelector('[data-results-info]');
 
   let slidesPerView = 1;

@@ -464,14 +464,14 @@
     background: rgba(0, 33, 120, 0.06);
 }
 
-.guias-carousel .carousel-dots {
+.guias-carousel-section .carousel-dots {
     margin-top: 22px;
     display: flex;
     justify-content: center;
     gap: 8px;
 }
 
-.guias-carousel .carousel-dot {
+.guias-carousel-section .carousel-dot {
     width: 9px;
     height: 9px;
     border-radius: 999px;
@@ -481,7 +481,7 @@
     transition: width 0.3s ease, background 0.3s ease;
 }
 
-.guias-carousel .carousel-dot.active {
+.guias-carousel-section .carousel-dot.active {
     width: 26px;
     background: var(--blue);
 }

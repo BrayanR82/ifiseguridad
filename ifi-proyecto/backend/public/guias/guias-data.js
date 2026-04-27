@@ -150,7 +150,7 @@ const GUIAS_DETAILS = {
       'Configura zonas de privacidad y máscaras cuando exista exposición a espacios sensibles.',
       'Documenta en acta final IP, puerto, usuario técnico, versión de firmware y posición física.'
     ],
-    image: 'images/configuracion-camaras-ip.svg',
+    image: 'images/configuracion-camaras-ip/1.jpg',
     imageAlt: 'Ilustración de configuración de cámara IP con red y monitoreo'
   },
   grabadores: {
@@ -166,7 +166,7 @@ const GUIAS_DETAILS = {
       'Activa alertas por caída de canal, pérdida de disco y eventos críticos del sistema.',
       'Valida exportación de clips en formato reproducible fuera del ecosistema del fabricante.'
     ],
-    image: 'images/configuracion-nvr-dvr.svg',
+    image: 'images/configuracion-nvr-dvr/1.jpg',
     imageAlt: 'Ilustración de grabador NVR DVR con múltiples canales de video'
   },
   lectoras: {
@@ -182,7 +182,7 @@ const GUIAS_DETAILS = {
       'Implementa prueba de contingencia ante corte de energía y verifica modo fail-safe/fail-secure.',
       'Respalda base de datos de credenciales antes de cambios masivos de configuración.'
     ],
-    image: 'images/control-de-acceso-lectoras.svg',
+    image: 'images/control-de-acceso-lectoras/1.jpg',
     imageAlt: 'Ilustración de lectoras y control de acceso en puerta segura'
   },
   direccionesIp: {
@@ -198,7 +198,7 @@ const GUIAS_DETAILS = {
       'Separa gestión y video en segmentos distintos cuando el tráfico sea elevado.',
       'Mantén historial de cambios para trazabilidad de incidentes de red.'
     ],
-    image: 'images/asignacion-direcciones-ip.svg',
+    image: 'images/asignacion-direcciones-ip/1.jpg',
     imageAlt: 'Ilustración de esquema de red y asignación de direcciones IP'
   },
   montajePc: {
@@ -214,7 +214,7 @@ const GUIAS_DETAILS = {
       'Ejecuta pruebas de memoria y almacenamiento antes de entrega final.',
       'Registra seriales de piezas críticas para facilitar garantías y futuros cambios.'
     ],
-    image: 'images/montaje-reparacion-pcs.svg',
+    image: 'images/montaje-reparacion-pcs/1.jpg',
     imageAlt: 'Ilustración de montaje y reparación de computadora de escritorio'
   },
   mantenimiento: {
@@ -230,7 +230,7 @@ const GUIAS_DETAILS = {
       'Evalúa estado de UPS y autonomía ante cortes para continuidad de grabación.',
       'Mantén versiones de firmware homogéneas por familia de dispositivos.'
     ],
-    image: 'images/mantenimiento-videovigilancia.svg',
+    image: 'images/mantenimiento-videovigilancia/1.jpg',
     imageAlt: 'Ilustración de mantenimiento preventivo de sistema de videovigilancia'
   },
   backups: {
@@ -246,7 +246,7 @@ const GUIAS_DETAILS = {
       'Versiona respaldos para prevenir sobreescritura de configuraciones funcionales.',
       'Monitorea alertas de tareas fallidas y documenta acciones de remediación.'
     ],
-    image: 'images/copias-seguridad.svg',
+    image: 'images/copias-seguridad/1.jpg',
     imageAlt: 'Ilustración de copias de seguridad y restauración de información'
   },
   dockerDeploy: {
@@ -262,7 +262,7 @@ const GUIAS_DETAILS = {
       'Activa healthchecks y monitorea reinicios para detectar degradación temprana.',
       'Incluye checklist post-despliegue con verificación funcional y de seguridad.'
     ],
-    image: 'images/despliegue-docker.svg',
+    image: 'images/despliegue-docker/1.jpg',
     imageAlt: 'Ilustración de despliegue web con contenedores Docker'
   },
   gitlabUbuntu: {
@@ -278,7 +278,7 @@ const GUIAS_DETAILS = {
       'Protege ramas principales y exige aprobación para fusionar cambios.',
       'Automatiza pruebas mínimas en CI para detectar errores antes del despliegue.'
     ],
-    image: 'images/gitlab-ubuntu-server.svg',
+    image: 'images/gitlab-ubuntu-server/1.jpg',
     imageAlt: 'Ilustración de gestión de repositorio GitLab desde Ubuntu Server'
   }
 };
