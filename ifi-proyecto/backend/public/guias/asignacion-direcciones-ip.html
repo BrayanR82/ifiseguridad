@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignación de direcciones IP a dispositivos | IFI Seguridad</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="guias-shared.css">
+    <link rel="icon" type="image/png" href="../img/logoifi.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="guias-page" data-guide-id="direccionesIp">
+    <nav class="navbar"><div class="container nav-content" style="display:flex;justify-content:space-between;align-items:center;position:relative;"><a href="../index.html" class="logo" style="flex:0 0 auto;"><img src="../img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;"></a><ul class="nav-links desktop-nav" style="position:absolute;left:50%;transform:translateX(-50%);margin:0;"><li><a href="../index.html" class="nav-link">Inicio</a></li><li><a href="../tienda.html" class="nav-link">Tienda</a></li><li><a href="../contacto.html" class="nav-link">Contacto</a></li></ul><div class="nav-action-links"><a href="../guias.html" class="nav-pill-link">Guias</a></div><ul class="nav-links mobile-nav-links" style="display:none;margin:0;"><li><a href="../index.html" class="nav-link">Inicio</a></li><li><a href="../tienda.html" class="nav-link">Tienda</a></li><li><a href="../contacto.html" class="nav-link">Contacto</a></li><li><a href="../guias.html" class="nav-pill-link">Guias</a></li></ul><button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;"><span></span><span></span><span></span></button></div></nav>
+    <div class="mobile-menu" id="mobile-menu"><ul><li><a href="../index.html" onclick="toggleMenu()">Inicio</a></li><li><a href="../tienda.html" onclick="toggleMenu()">Tienda</a></li><li><a href="../contacto.html" onclick="toggleMenu()">Contacto</a></li><li><a href="../guias.html" onclick="toggleMenu()">Guias</a></li></ul></div>
+    <main class="guias-browser fade-in"><section class="guias-hero"><div class="guias-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div><h1 data-page-heading>Guias.</h1><p data-page-subtitle>Selecciona una guía, usa el buscador para priorizar resultados y navega con el carrusel inferior.</p></section><section data-current-guide></section><section class="guias-search-block"><div class="guias-search-box"><input id="guias-search" type="search" placeholder="Buscar guía..." aria-label="Buscar guía"></div></section><section class="guias-carousel-section"><div class="guias-carousel-header"><div><h2>Explorar todas las guías</h2><p data-results-info>9 guías disponibles</p></div></div><div class="guias-carousel" data-guide-carousel><button class="carousel-btn" data-direction="prev" aria-label="Ver guía anterior"><span aria-hidden="true">‹</span></button><div class="guias-carousel-viewport" data-carousel-viewport><div class="guias-carousel-track" data-carousel-track></div></div><button class="carousel-btn" data-direction="next" aria-label="Ver siguiente guía"><span aria-hidden="true">›</span></button></div><div class="carousel-dots" data-carousel-dots aria-label="Navegación de guías"></div></section></main>
+    <script src="guias-data.js"></script><script src="guias-shared.js"></script>
+</body>
+</html>
