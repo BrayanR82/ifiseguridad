@@ -111,6 +111,11 @@ window.addEventListener('scroll', () => {
     return `${parentPath}guias.html`;
   }
 
+  function getGuideImageUrl(guide) {
+    if (!guide.image) return '';
+    return `${basePath}${guide.image}`;
+  }
+
   function ensureCurrentGuideContainer() {
     if (currentGuideContainer) return currentGuideContainer;
 
@@ -153,18 +158,67 @@ window.addEventListener('scroll', () => {
     const container = ensureCurrentGuideContainer();
     if (!container) return;
 
+    const requirements = guide.requirements || [];
+    const bestPractices = guide.bestPractices || [];
     const stepsHtml = guide.steps.map((step) => `<li>${step}</li>`).join('');
+    const requirementsHtml = requirements.map((item) => `<li>${item}</li>`).join('');
+    const bestPracticesHtml = bestPractices.map((item) => `<li>${item}</li>`).join('');
+    const imageSrc = getGuideImageUrl(guide);
+    const imageHtml = imageSrc
+      ? `<figure class="guide-visual"><img src="${imageSrc}" alt="${guide.imageAlt || guide.title}" loading="lazy"></figure>`
+      : '';
 
-    container.innerHTML = `
-      <section class="guias-current fade-in" aria-labelledby="current-guide-title">
-        <div class="guias-current-topline">
-          <span class="guias-current-label">Contenido de la guía</span>
-        </div>
-        <h2 class="guias-current-title" id="current-guide-title">${guide.title}</h2>
-        <p class="guias-current-intro">${guide.intro}</p>
+    const contentBlocks = [];
+
+    if (requirements.length) {
+      contentBlocks.push(`
+        <article class="guide-mini-card">
+          <h3>Antes de empezar</h3>
+          <ul class="guide-list">
+            ${requirementsHtml}
+          </ul>
+        </article>
+      `);
+    }
+
+    contentBlocks.push(`
+      <article class="guide-main-card">
+        <h3>Paso a paso</h3>
         <ol class="guias-current-steps">
           ${stepsHtml}
         </ol>
+      </article>
+    `);
+
+    if (bestPractices.length) {
+      contentBlocks.push(`
+        <article class="guide-mini-card">
+          <h3>Buenas prácticas</h3>
+          <ul class="guide-list">
+            ${bestPracticesHtml}
+          </ul>
+        </article>
+      `);
+    }
+
+    container.innerHTML = `
+      <section class="guide-content-heading fade-in">
+        <span class="guias-current-label" id="current-guide-title">Contenido de la guia</span>
+      </section>
+
+      <section class="guias-current fade-in" aria-labelledby="current-guide-title">
+        <div class="guide-overview">
+          ${imageHtml}
+          <div class="guide-overview-text">
+            <h3 class="guias-current-title">${guide.title}</h3>
+            <p class="guias-current-intro">${guide.intro}</p>
+            <p class="guide-context">${guide.context || ''}</p>
+          </div>
+        </div>
+
+        <div class="guide-content-grid">
+          ${contentBlocks.join('')}
+        </div>
       </section>
     `;
   }
@@ -296,13 +350,15 @@ window.addEventListener('scroll', () => {
   }
 
   function updatePageMeta(guide) {
+    const titleWithDot = /[.!?]$/.test(guide.title) ? guide.title : `${guide.title}.`;
+
     const heading = document.querySelector('[data-page-heading]');
     const subtitle = document.querySelector('[data-page-subtitle]');
 
     if (isGuideDetailPage) {
       document.title = `${guide.title} | IFI Seguridad`;
       if (heading) {
-        heading.textContent = guide.title;
+        heading.textContent = titleWithDot;
       }
       if (subtitle) {
         subtitle.textContent = guide.summary;

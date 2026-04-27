@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Montaje reparacion PCs</title>
+  <desc id="desc">Torre de computadora y herramientas de soporte</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eff5ff"/><stop offset="100%" stop-color="#f9fcff"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="220" y="220" width="320" height="480" rx="24" fill="#ffffff" stroke="#d9e5ff"/>
+  <circle cx="380" cy="610" r="18" fill="#173b87"/>
+  <rect x="630" y="260" width="360" height="280" rx="20" fill="#173b87"/>
+  <rect x="680" y="310" width="260" height="150" rx="12" fill="#eaf2ff"/>
+  <path d="M660 610h280M660 670h220" stroke="#2b4c97" stroke-width="22" stroke-linecap="round"/>
+  <text x="120" y="120" font-size="54" font-family="Inter, Arial, sans-serif" fill="#173b87">Montaje y reparacion de PCs</text>
+</svg>

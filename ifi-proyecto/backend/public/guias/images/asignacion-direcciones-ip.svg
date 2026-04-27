@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Asignacion direcciones IP</title>
+  <desc id="desc">Topologia de red con nodos IP</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#edf4ff"/><stop offset="100%" stop-color="#fcfdff"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="600" cy="450" r="90" fill="#173b87"/>
+  <circle cx="330" cy="280" r="72" fill="#dce9ff" stroke="#8db1f6"/>
+  <circle cx="870" cy="280" r="72" fill="#dce9ff" stroke="#8db1f6"/>
+  <circle cx="300" cy="630" r="72" fill="#dce9ff" stroke="#8db1f6"/>
+  <circle cx="900" cy="630" r="72" fill="#dce9ff" stroke="#8db1f6"/>
+  <path d="M390 320L540 410M810 320L660 410M360 600L530 500M840 600L670 500" stroke="#2b4c97" stroke-width="12"/>
+  <text x="120" y="120" font-size="54" font-family="Inter, Arial, sans-serif" fill="#173b87">Asignacion de direcciones IP</text>
+</svg>

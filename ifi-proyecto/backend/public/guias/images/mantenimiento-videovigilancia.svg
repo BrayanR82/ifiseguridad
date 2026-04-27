@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Mantenimiento videovigilancia</title>
+  <desc id="desc">Camara con checklist de mantenimiento</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eef4ff"/><stop offset="100%" stop-color="#fafdff"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="130" y="230" width="430" height="430" rx="24" fill="#ffffff" stroke="#d9e6ff"/>
+  <circle cx="345" cy="445" r="120" fill="#dbe9ff"/>
+  <circle cx="345" cy="445" r="58" fill="#ffffff" stroke="#8cb0f5" stroke-width="10"/>
+  <rect x="650" y="220" width="420" height="500" rx="24" fill="#ffffff" stroke="#d9e6ff"/>
+  <path d="M720 320h280M720 410h280M720 500h280" stroke="#2b4c97" stroke-width="20" stroke-linecap="round"/>
+  <path d="M685 320l18 18 26-30M685 410l18 18 26-30M685 500l18 18 26-30" fill="none" stroke="#173b87" stroke-width="9" stroke-linecap="round"/>
+  <text x="120" y="120" font-size="50" font-family="Inter, Arial, sans-serif" fill="#173b87">Mantenimiento de videovigilancia</text>
+</svg>

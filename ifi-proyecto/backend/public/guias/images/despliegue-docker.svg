@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Despliegue Docker</title>
+  <desc id="desc">Contenedores y flujo de despliegue web</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#edf4ff"/><stop offset="100%" stop-color="#f9fcff"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="190" y="280" width="190" height="120" rx="14" fill="#173b87"/>
+  <rect x="410" y="280" width="190" height="120" rx="14" fill="#173b87"/>
+  <rect x="630" y="280" width="190" height="120" rx="14" fill="#173b87"/>
+  <rect x="850" y="280" width="190" height="120" rx="14" fill="#173b87"/>
+  <rect x="300" y="500" width="620" height="180" rx="24" fill="#ffffff" stroke="#d8e5ff"/>
+  <path d="M370 590h470" stroke="#2b4c97" stroke-width="20" stroke-linecap="round"/>
+  <path d="M580 210v-70M620 210v-70" stroke="#2b4c97" stroke-width="16" stroke-linecap="round"/>
+  <text x="120" y="120" font-size="54" font-family="Inter, Arial, sans-serif" fill="#173b87">Despliegue web con Docker</text>
+</svg>

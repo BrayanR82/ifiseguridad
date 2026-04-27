@@ -79,6 +79,83 @@
     box-shadow: 0 16px 40px rgba(0, 33, 120, 0.08);
 }
 
+.guide-content-heading {
+    margin-top: 30px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.guide-content-heading .guias-current-label {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.guide-content-heading .guias-current-label:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: rgba(0, 33, 120, 0.1);
+    box-shadow: 0 10px 24px rgba(0, 33, 120, 0.14);
+}
+
+.guide-overview {
+    display: grid;
+    grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+    gap: 22px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.guide-visual {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 33, 120, 0.12);
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(0, 33, 120, 0.08);
+}
+
+.guide-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.guide-context {
+    color: var(--gray-text);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.guide-content-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.guide-main-card,
+.guide-mini-card {
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 33, 120, 0.1);
+    padding: 20px;
+}
+
+.guide-main-card h3,
+.guide-mini-card h3 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+}
+
+.guide-list {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 10px;
+    color: var(--black);
+    line-height: 1.7;
+}
+
 .guias-current-topline {
     display: flex;
     align-items: center;
@@ -439,6 +516,20 @@
 
     .guias-current {
         padding: 20px;
+    }
+
+    .guide-content-heading {
+        margin-top: 24px;
+    }
+
+    .guide-overview {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .guide-main-card,
+    .guide-mini-card {
+        padding: 16px;
     }
 
     .guias-carousel {

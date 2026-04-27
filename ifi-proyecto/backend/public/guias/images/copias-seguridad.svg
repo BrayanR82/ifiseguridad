@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Copias de seguridad</title>
+  <desc id="desc">Respaldo de datos con nube y discos</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#edf4ff"/><stop offset="100%" stop-color="#fbfdff"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <ellipse cx="390" cy="390" rx="180" ry="95" fill="#dce9ff"/>
+  <rect x="250" y="390" width="280" height="170" rx="85" fill="#dce9ff"/>
+  <rect x="680" y="250" width="340" height="120" rx="20" fill="#ffffff" stroke="#d8e4ff"/>
+  <rect x="680" y="420" width="340" height="120" rx="20" fill="#ffffff" stroke="#d8e4ff"/>
+  <rect x="680" y="590" width="340" height="120" rx="20" fill="#ffffff" stroke="#d8e4ff"/>
+  <path d="M550 475h100M630 475l-26-24M630 475l-26 24" fill="none" stroke="#173b87" stroke-width="10" stroke-linecap="round"/>
+  <text x="120" y="120" font-size="54" font-family="Inter, Arial, sans-serif" fill="#173b87">Copias de seguridad</text>
+</svg>
