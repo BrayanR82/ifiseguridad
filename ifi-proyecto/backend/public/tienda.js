@@ -111,7 +111,7 @@ function renderizarProductos(productos) {
                     <h3 style="word-break: break-word;">${prod.nombre || 'Producto sin nombre'}</h3>
                     ${descripcionHtml}
                     <p class="product-price">$${precioSeguro.toLocaleString()}</p>
-                    <p class="stock-badge">✓ ${prod.stock || 0} disponibles</p>
+                    <p class="stock-badge">${prod.stock || 0} disponibles</p>
                     <button class="btn-comprar" onclick="agregarAlCarrito('${prod.id}', event)">
                         Añadir al carrito
                     </button>
@@ -232,7 +232,7 @@ async function abrirProductoModal(productoId) {
         document.getElementById('modal-imagen').src = urlImagen;
         document.getElementById('modal-titulo').innerText = producto.nombre || 'Sin nombre';
         document.getElementById('modal-precio').innerText = `$${precioModal.toLocaleString()}`;
-        document.getElementById('modal-stock').innerHTML = `✓ ${producto.stock || 0} disponibles`;
+        document.getElementById('modal-stock').innerHTML = `${producto.stock || 0} disponibles`;
         
         // Aplicar descripción con estilos de ruptura de palabras
         descElement.innerText = desc;
