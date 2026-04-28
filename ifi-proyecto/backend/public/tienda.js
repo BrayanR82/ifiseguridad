@@ -134,6 +134,7 @@ function actualizarInterfazCarrito() {
         contenedor.innerHTML = `<div class="cart-empty">Tu carrito está vacío</div>`;
         totalElemento.innerText = 'Total: $0';
         actualizarContadoresCarrito(0);
+        localStorage.removeItem('carrito_ifi');
         return;
     }
 
@@ -332,5 +333,9 @@ if (buscador) buscador.addEventListener('input', (e) => cargarProductos(e.target
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
+    // Limpiar localStorage si el carrito está vacío
+    if (carrito.length === 0) {
+        localStorage.removeItem('carrito_ifi');
+    }
     actualizarInterfazCarrito();
 });

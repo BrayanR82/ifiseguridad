@@ -130,6 +130,10 @@ let carrito = JSON.parse(localStorage.getItem('carrito_ifi')) || [];
 
 // Ejecutamos la interfaz nada más cargar para que el contador del header aparezca
 document.addEventListener('DOMContentLoaded', () => {
+    // Limpiar localStorage si el carrito está vacío
+    if (carrito.length === 0) {
+        localStorage.removeItem('carrito_ifi');
+    }
     actualizarInterfazCarrito();
     cargarProductos(); 
 });
@@ -190,6 +194,7 @@ function actualizarInterfazCarrito() {
         `;
         totalElemento.innerText = 'Total: $0';
         document.getElementById('carrito-count').style.display = 'none';
+        localStorage.removeItem('carrito_ifi');
         return;
     }
 

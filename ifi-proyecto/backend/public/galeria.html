@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería | IFI Seguridad</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="guias/guias-shared.css">
+    <link rel="icon" type="image/png" href="img/logoifi.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .gallery-grid{padding:28px 0}
+        .gallery-grid .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;justify-items:center}
+        .gallery-item{border-radius:8px;overflow:hidden;background:#fff;width:92%;display:flex;align-items:center;justify-content:center}
+        .gallery-item img{width:100%;height:220px;object-fit:cover;display:block;border-radius:6px;cursor:pointer;transition:transform .18s ease}
+        .gallery-item img:hover{transform:scale(1.02)}
+        @media(max-width:700px){.gallery-grid .grid{grid-template-columns:repeat(2,1fr)}.gallery-item img{height:160px}}
+        @media(min-width:900px){.gallery-item img{height:260px}}
+        .gallery-hero{padding:40px 0}
+
+        /* Lightbox / overlay */
+        #lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2200;align-items:center;justify-content:center;padding:20px}
+        #lightbox-overlay.visible{display:flex}
+        #lightbox-overlay img{max-width:96%;max-height:96%;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,0.6)}
+        /* Oculta el header cuando el lightbox esté activo */
+        .hide-header .navbar{display:none !important}
+    </style>
+</head>
+<body class="guias-page">
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <a href="index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
+            <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-action-links">
+                <a href="guias.html" class="nav-pill-link">Guias</a>
+            </div>
+            <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="guias.html" class="nav-pill-link">Guias</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="index.html" onclick="toggleMenu()">Inicio</a></li>
+            <li><a href="tienda.html" onclick="toggleMenu()">Tienda</a></li>
+            <li><a href="contacto.html" onclick="toggleMenu()">Contacto</a></li>
+            <li><a href="guias.html" onclick="toggleMenu()">Guias</a></li>
+        </ul>
+    </div>
+
+    <main class="guias-browser fade-in">
+        <section class="guias-hero gallery-hero">
+            <div class="guias-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1>Galería.</h1>
+            <p>Explora nuestra galería de imágenes.</p>
+        </section>
+
+        <section class="gallery-grid container">
+            <div class="grid">
+                <!-- Usar imágenes y vídeo existentes en img/galeria -->
+                <figure class="gallery-item"><img src="img/galeria/1.jpeg" alt="Imagen 1"></figure>
+                <figure class="gallery-item"><img src="img/galeria/2.jpeg" alt="Imagen 2"></figure>
+                <figure class="gallery-item"><img src="img/galeria/3.jpeg" alt="Imagen 3"></figure>
+                <figure class="gallery-item"><img src="img/galeria/4.jpeg" alt="Imagen 4"></figure>
+                <figure class="gallery-item"><img src="img/galeria/5.jpeg" alt="Imagen 5"></figure>
+                <figure class="gallery-item"><img src="img/galeria/6.jpeg" alt="Imagen 6"></figure>
+                <figure class="gallery-item video-thumb">
+                    <video src="img/galeria/video1.mp4" preload="metadata" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block"></video>
+                </figure>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div id="lightbox-overlay" aria-hidden="true">
+        <img id="lightbox-img" src="" alt="">
+        <video id="lightbox-video" controls style="display:none;max-width:96%;max-height:96%;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,0.6)"></video>
+    </div>
+
+    <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <img src="img/logoifi.png" alt="IFI Seguridad" style="width: 50px; height: auto; margin-bottom: 12px;">
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem;">IFI Seguridad</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Protección inteligente para tu hogar y negocio.</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                        <strong style="color: rgba(255,255,255,0.8);">Teléfono:</strong> +34 900 123 456<br>
+                        <strong style="color: rgba(255,255,255,0.8);">Email:</strong> contacto@ifiseguridad.es
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Enlaces</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Inicio</a></li>
+                        <li style="margin-bottom: 10px;"><a href="index.html#productos" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Planes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="tienda.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Tienda</a></li>
+                        <li><a href="contacto.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Síguenos</h4>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">f</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">𝕏</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">In</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0;">© 2026 IFI Seguridad. Elevando los estándares de protección.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="guias/guias-data.js"></script>
+    <script src="guias/guias-shared.js"></script>
+    <script>
+        (function(){
+            const overlay = document.getElementById('lightbox-overlay');
+            const overlayImg = document.getElementById('lightbox-img');
+            const overlayVideo = document.getElementById('lightbox-video');
+            const imgs = document.querySelectorAll('.gallery-item img');
+            const vids = document.querySelectorAll('.gallery-item video');
+
+            function openImage(src, alt){
+                overlayVideo.style.display = 'none';
+                overlayVideo.pause();
+                overlayVideo.removeAttribute('src');
+                overlayImg.src = src;
+                overlayImg.alt = alt || '';
+                overlayImg.style.display = '';
+                overlay.classList.add('visible');
+                overlay.setAttribute('aria-hidden','false');
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('hide-header');
+            }
+
+            function openVideo(src){
+                overlayImg.style.display = 'none';
+                overlayImg.src = '';
+                overlayVideo.src = src;
+                overlayVideo.style.display = '';
+                overlayVideo.play().catch(()=>{});
+                overlay.classList.add('visible');
+                overlay.setAttribute('aria-hidden','false');
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('hide-header');
+            }
+
+            function close(){
+                overlay.classList.remove('visible');
+                overlay.setAttribute('aria-hidden','true');
+                overlayImg.src = '';
+                overlayVideo.pause();
+                overlayVideo.removeAttribute('src');
+                document.body.style.overflow = '';
+                document.body.classList.remove('hide-header');
+            }
+
+            imgs.forEach(img => {
+                img.addEventListener('click', e => openImage(e.currentTarget.src, e.currentTarget.alt));
+            });
+
+            vids.forEach(v => {
+                v.addEventListener('click', e => {
+                    // use video's src
+                    openVideo(e.currentTarget.currentSrc || e.currentTarget.src);
+                });
+                // also allow play on hover small preview
+                v.addEventListener('mouseenter', ()=> v.play().catch(()=>{}));
+                v.addEventListener('mouseleave', ()=> { v.pause(); v.currentTime = 0; });
+            });
+
+            // Close when clicking outside the media
+            overlay.addEventListener('click', e => {
+                if(e.target === overlay) close();
+            });
+
+            // Close on ESC
+            document.addEventListener('keydown', e => {
+                if(e.key === 'Escape' && overlay.classList.contains('visible')) close();
+            });
+        })();
+    </script>
+</body>
+</html>
