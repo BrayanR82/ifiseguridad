@@ -9,8 +9,10 @@
     <link rel="icon" type="image/png" href="img/logoifi.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Botón flotante estilo circular (blanco) con sombra */
-        .floating-btn{position:fixed;right:20px;bottom:40px;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#ffffff;border:1px solid rgba(0,0,0,0.06);box-shadow:0 8px 20px rgba(2,6,23,0.18);cursor:pointer;z-index:1200;animation:float-y 3s ease-in-out infinite;transition:transform .18s ease,box-shadow .18s ease}
+        /* Botones flotantes estilo circular (blanco) con sombra */
+        .floating-btn{position:fixed;bottom:40px;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#ffffff;border:1px solid rgba(0,0,0,0.06);box-shadow:0 8px 20px rgba(2,6,23,0.18);cursor:pointer;z-index:1200;animation:float-y 3s ease-in-out infinite;transition:transform .18s ease,box-shadow .18s ease}
+        .floating-btn--right{right:20px}
+        .floating-btn--left{left:20px}
         .floating-btn:active{transform:translateY(2px) scale(.99)}
         .floating-btn:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 18px 36px rgba(2,6,23,0.22)}
         .floating-btn-inner{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:transparent}
@@ -18,7 +20,7 @@
         @keyframes float-y{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
         /* Ajustes responsivos para no cubrir contenido importante */
-        @media (max-width:520px){.floating-btn{right:14px;bottom:24px;width:56px;height:56px}.floating-btn-inner img{width:32px;height:32px}}
+        @media (max-width:520px){.floating-btn{bottom:24px;width:56px;height:56px}.floating-btn--right{right:14px}.floating-btn--left{left:14px}.floating-btn-inner img{width:32px;height:32px}}
     </style>
 </head>
 <body class="guias-page">
@@ -142,9 +144,15 @@
     <script src="guias/guias-shared.js"></script>
 
     <!-- Botón flotante que lleva a galeria.html (solo en esta página) -->
-    <a href="galeria.html" class="floating-btn" aria-label="Ir a galería">
+    <a href="galeria.html" class="floating-btn floating-btn--right" aria-label="Ir a galería">
         <span class="floating-btn-inner">
             <img src="img/photo.png" alt="Galería" />
+        </span>
+    </a>
+
+    <a href="herramientas.html" class="floating-btn floating-btn--left" aria-label="Ir a herramientas">
+        <span class="floating-btn-inner">
+            <img src="img/herramienta.png" alt="Herramientas" />
         </span>
     </a>
 </body>

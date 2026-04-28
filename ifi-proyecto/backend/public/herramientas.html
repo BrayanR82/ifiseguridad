@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas | IFI Seguridad</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="guias/guias-shared.css">
+    <link rel="icon" type="image/png" href="img/logoifi.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .herramientas-page {
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
+            background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 30%);
+        }
+
+        .herramientas-page::before,
+        .herramientas-page::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .herramientas-page::before {
+            top: 14%;
+            left: 4%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(0, 33, 120, 0.10), transparent 70%);
+        }
+
+        .herramientas-page::after {
+            bottom: 10%;
+            right: 4%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(0, 33, 120, 0.08), transparent 72%);
+        }
+
+        .herramientas-browser {
+            max-width: 1160px;
+            margin: 120px auto 70px;
+            padding: 0 20px;
+        }
+
+        .herramientas-hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .herramientas-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 33, 120, 0.08);
+            border-radius: 999px;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .herramientas-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .herramientas-hero p {
+            color: var(--gray-text);
+            font-size: 1.15rem;
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .herramientas-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .herramientas-card {
+            background: linear-gradient(135deg, rgba(0, 33, 120, 0.06), rgba(0, 33, 120, 0.02));
+            border: 1px solid rgba(0, 33, 120, 0.12);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 16px 40px rgba(0, 33, 120, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .herramientas-panel h2 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .herramientas-panel p {
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .herramientas-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .herramientas-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .herramientas-field label {
+            font-weight: 600;
+            color: var(--black);
+            font-size: 0.98rem;
+        }
+
+        .herramientas-field input,
+        .herramientas-field select {
+            width: 100%;
+            border: 1px solid rgba(0, 33, 120, 0.14);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 16px 18px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .herramientas-field input:focus,
+        .herramientas-field select:focus {
+            border-color: rgba(0, 33, 120, 0.35);
+            box-shadow: 0 14px 30px rgba(0, 33, 120, 0.14);
+            transform: translateY(-1px);
+        }
+
+        .herramientas-help {
+            font-size: 0.9rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        .herramientas-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .herramientas-btn {
+            appearance: none;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .herramientas-btn.primary {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--blue), #001650);
+            box-shadow: 0 14px 26px rgba(0, 33, 120, 0.2);
+        }
+
+        .herramientas-btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 30px rgba(0, 33, 120, 0.24);
+        }
+
+        .herramientas-btn.secondary {
+            color: var(--blue);
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(0, 33, 120, 0.18);
+        }
+
+        .herramientas-btn.secondary:hover {
+            transform: translateY(-1px);
+            background: rgba(0, 33, 120, 0.06);
+        }
+
+        .herramientas-result {
+            position: sticky;
+            top: 120px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .herramientas-result-value {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .herramientas-summary {
+            display: grid;
+            gap: 12px;
+        }
+
+        .herramientas-chip {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(0, 33, 120, 0.08);
+            color: var(--blue);
+            border: 1px solid rgba(0, 33, 120, 0.12);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .herramientas-breakdown {
+            display: grid;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .herramientas-breakdown .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(0, 33, 120, 0.08);
+        }
+
+        .herramientas-breakdown .label {
+            color: var(--gray-text);
+        }
+
+        .herramientas-breakdown .value {
+            color: var(--black);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .herramientas-note {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .herramientas-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .herramientas-result {
+                position: static;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .herramientas-card {
+                padding: 22px;
+                border-radius: 24px;
+            }
+
+            .herramientas-actions {
+                flex-direction: column;
+            }
+
+            .herramientas-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="guias-page herramientas-page">
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <a href="index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
+            <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-action-links">
+                <a href="guias.html" class="nav-pill-link">Guias</a>
+            </div>
+            <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="guias.html" class="nav-pill-link">Guias</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="index.html" onclick="toggleMenu()">Inicio</a></li>
+            <li><a href="tienda.html" onclick="toggleMenu()">Tienda</a></li>
+            <li><a href="contacto.html" onclick="toggleMenu()">Contacto</a></li>
+            <li><a href="guias.html" onclick="toggleMenu()">Guias</a></li>
+        </ul>
+    </div>
+
+    <main class="herramientas-browser fade-in">
+        <section class="herramientas-hero">
+            <div class="herramientas-kicker">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1>Herramientas.</h1>
+            <p>
+                Calcula la capacidad de almacenamiento que necesitarás para tu sistema de videovigilancia según la cantidad de cámaras, los días de retención, la compresión y la resolución.
+            </p>
+        </section>
+
+        <section class="herramientas-layout">
+            <article class="herramientas-card herramientas-panel">
+                <h2>Calculadora de capacidad</h2>
+                <p>
+                    La estimación usa un consumo medio por resolución, un factor de compresión y un margen de seguridad del 15%.
+                </p>
+
+                <div class="herramientas-form" aria-label="Formulario de cálculo de capacidad">
+                    <div class="herramientas-field">
+                        <label for="tool-camaras">Cuántas cámaras</label>
+                        <input id="tool-camaras" type="number" min="1" step="1" value="8" inputmode="numeric">
+                    </div>
+
+                    <div class="herramientas-field">
+                        <label for="tool-dias">Días de retención</label>
+                        <input id="tool-dias" type="number" min="1" step="1" value="30" inputmode="numeric">
+                    </div>
+
+                    <div class="herramientas-field">
+                        <label for="tool-decodificacion">Decodificación / compresión</label>
+                        <select id="tool-decodificacion">
+                            <option value="h264">H.264</option>
+                            <option value="h265" selected>H.265</option>
+                        </select>
+                    </div>
+
+                    <div class="herramientas-field">
+                        <label for="tool-resolucion">Resolución</label>
+                        <select id="tool-resolucion">
+                            <option value="720p">720p</option>
+                            <option value="1080p" selected>1080p</option>
+                            <option value="4mp">4MP</option>
+                            <option value="4k">4K</option>
+                        </select>
+                    </div>
+
+                    <div class="herramientas-help">
+                        Valores orientativos pensados para una grabación continua estándar. Si tu proyecto usa FPS muy altos o escenas muy dinámicas, conviene dejar más margen.
+                    </div>
+
+                    <div class="herramientas-actions">
+                        <button type="button" class="herramientas-btn primary" id="calcular-capacidad">Calcular capacidad</button>
+                        <button type="button" class="herramientas-btn secondary" id="limpiar-capacidad">Limpiar</button>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="herramientas-card herramientas-result" aria-live="polite">
+                <div>
+                    <span class="herramientas-chip">Resultado estimado</span>
+                    <div class="herramientas-result-value" id="resultado-capacidad">0 TB</div>
+                    <p class="herramientas-note" id="resultado-descripcion">
+                        Ajusta los campos para ver la capacidad recomendada.
+                    </p>
+                </div>
+
+                <div class="herramientas-summary">
+                    <div class="herramientas-breakdown">
+                        <div class="row">
+                            <span class="label">Bitrate aproximado</span>
+                            <span class="value" id="resultado-bitrate">—</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">Consumo por cámara / día</span>
+                            <span class="value" id="resultado-diario">—</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">Capacidad total</span>
+                            <span class="value" id="resultado-total">—</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">Capacidad por cámara</span>
+                            <span class="value" id="resultado-por-camara">—</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <img src="img/logoifi.png" alt="IFI Seguridad" style="width: 50px; height: auto; margin-bottom: 12px;">
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem;">IFI Seguridad</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Protección inteligente para tu hogar y negocio.</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">
+                        <strong style="color: rgba(255,255,255,0.8);">Teléfono:</strong> +34 900 123 456<br>
+                        <strong style="color: rgba(255,255,255,0.8);">Email:</strong> contacto@ifiseguridad.es
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Enlaces</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 10px;"><a href="index.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Inicio</a></li>
+                        <li style="margin-bottom: 10px;"><a href="index.html#productos" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Planes</a></li>
+                        <li style="margin-bottom: 10px;"><a href="tienda.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Tienda</a></li>
+                        <li><a href="contacto.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); font-size: 0.9rem;" onmouseover="this.style.color='white'">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="color: white; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Síguenos</h4>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">f</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">𝕏</a>
+                        <a href="#" style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 0.9rem; font-weight: 600;" onmouseover="this.style.background='rgba(0, 33, 120, 0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">In</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0;">© 2026 IFI Seguridad. Elevando los estándares de protección.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="guias/guias-shared.js"></script>
+    <script>
+        (function () {
+            const camerasInput = document.getElementById('tool-camaras');
+            const daysInput = document.getElementById('tool-dias');
+            const codecInput = document.getElementById('tool-decodificacion');
+            const resolutionInput = document.getElementById('tool-resolucion');
+            const calculateButton = document.getElementById('calcular-capacidad');
+            const resetButton = document.getElementById('limpiar-capacidad');
+
+            const resultCapacity = document.getElementById('resultado-capacidad');
+            const resultDescription = document.getElementById('resultado-descripcion');
+            const resultBitrate = document.getElementById('resultado-bitrate');
+            const resultDaily = document.getElementById('resultado-diario');
+            const resultTotal = document.getElementById('resultado-total');
+            const resultPerCamera = document.getElementById('resultado-por-camara');
+
+            const bitrateByResolution = {
+                '720p': 1.5,
+                '1080p': 3,
+                '4mp': 4.5,
+                '4k': 8
+            };
+
+            const codecFactor = {
+                h264: 1,
+                h265: 0.65
+            };
+
+            const codecLabel = {
+                h264: 'H.264',
+                h265: 'H.265'
+            };
+
+            function parsePositiveInt(value, fallback) {
+                const number = Number.parseInt(value, 10);
+                return Number.isFinite(number) && number > 0 ? number : fallback;
+            }
+
+            function formatSize(gb) {
+                if (gb >= 1000) {
+                    return `${(gb / 1000).toFixed(2)} TB`;
+                }
+                return `${gb.toFixed(0)} GB`;
+            }
+
+            function calculateCapacity() {
+                const cameras = parsePositiveInt(camerasInput.value, 1);
+                const days = parsePositiveInt(daysInput.value, 1);
+                const codec = codecInput.value in codecFactor ? codecInput.value : 'h265';
+                const resolution = resolutionInput.value in bitrateByResolution ? resolutionInput.value : '1080p';
+
+                const baseBitrate = bitrateByResolution[resolution];
+                const factor = codecFactor[codec];
+                const bitrate = baseBitrate * factor;
+                const dailyGbPerCamera = bitrate * 10.8 * 1.15;
+                const totalGb = cameras * days * dailyGbPerCamera;
+                const totalTb = totalGb / 1000;
+                const perCameraGb = days * dailyGbPerCamera;
+
+                resultCapacity.textContent = formatSize(totalGb);
+                resultDescription.textContent = `Con ${cameras} cámara${cameras === 1 ? '' : 's'} durante ${days} día${days === 1 ? '' : 's'}, la capacidad recomendada es ${formatSize(totalGb)}.`;
+                resultBitrate.textContent = `${bitrate.toFixed(2)} Mbps`;
+                resultDaily.textContent = `${dailyGbPerCamera.toFixed(1)} GB/día`;
+                resultTotal.textContent = `${totalGb.toFixed(1)} GB (${totalTb.toFixed(2)} TB)`;
+                resultPerCamera.textContent = `${perCameraGb.toFixed(1)} GB`;
+            }
+
+            function resetCalculator() {
+                camerasInput.value = '8';
+                daysInput.value = '30';
+                codecInput.value = 'h265';
+                resolutionInput.value = '1080p';
+                calculateCapacity();
+            }
+
+            [camerasInput, daysInput, codecInput, resolutionInput].forEach((element) => {
+                element.addEventListener('input', calculateCapacity);
+                element.addEventListener('change', calculateCapacity);
+            });
+
+            calculateButton.addEventListener('click', calculateCapacity);
+            resetButton.addEventListener('click', resetCalculator);
+
+            calculateCapacity();
+        }());
+    </script>
+</body>
+</html>
