@@ -91,46 +91,123 @@
                 <figure class="guide-visual">
                     <img src="images/copias-seguridad/1.jpg" alt="Ilustración de copias de seguridad y restauración de información" loading="lazy">
                 </figure>
-                <div class="guide-overview-text">
-                    <h3 class="guias-current-title">Copias de seguridad (backups)</h3>
-                    <p class="guias-current-intro">Estrategia práctica de respaldo para proteger configuraciones, evidencia audiovisual y datos críticos ante fallas o incidentes.</p>
-                    <p class="guide-context">En operaciones de seguridad, la restauración rápida es tan importante como la copia. Esta guía prioriza verificaciones periódicas y recuperación efectiva.</p>
-                </div>
-            </div>
+<div class="guide-overview-text">
+    <h3 class="guias-current-title">Preparación de almacenamiento para copias de seguridad (bahía de discos)</h3>
+    <p class="guias-current-intro">
+        Procedimiento práctico para preparar una bahía de discos destinada a backups, asegurando que todos los discos funcionen correctamente y queden listos para uso en rack.
+    </p>
+    <p class="guide-context">
+        Aplicado en entornos donde se requiere almacenamiento fiable, verificando físicamente discos, limpiando el hardware y dejando el sistema listo para copias de seguridad.
+    </p>
+</div>
+</div>
 
-            <div class="guide-content-grid">
-                <article class="guide-mini-card">
-                    <h3>Antes de empezar</h3>
-                    <ul class="guide-list">
-                        <li>Identificación de activos críticos y clasificación por nivel de impacto.</li>
-                        <li>Destino de backup local y externo con cifrado habilitado.</li>
-                        <li>Definición de objetivos de recuperación (RTO) y pérdida máxima aceptable (RPO).</li>
-                    </ul>
-                </article>
+<div class="guide-content-grid">
+    <article class="guide-mini-card">
+        <h3>Antes de empezar</h3>
+        <ul class="guide-list">
+            <li>Bahía de discos (ej. 24 discos) disponible y desconectada.</li>
+            <li>Servidor o equipo donde se montará (rack).</li>
+            <li>Sistema operativo (Debian) listo para instalar.</li>
+            <li>Herramientas básicas de limpieza (aire comprimido, brocha).</li>
+            <li>Acceso físico completo para manipulación de discos.</li>
+            <li>Plan de uso: discos destinados a almacenamiento de backups.</li>
+        </ul>
+    </article>
 
-                <article class="guide-main-card">
-                    <h3>Paso a paso</h3>
-                    <ol class="guias-current-steps">
-                        <li>Clasifica qué respaldar: configuraciones, base de datos, clips y reportes.</li>
-                        <li>Define estrategia 3-2-1 con cifrado y retención por criticidad.</li>
-                        <li>Automatiza tareas con cron o scheduler y monitoriza ejecuciones.</li>
-                        <li>Valida integridad con checksums y pruebas de restauración parciales.</li>
-                        <li>Replica en almacenamiento externo o nube según la política de seguridad.</li>
-                        <li>Documenta el procedimiento de recuperación con tiempos objetivo (RTO/RPO).</li>
-                    </ol>
-                </article>
+    <article class="guide-main-card">
+        <h3>Paso a paso</h3>
+        <ol class="guias-current-steps">
+            <li>
+                <a class="step-gallery-link" href="images/copias-seguridad/pasos/paso-01/1.jpg" aria-label="Ver imagen del paso 1">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1v2l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v10h10.6l.4.27V16h3V6H5zm2 8h10l-2.8-3.5-2.2 2.7-1.6-1.9L7 14zm2-6.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
+                    </svg>
+                </a>
+                Extrae todos los discos de la bahía.
+            </li>
+            <li>
+                <a class="step-gallery-link" href="images/copias-seguridad/pasos/paso-02/1.jpg" aria-label="Ver imagen del paso 2">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1v2l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v10h10.6l.4.27V16h3V6H5zm2 8h10l-2.8-3.5-2.2 2.7-1.6-1.9L7 14zm2-6.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
+                    </svg>
+                </a>
+                Enumera cada disco (etiquetas físicas) para control.
+            </li>
+            <li>
+                <a class="step-gallery-link" href="images/copias-seguridad/pasos/paso-03/1.jpg" aria-label="Ver imagen del paso 3">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1v2l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v10h10.6l.4.27V16h3V6H5zm2 8h10l-2.8-3.5-2.2 2.7-1.6-1.9L7 14zm2-6.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
+                    </svg>
+                </a>
+                Limpia cada bahía y los discos (eliminar polvo y suciedad).
+            </li>
+            <li>
+                <a class="step-gallery-link" href="images/copias-seguridad/pasos/paso-04/1.jpg" aria-label="Ver imagen del paso 4">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1v2l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v10h10.6l.4.27V16h3V6H5zm2 8h10l-2.8-3.5-2.2 2.7-1.6-1.9L7 14zm2-6.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
+                    </svg>
+                </a>
+                Prueba cada disco individualmente:
+                <br>• Ver si es detectado
+                <br>• Comprobar estado básico
+                <br>• Detectar fallos
+            </li>
+            <li>
+                <a class="step-gallery-link" href="images/copias-seguridad/pasos/paso-05/1.jpg" aria-label="Ver imagen del paso 5">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1v2l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v10h10.6l.4.27V16h3V6H5zm2 8h10l-2.8-3.5-2.2 2.7-1.6-1.9L7 14zm2-6.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
+                    </svg>
+                </a>
+                Separa discos defectuosos o con errores.
+            </li>
+            <li>
+                Vuelve a insertar los discos funcionales en la bahía.
+            </li>
+            <li>
+                Instala Debian en el servidor o equipo del rack.
+            </li>
+            <li>
+                Detecta todos los discos desde el sistema.
+            </li>
+            <li>
+                Formatea cada disco para uso de almacenamiento.
+            </li>
+            <li>
+                Monta los discos y organiza rutas para backups.
+            </li>
+            <li>
+                <a class="step-gallery-link" href="images/copias-seguridad/pasos/paso-11/1.jpg" aria-label="Ver imagen del paso 11">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1v2l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v10h10.6l.4.27V16h3V6H5zm2 8h10l-2.8-3.5-2.2 2.7-1.6-1.9L7 14zm2-6.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
+                    </svg>
+                </a>
+                Verifica que todos los discos están accesibles y funcionando correctamente.
+            </li>
+            <li>
+                Deja el sistema listo para almacenar copias de seguridad.
+            </li>
+        </ol>
+    </article>
 
-                <article class="guide-mini-card">
-                    <h3>Buenas prácticas</h3>
-                    <ul class="guide-list">
-                        <li>Prueba restauración mensual en entorno controlado, no solo ejecución de respaldo.</li>
-                        <li>Versiona respaldos para prevenir sobreescritura de configuraciones funcionales.</li>
-                        <li>Monitorea alertas de tareas fallidas y documenta acciones de remediación.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-    </main>
+    <article class="guide-mini-card">
+        <h3>Buenas prácticas</h3>
+        <ul class="guide-list">
+            <li>Etiquetar siempre los discos para poder identificarlos rápidamente.</li>
+            <li>No mezclar discos buenos con defectuosos; retirar los que fallen.</li>
+            <li>Revisar estado SMART de los discos antes de usarlos.</li>
+            <li>Mantener la bahía limpia para evitar sobrecalentamiento.</li>
+            <li>Comprobar que todos los discos aparecen correctamente en el sistema.</li>
+            <li>Usar sistemas de archivos adecuados (ext4, xfs) según el uso.</li>
+            <li>Hacer pruebas de escritura/lectura antes de poner en producción.</li>
+            <li>Organizar bien los puntos de montaje para evitar errores en backups.</li>
+            <li>Documentar qué disco ocupa cada posición en la bahía.</li>
+            <li>Monitorizar discos con el tiempo para detectar fallos antes de pérdida de datos.</li>
+        </ul>
+    </article>
+</div>
+</section>
+</main>
 
     <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
         <div class="container">
@@ -175,3 +252,4 @@
     <script src="guias-shared.js"></script>
 </body>
 </html>
+

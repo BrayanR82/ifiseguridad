@@ -321,3 +321,100 @@ window.addEventListener('scroll', () => {
 
   document.addEventListener('DOMContentLoaded', initialize);
 }());
+
+(function () {
+  const OPEN_CLASS = 'is-open';
+  const CLOSING_CLASS = 'is-closing';
+  const BODY_LOCK_CLASS = 'gallery-modal-open';
+  const CLOSE_ANIMATION_MS = 240;
+
+  function createModal() {
+    const modal = document.createElement('div');
+    modal.className = 'step-gallery-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.hidden = true;
+
+    modal.innerHTML = `
+      <div class="step-gallery-modal-dialog" role="dialog" aria-modal="true" aria-label="Vista de imagen del paso">
+        <button type="button" class="step-gallery-close" aria-label="Cerrar imagen">&times;</button>
+        <img class="step-gallery-modal-image" src="" alt="Imagen del paso" loading="eager">
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function initializeStepGalleryModal() {
+    const stepLinks = Array.from(document.querySelectorAll('.step-gallery-link'));
+    if (!stepLinks.length) return;
+
+    const modal = createModal();
+    const image = modal.querySelector('.step-gallery-modal-image');
+    const closeButton = modal.querySelector('.step-gallery-close');
+    let closeTimer = null;
+
+    function openModal(imageSrc, imageAlt) {
+      if (!image) return;
+
+      if (closeTimer) {
+        window.clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+
+      image.src = imageSrc;
+      image.alt = imageAlt || 'Imagen del paso';
+      modal.hidden = false;
+      modal.classList.remove(CLOSING_CLASS);
+
+      window.requestAnimationFrame(() => {
+        modal.classList.add(OPEN_CLASS);
+      });
+
+      document.body.classList.add(BODY_LOCK_CLASS);
+    }
+
+    function closeModal() {
+      if (modal.hidden || !modal.classList.contains(OPEN_CLASS)) return;
+
+      modal.classList.remove(OPEN_CLASS);
+      modal.classList.add(CLOSING_CLASS);
+      document.body.classList.remove(BODY_LOCK_CLASS);
+
+      closeTimer = window.setTimeout(() => {
+        modal.hidden = true;
+        modal.classList.remove(CLOSING_CLASS);
+        modal.setAttribute('aria-hidden', 'true');
+        if (image) image.src = '';
+      }, CLOSE_ANIMATION_MS);
+    }
+
+    stepLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const href = link.getAttribute('href');
+        if (!href) return;
+        modal.setAttribute('aria-hidden', 'false');
+        openModal(href, link.getAttribute('aria-label') || 'Imagen del paso');
+      });
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
+    }
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeStepGalleryModal);
+}());
