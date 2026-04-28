@@ -91,46 +91,97 @@
                 <figure class="guide-visual">
                     <img src="images/control-de-acceso-lectoras/1.jpeg" alt="Ilustración de lectoras y control de acceso en puerta segura" loading="lazy">
                 </figure>
-                <div class="guide-overview-text">
-                    <h3 class="guias-current-title">Configuración de lectoras de control de acceso</h3>
-                    <p class="guias-current-intro">Guía para integrar lectoras y controladoras con criterios de seguridad física, continuidad operativa y control granular por perfiles.</p>
-                    <p class="guide-context">Aplica tanto para accesos peatonales como para áreas restringidas donde se requiere bitácora detallada de entradas, salidas y eventos de excepción.</p>
-                </div>
-            </div>
+<div class="guide-overview-text">
+    <h3 class="guias-current-title">Configuración de lectoras Suprema BioEntry Plus y XPass</h3>
+    <p class="guias-current-intro">
+        Guía para integrar lectoras Suprema BioEntry Plus y XPass con BioStar 1 y BioStar 2, bajo criterios de seguridad física, continuidad operativa y control granular por perfiles de acceso.
+    </p>
+    <p class="guide-context">
+        Aplica tanto para accesos peatonales como para áreas restringidas donde se requiere bitácora detallada de entradas, salidas y eventos de excepción, gestionados desde plataforma centralizada o distribuida.
+    </p>
+</div>
+</div>
 
-            <div class="guide-content-grid">
-                <article class="guide-mini-card">
-                    <h3>Antes de empezar</h3>
-                    <ul class="guide-list">
-                        <li>Controladora compatible, lectoras correctamente cableadas y fuente estabilizada.</li>
-                        <li>Definición previa de niveles de acceso, horarios y excepciones operativas.</li>
-                        <li>Catálogo de usuarios o credenciales iniciales para pruebas de aceptación.</li>
-                    </ul>
-                </article>
+<div class="guide-content-grid">
+    <article class="guide-mini-card">
+        <h3>Antes de empezar</h3>
+        <ul class="guide-list">
+            <li>Servidor con <a href="https://www.supremainc.com/en/products/software/biostar-1" target="_blank" rel="noopener noreferrer">BioStar 1</a> o <a href="https://www.supremainc.com/en/products/software/biostar-2" target="_blank" rel="noopener noreferrer">BioStar 2</a> instalado y servicios activos.</li>
+            <li>Base de datos operativa (SQL Server para BioStar 1 / servicio integrado en BioStar 2).</li>
+            <li>Software adicional recomendado: herramientas de red (ping, escáner IP), navegador actualizado (BioStar 2) y cliente BioStar 1 si aplica.</li>
+            <li>Lectoras BioEntry Plus (biometría) y/o XPass (RF) correctamente cableadas.</li>
+            <li>Red configurada (TCP/IP recomendado; RS-485 según topología).</li>
+            <li>Fuente de alimentación estabilizada, con respaldo (UPS recomendado) y correcta puesta a tierra.</li>
+            <li>Definición previa de niveles de acceso, horarios y excepciones operativas.</li>
+            <li>Catálogo de usuarios o credenciales iniciales para pruebas de aceptación.</li>
+        </ul>
+    </article>
 
-                <article class="guide-main-card">
-                    <h3>Paso a paso</h3>
-                    <ol class="guias-current-steps">
-                        <li>Revisa cableado Wiegand/OSDP, alimentación y tierra antes de energizar.</li>
-                        <li>Registra la lectora en la controladora y asigna puerta o zona correspondiente.</li>
-                        <li>Configura horarios, niveles de acceso y reglas anti-passback si aplica.</li>
-                        <li>Da de alta tarjetas o credenciales y asocia usuarios con su perfil.</li>
-                        <li>Valida aperturas, rechazos, eventos de puerta forzada y bloqueo remoto.</li>
-                        <li>Respalda la configuración y deja evidencia de pruebas de aceptación.</li>
-                    </ol>
-                </article>
+    <article class="guide-main-card">
+        <h3>Paso a paso</h3>
+        <ol class="guias-current-steps">
+            <li>
+                Verifica cableado de comunicación (TCP/IP, RS-485, Wiegand u OSDP), alimentación y tierra antes de energizar los dispositivos.
+            </li>
+            <li>
+                Inicia el servidor BioStar y realiza descubrimiento de lectoras:
+                <br>• BioStar 1: registro manual o por IP.
+                <br>• BioStar 2: auto-discovery o escaneo de red.
+            </li>
+            <li>
+                Registra cada lectora (BioEntry Plus / XPass) en el sistema y asigna puerta, zona y ubicación correspondiente.
+            </li>
+            <li>
+                Configura parámetros de comunicación:
+                <br>• IP fija
+                <br>• Protocolo (ONVIF)
+                <br>• RS-485 si aplica
+            </li>
+            <li>
+                Configura horarios, niveles de acceso, zonas y reglas como anti-passback según requerimientos del proyecto.
+            </li>
+            <li>
+                Da de alta usuarios:
+                <br>• Huellas en BioEntry Plus
+                <br>• Tarjetas en XPass
+                <br>Asocia cada usuario con su perfil de acceso.
+            </li>
+            <li>
+                Sincroniza configuraciones y credenciales desde BioStar hacia los dispositivos.
+            </li>
+            <li>
+                Valida funcionamiento:
+                <br>• Aperturas correctas
+                <br>• Rechazos
+                <br>• Eventos de puerta forzada
+                <br>• Puerta abierta prolongada
+                <br>• Bloqueo o desbloqueo remoto
+            </li>
+            <li>
+                Verifica que todos los eventos se registren correctamente.
+            </li>
+            <li>
+                Respalda la configuración del sistema y deja evidencia documentada.
+            </li>
+        </ol>
+    </article>
 
-                <article class="guide-mini-card">
-                    <h3>Buenas prácticas</h3>
-                    <ul class="guide-list">
-                        <li>Evita compartir credenciales entre áreas para mantener auditoría real por usuario.</li>
-                        <li>Implementa prueba de contingencia ante corte de energía y verifica modo fail-safe/fail-secure.</li>
-                        <li>Respalda base de datos de credenciales antes de cambios masivos de configuración.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-    </main>
+    <article class="guide-mini-card">
+        <h3>Buenas prácticas</h3>
+        <ul class="guide-list">
+            <li>Asignar credenciales individuales; evitar cuentas compartidas para mantener seguridad.</li>
+            <li>Implementar autenticación multifactor en accesos críticos (tarjeta + biometría).</li>
+            <li>Configurar correctamente modos fail-safe o fail-secure según normativa y tipo de puerta.</li>
+            <li>Realizar pruebas periódicas de contingencia (fallo eléctrico, caída de red, pérdida de comunicación).</li>
+            <li>Sincronizar hora (NTP) en todos los dispositivos para garantizar coherencia en eventos.</li>
+            <li>Aplicar actualizaciones de firmware y parches de BioStar en ventanas controladas.</li>
+            <li>Auditar logs regularmente para detectar accesos anómalos o fallos operativos.</li>
+            <li>Documentar cambios de configuración y mantener control de versiones del sistema.</li>
+        </ul>
+    </article>
+</div>
+</section>
+</main>
 
     <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
         <div class="container">
