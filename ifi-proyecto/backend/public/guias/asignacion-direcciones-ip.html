@@ -98,39 +98,94 @@
                 </div>
             </div>
 
-            <div class="guide-content-grid">
-                <article class="guide-mini-card">
-                    <h3>Antes de empezar</h3>
-                    <ul class="guide-list">
-                        <li>Plan de red con subredes definidas, VLAN aprobadas y políticas de acceso claras.</li>
-                        <li>Inventario inicial con serial, MAC y ubicación física de cada equipo.</li>
-                        <li>Herramientas básicas de validación de conectividad y tabla de documentación.</li>
-                    </ul>
-                </article>
+            <div class="guide-overview-text">
+    <h3 class="guias-current-title">Asignación de direcciones IP con DHCPsrv</h3>
+    <p class="guias-current-intro">
+        Configuración de un servidor DHCP local para asignar direcciones IP automáticamente a dispositivos de red.
+    </p>
+    <p class="guide-context">
+        El uso de DHCPsrv permite centralizar la asignación de IP, reducir errores manuales y agilizar la incorporación de nuevos equipos en la red.
+    </p>
+</div>
+</div>
 
-                <article class="guide-main-card">
-                    <h3>Paso a paso</h3>
-                    <ol class="guias-current-steps">
-                        <li>Reserva un segmento por tipo de dispositivo (cámaras, NVR, control de acceso).</li>
-                        <li>Define una convención de nombres y una tabla de inventario con MAC e IP.</li>
-                        <li>Configura IP estática o reservas DHCP según la política del cliente.</li>
-                        <li>Comprueba conectividad con ping, traceroute y acceso por puertos de gestión.</li>
-                        <li>Aplica VLAN y ACL cuando se requiera separar tráfico de videovigilancia.</li>
-                        <li>Actualiza la documentación de red con cambios y responsables.</li>
-                    </ol>
-                </article>
+<div class="guide-content-grid">
 
-                <article class="guide-mini-card">
-                    <h3>Buenas prácticas</h3>
-                    <ul class="guide-list">
-                        <li>Usa nomenclatura consistente para hostnames y etiquetas físicas en gabinete.</li>
-                        <li>Separa gestión y video en segmentos distintos cuando el tráfico sea elevado.</li>
-                        <li>Mantén historial de cambios para trazabilidad de incidentes de red.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-    </main>
+    <article class="guide-mini-card">
+        <h3>Antes de empezar</h3>
+        <ul class="guide-list">
+            <li>Descarga <a href="https://www.dhcpserver.de/cms/release_notes/2-5-2/">DHCPsrv 2.5.2</a> desde su web oficial.</li>
+            <li>Ejecuta el programa con permisos de administrador en un equipo conectado a la red.</li>
+            <li>Asegúrate de tener acceso al router (gateway) y conocer el rango de IP de tu red.</li>
+        </ul>
+    </article>
+
+    <article class="guide-main-card">
+        <h3>Paso a paso</h3>
+        <ol class="guias-current-steps">
+            <li>Descomprime el archivo descargado y ejecuta <strong>dhcpsrv.exe</strong>.</li>
+            <li>Abre el archivo de configuración <strong>dhcpsrv.ini</strong> con un editor de texto.</li>
+            <li>Define la máscara de red correspondiente.</li>
+            <li>Configura el rango de direcciones IP que se asignarán automáticamente.</li>
+            <li>Establece la puerta de enlace (gateway) de la red.</li>
+            <li>Configura los servidores DNS.</li>
+            <li>Guarda los cambios realizados en el archivo.</li>
+            <li>Instala el servicio DHCP (opcional).</li>
+            <li>Inicia el servidor DHCP.</li>
+            <li>Configura los dispositivos cliente en modo automático (DHCP).</li>
+        </ol>
+
+        <h4>Comandos útiles</h4>
+        <pre class="code-block">
+# Ejecutar servidor
+dhcpsrv.exe
+
+# Instalar como servicio
+dhcpsrv.exe -install
+
+# Iniciar servicio
+net start dhcpsrv
+        </pre>
+    </article>
+
+    <article class="guide-mini-card">
+        <h3>Ejemplo de configuración</h3>
+        <p class="guide-context">Archivo base recomendado para <strong>dhcpsrv.ini</strong>. Puedes copiarlo y adaptarlo al rango, gateway y DNS de tu red.</p>
+        <pre class="code-block" id="dhcpsrv-config-example">
+# Archivo: dhcpsrv.ini
+
+[GENERAL]
+SUBNETMASK=255.255.255.0
+
+[RANGE_SET]
+DHCPRANGE=192.168.1.100-192.168.1.200
+
+# Puerta de enlace
+ROUTER_0=192.168.1.1
+
+# Servidores DNS
+DNS_0=8.8.8.8
+DNS_1=8.8.4.4
+        </pre>
+        <button id="copy-dhcpsrv-config-btn" type="button" style="margin-top: 8px; border: 1px solid rgba(0, 33, 120, 0.3); background: #ffffff; color: #002178; border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer;">
+            Copiar ejemplo
+        </button>
+        <p id="copy-dhcpsrv-config-feedback" style="margin-top: 8px; font-size: 0.9rem; min-height: 1.2em;" aria-live="polite"></p>
+    </article>
+
+    <article class="guide-mini-card">
+        <h3>Buenas prácticas</h3>
+        <ul class="guide-list">
+            <li>No tener más de un servidor DHCP activo en la misma red.</li>
+            <li>Definir rangos de IP fuera del DHCP para dispositivos críticos (routers, NVR, servidores).</li>
+            <li>Documentar siempre el rango utilizado y la configuración aplicada.</li>
+            <li>Supervisar conflictos de IP y revisar logs del servidor si es necesario.</li>
+        </ul>
+    </article>
+
+</div>
+</section>
+</main>
 
     <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
         <div class="container">
@@ -173,5 +228,30 @@
 
     <script src="guias-data.js"></script>
     <script src="guias-shared.js"></script>
+    <script>
+        (function () {
+            const copyBtn = document.getElementById('copy-dhcpsrv-config-btn');
+            const configExample = document.getElementById('dhcpsrv-config-example');
+            const feedback = document.getElementById('copy-dhcpsrv-config-feedback');
+
+            if (!copyBtn || !configExample || !feedback) {
+                return;
+            }
+
+            copyBtn.addEventListener('click', async function () {
+                const textToCopy = configExample.textContent.trim();
+
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    feedback.textContent = 'Ejemplo copiado al portapapeles.';
+                    setTimeout(function () {
+                        feedback.textContent = '';
+                    }, 1800);
+                } catch (error) {
+                    feedback.textContent = 'No se pudo copiar automáticamente. Copia el bloque manualmente.';
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
