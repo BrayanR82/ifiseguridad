@@ -91,46 +91,61 @@
                 <figure class="guide-visual">
                     <img src="images/configuracion-camaras-ip/1.jpg" alt="Ilustración de configuración de cámara IP con red y monitoreo" loading="lazy">
                 </figure>
-                <div class="guide-overview-text">
-                    <h3 class="guias-current-title">Configuración de cámaras IP</h3>
-                    <p class="guias-current-intro">Guía técnica para implementar una cámara IP con calidad de imagen estable, red segura y acceso remoto controlado.</p>
-                    <p class="guide-context">Este flujo está orientado a instalaciones residenciales y comerciales pequeñas donde importa la claridad en evidencia, la continuidad de grabación y una puesta en marcha rápida sin perder seguridad.</p>
-                </div>
-            </div>
+<div class="guide-overview-text">
+    <h3 class="guias-current-title">Configuración de cámaras IP (Hikvision & Dahua)</h3>
+    <p class="guias-current-intro">
+        Guía técnica para implementar cámaras IP utilizando herramientas oficiales del fabricante: SADP Tool en Hikvision y ConfigTool en Dahua.
+    </p>
+    <p class="guide-context">
+        Este flujo está orientado a instalaciones residenciales y comerciales pequeñas donde importa la claridad en evidencia, la continuidad de grabación y una puesta en marcha rápida sin perder seguridad.
+    </p>
+</div>
+</div>
 
-            <div class="guide-content-grid">
-                <article class="guide-mini-card">
-                    <h3>Antes de empezar</h3>
-                    <ul class="guide-list">
-                        <li>Cámara IP con firmware actualizado, switch PoE o fuente certificada y cableado validado.</li>
-                        <li>Acceso a red local con direccionamiento definido y permisos de administración.</li>
-                        <li>Credenciales seguras y criterio de calidad (resolución, fps y retención) acordado con el cliente.</li>
-                    </ul>
-                </article>
+<div class="guide-content-grid">
 
-                <article class="guide-main-card">
-                    <h3>Paso a paso</h3>
-                    <ol class="guias-current-steps">
-                        <li>Conecta la cámara al switch PoE o a su fuente y verifica el enlace físico.</li>
-                        <li>Detecta el dispositivo con la herramienta del fabricante o un escaneo de red.</li>
-                        <li>Asigna IP fija en el rango de la instalación y configura puerta de enlace y DNS.</li>
-                        <li>Cambia las credenciales por defecto y activa autenticación fuerte.</li>
-                        <li>Ajusta resolución, FPS, compresión y perfiles de grabación según el escenario.</li>
-                        <li>Valida el stream principal y secundario desde VMS o NVR y documenta los parámetros finales.</li>
-                    </ol>
-                </article>
+    <article class="guide-mini-card">
+        <h3>Antes de empezar</h3>
+        <ul class="guide-list">
+            <li>Cámara IP Hikvision o Dahua con firmware actualizado, switch PoE o fuente certificada y cableado validado.</li>
+            <li>PC conectado a la misma red local con acceso a la instalación.</li>
+            <li>Herramientas oficiales instaladas: <a href="https://www.hikvision.com/es/support/tools/hitools/clea8b3e4ea7da90a9/" target="_blank" rel="noopener">SADP Tool</a> para Hikvision y <a href="https://dahuawiki.com/ConfigTool" target="_blank" rel="noopener">ConfigTool</a> para Dahua.
+                
+            </li>
+            <li>Acceso a red con direccionamiento definido y permisos de administración.</li>
+            <li>Credenciales seguras y criterios de calidad definidos (resolución, FPS y retención).</li>
+        </ul>
+    </article>
 
-                <article class="guide-mini-card">
-                    <h3>Buenas prácticas</h3>
-                    <ul class="guide-list">
-                        <li>Prioriza perfiles diferenciados para visualización en vivo y grabación para optimizar ancho de banda.</li>
-                        <li>Configura zonas de privacidad y máscaras cuando exista exposición a espacios sensibles.</li>
-                        <li>Documenta en acta final IP, puerto, usuario técnico, versión de firmware y posición física.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-    </main>
+    <article class="guide-main-card">
+        <h3>Paso a paso</h3>
+        <ol class="guias-current-steps">
+            <li>Conecta la cámara al switch PoE o a su fuente y verifica el enlace físico.</li>
+            <li>Abre la herramienta correspondiente:
+                <strong>SADP Tool</strong> (Hikvision) o <strong>ConfigTool</strong> (Dahua).</li>
+            <li>Detecta el dispositivo dentro de la red local.</li>
+            <li>Inicializa la cámara si es necesario (estableciendo contraseña de administrador).</li>
+            <li>Asigna una IP fija dentro del rango de la instalación y configura puerta de enlace y DNS.</li>
+            <li>Cambia credenciales por defecto y activa autenticación segura.</li>
+            <li>Ajusta resolución, FPS, compresión y perfiles de grabación según el escenario.</li>
+            <li>Valida el stream principal y secundario desde VMS, NVR o navegador.</li>
+            <li>Documenta la configuración final: IP, usuario técnico, ubicación y firmware.</li>
+        </ol>
+    </article>
+
+    <article class="guide-mini-card">
+        <h3>Buenas prácticas</h3>
+        <ul class="guide-list">
+            <li>Usar SADP Tool y ConfigTool únicamente en red local segura.</li>
+            <li>Evitar credenciales por defecto en cualquier dispositivo activo.</li>
+            <li>Asignar IPs de forma ordenada para evitar conflictos en red.</li>
+            <li>Registrar cada dispositivo con su ubicación física y parámetros de red.</li>
+        </ul>
+    </article>
+
+</div>
+</section>
+</main>
 
     <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
         <div class="container">
