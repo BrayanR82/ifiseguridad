@@ -14,6 +14,7 @@
         .gallery-item{border-radius:8px;overflow:hidden;background:#fff;width:92%;display:flex;align-items:center;justify-content:center}
         .gallery-item img{width:100%;height:220px;object-fit:cover;display:block;border-radius:6px;cursor:pointer;transition:transform .18s ease}
         .gallery-item img:hover{transform:scale(1.02)}
+        #gallery-container{display:contents}
         @media(max-width:700px){.gallery-grid .grid{grid-template-columns:repeat(2,1fr)}.gallery-item img{height:160px}}
         @media(min-width:900px){.gallery-item img{height:260px}}
         .gallery-hero{padding:40px 0}
@@ -193,42 +194,63 @@
         // Función para cargar imágenes desde Payload
         async function loadGalleryFromPayload() {
             try {
+                console.log('Intentando cargar galería desde Payload...');
+                
                 // Obtener imágenes de Payload ordenadas por el campo 'orden'
-                const response = await fetch('/api/galeria?limit=100&sort=-orden');
-                if (!response.ok) throw new Error('Error al cargar la galería');
+                const url = 'https://ifiseguridad.vercel.app/api/galeria?limit=100&sort=orden';
+                console.log('URL:', url);
+                
+                const response = await fetch(url);
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error Response:', errorText);
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
                 
                 const data = await response.json();
+                console.log('Datos recibidos:', data);
+                
                 const container = document.getElementById('gallery-container');
                 
                 // Limpiar contenedor
                 container.innerHTML = '';
                 
+                // Si no hay documentos, no hacer nada (solo mostrar las imágenes estáticas)
+                if (!data.docs || data.docs.length === 0) {
+                    console.log('No hay imágenes en Payload');
+                    initializeLightbox();
+                    return;
+                }
+                
                 // Renderizar cada elemento de la galería
+                let imagenesAgregadas = 0;
                 data.docs.forEach(item => {
-                    const imagenData = item.imagen;
-                    
-                    if (imagenData) {
+                    console.log('Procesando item:', item);
+                    if (item.imagenUrl) {
+                        imagenesAgregadas++;
                         const figure = document.createElement('figure');
                         figure.className = 'gallery-item';
                         
                         const img = document.createElement('img');
-                        img.src = imagenData.url;
+                        img.src = item.imagenUrl;
                         img.alt = item.titulo || 'Imagen de galería';
-                        img.style.cursor = 'pointer';
-                        img.style.transition = 'transform .18s ease';
                         
                         figure.appendChild(img);
                         container.appendChild(figure);
                     }
                 });
                 
+                console.log('Imágenes agregadas:', imagenesAgregadas);
+                
                 // Re-inicializar el lightbox después de cargar las imágenes
                 initializeLightbox();
             } catch (error) {
                 console.error('Error cargando galería:', error);
-                // Mostrar mensaje de error en la galería
-                const container = document.getElementById('gallery-container');
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Error al cargar la galería. Intenta recargar la página.</p>';
+                console.error('Stack:', error.stack);
+                // No mostrar mensaje de error visual - solo dejar las imágenes estáticas
             }
         }
 
