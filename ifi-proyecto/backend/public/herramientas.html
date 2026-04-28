@@ -258,6 +258,273 @@
             line-height: 1.7;
         }
 
+        .herramientas-separator {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 34px 0 22px;
+        }
+
+        .herramientas-separator::before,
+        .herramientas-separator::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 33, 120, 0.18), transparent);
+        }
+
+        .herramientas-separator span {
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 33, 120, 0.12);
+            color: var(--blue);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow: 0 10px 24px rgba(0, 33, 120, 0.06);
+        }
+
+        .software-downloads {
+            margin: 10px auto 90px;
+            max-width: 1160px;
+            padding: 0 20px;
+        }
+
+        .software-downloads-shell {
+            position: relative;
+            overflow: hidden;
+            border-radius: 34px;
+            padding: 30px;
+            background:
+                radial-gradient(circle at top left, rgba(0, 33, 120, 0.12), transparent 32%),
+                radial-gradient(circle at bottom right, rgba(0, 33, 120, 0.08), transparent 28%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(248, 249, 255, 0.9));
+            border: 1px solid rgba(0, 33, 120, 0.12);
+            box-shadow: 0 18px 50px rgba(0, 33, 120, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .software-downloads-header {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .software-downloads-header h2 {
+            margin: 0;
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            letter-spacing: -0.03em;
+        }
+
+        .software-downloads-header p {
+            margin: 0;
+            max-width: 760px;
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        .software-toolbar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .software-search {
+            flex: 1 1 320px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(0, 33, 120, 0.14);
+            background: rgba(255, 255, 255, 0.94);
+        }
+
+        .software-search svg {
+            flex: 0 0 auto;
+            color: var(--blue);
+        }
+
+        .software-search input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 0.98rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+        }
+
+        .software-chip-filter {
+            appearance: none;
+            border: 1px solid rgba(0, 33, 120, 0.14);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--blue);
+            border-radius: 999px;
+            padding: 12px 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .software-card {
+            position: relative;
+            display: grid;
+            gap: 14px;
+            padding: 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 33, 120, 0.12);
+            box-shadow: 0 14px 30px rgba(0, 33, 120, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            min-height: 230px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .software-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 34px rgba(0, 33, 120, 0.1);
+            border-color: rgba(0, 33, 120, 0.2);
+        }
+
+        .software-card-top {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .software-card h3 {
+            margin: 0;
+            font-size: 1.15rem;
+            letter-spacing: -0.02em;
+        }
+
+        .software-card .vendor {
+            color: var(--gray-text);
+            font-size: 0.92rem;
+            margin-top: 4px;
+        }
+
+        .software-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .software-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(0, 33, 120, 0.06);
+            color: var(--blue);
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 33, 120, 0.08);
+        }
+
+        .software-link {
+            word-break: break-word;
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            background: rgba(0, 33, 120, 0.03);
+            border: 1px solid rgba(0, 33, 120, 0.08);
+            border-radius: 16px;
+            padding: 12px 14px;
+            text-align: center;
+        }
+
+        .software-actions-inline {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            justify-content: center;
+        }
+
+        .software-mini-btn {
+            appearance: none;
+            border: none;
+            border-radius: 999px;
+            padding: 11px 14px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .software-mini-btn.primary {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--blue), #001650);
+            box-shadow: 0 12px 24px rgba(0, 33, 120, 0.16);
+        }
+
+        .software-mini-btn.secondary {
+            color: var(--blue);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 33, 120, 0.14);
+        }
+
+        .software-mini-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .software-empty {
+            display: none;
+            padding: 24px;
+            text-align: center;
+            color: var(--gray-text);
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 22px;
+            border: 1px dashed rgba(0, 33, 120, 0.18);
+        }
+
+        .software-notice {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--gray-text);
+            font-size: 0.92rem;
+        }
+
+        .software-notice strong {
+            color: var(--black);
+        }
+
+        @media (max-width: 640px) {
+            .software-downloads-shell {
+                padding: 22px;
+                border-radius: 26px;
+            }
+
+            .software-toolbar {
+                align-items: stretch;
+            }
+
+            .software-search,
+            .software-chip-filter {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 900px) {
             .herramientas-layout {
                 grid-template-columns: 1fr;
@@ -408,6 +675,37 @@
                 </div>
             </aside>
         </section>
+
+        <div class="herramientas-separator" aria-hidden="true"><span>Software</span></div>
+
+        <section class="software-downloads" aria-label="Descargar software">
+            <div class="software-downloads-shell">
+                <div class="software-downloads-header">
+                    <h2>Descargar Software</h2>
+                    <p>
+                        Un panel rápido para abrir o copiar herramientas clave de instalación y configuración. Busca por nombre o fabricante, filtra en un clic y accede al recurso correcto sin perder tiempo.
+                    </p>
+                </div>
+
+                <div class="software-toolbar">
+                    <label class="software-search" for="software-search-input">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/>
+                            <path d="M16.2 16.2 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <input id="software-search-input" type="search" placeholder="Buscar software, marca o uso...">
+                    </label>
+                    <button type="button" class="software-chip-filter" data-filter="all">Ver todo</button>
+                    <button type="button" class="software-chip-filter" data-filter="camaras">Cámaras</button>
+                    <button type="button" class="software-chip-filter" data-filter="acceso">Acceso</button>
+                    <button type="button" class="software-chip-filter" data-filter="red">Red</button>
+                </div>
+
+                <div class="software-grid" id="software-grid"></div>
+                <div class="software-empty" id="software-empty">No hay resultados con ese filtro. Prueba con otra palabra clave.</div>
+
+            </div>
+        </section>
     </main>
 
     <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
@@ -466,6 +764,80 @@
             const resultTotal = document.getElementById('resultado-total');
             const resultPerCamera = document.getElementById('resultado-por-camara');
 
+            const softwareGrid = document.getElementById('software-grid');
+            const softwareEmpty = document.getElementById('software-empty');
+            const softwareSearchInput = document.getElementById('software-search-input');
+            const filterButtons = Array.from(document.querySelectorAll('.software-chip-filter'));
+
+            const softwareTools = [
+                {
+                    name: 'SADP',
+                    vendor: 'Hikvision',
+                    category: 'camaras',
+                    tags: ['Descubrimiento', 'Cámaras', 'Red'],
+                    url: 'https://www.hikvision.com/es/support/tools/hitools/clea8b3e4ea7da90a9/',
+                    summary: 'Ubica dispositivos en red y deja lista la primera puesta en marcha.'
+                },
+                {
+                    name: 'ConfigTool',
+                    vendor: 'Dahua',
+                    category: 'camaras',
+                    tags: ['Configuración', 'IP', 'CCTV'],
+                    url: 'https://dahuawiki.com/ConfigTool',
+                    summary: 'Ajuste rápido de parámetros y direccionamiento en equipos Dahua.'
+                },
+                {
+                    name: 'BioStar 1',
+                    vendor: 'Suprema',
+                    category: 'acceso',
+                    tags: ['Acceso', 'Biometría', 'Control'],
+                    url: 'https://www.supremainc.com/en/support/biostar-1-pakage.asp',
+                    summary: 'Plataforma clásica para despliegues de control de acceso biométrico.'
+                },
+                {
+                    name: 'BioStar 2',
+                    vendor: 'Suprema',
+                    category: 'acceso',
+                    tags: ['Acceso', 'Plataforma', 'Gestión'],
+                    url: 'https://www.supremainc.com/en/platform/hybrid-security-platform-biostar-2.asp',
+                    summary: 'Gestión híbrida moderna para proyectos de seguridad y accesos.'
+                },
+                {
+                    name: 'Advanced IP Scanner',
+                    vendor: 'Famatech',
+                    category: 'red',
+                    tags: ['Escaneo', 'LAN', 'Red'],
+                    url: 'https://www.advanced-ip-scanner.com/es/download/',
+                    summary: 'Explora la red en segundos para encontrar equipos activos y servicios.'
+                },
+                {
+                    name: 'iVMS',
+                    vendor: 'Hikvision',
+                    category: 'camaras',
+                    tags: ['VMS', 'Visualización', 'CCTV'],
+                    url: 'https://www.hikvision.com/es/support/download/software/ivms4200-series/',
+                    summary: 'Visualización y administración centralizada de sistemas Hikvision.'
+                },
+                {
+                    name: 'DHCP Server',
+                    vendor: 'DHCP Server',
+                    category: 'red',
+                    tags: ['IP', 'Asignación', 'Red'],
+                    url: 'https://www.dhcpserver.de/cms/release_notes/2-5-2/',
+                    summary: 'Servidor DHCP ligero para pruebas, laboratorio o despliegues controlados.'
+                },
+                {
+                    name: 'CrystalDiskInfo',
+                    vendor: 'Crystal Dew World',
+                    category: 'red',
+                    tags: ['Diagnóstico', 'Disco', 'Monitoreo'],
+                    url: 'https://crystalmark.info/en/software/crystaldiskinfo/',
+                    summary: 'Monitorea la salud de discos duros con alertas de fallos y estado S.M.A.R.T.'
+                }
+            ];
+
+            let currentFilter = 'all';
+
             const bitrateByResolution = {
                 '720p': 1.5,
                 '1080p': 3,
@@ -494,6 +866,96 @@
                 }
                 return `${gb.toFixed(0)} GB`;
             }
+
+            function escapeHtml(value) {
+                return value
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('<', '&lt;')
+                    .replaceAll('>', '&gt;')
+                    .replaceAll('"', '&quot;')
+                    .replaceAll("'", '&#39;');
+            }
+
+            function renderSoftwareTools() {
+                const query = softwareSearchInput.value.trim().toLowerCase();
+
+                const filteredTools = softwareTools.filter((tool) => {
+                    const matchesFilter = currentFilter === 'all' || tool.category === currentFilter;
+                    const matchesQuery = !query || [tool.name, tool.vendor, tool.summary, tool.tags.join(' ')]
+                        .join(' ')
+                        .toLowerCase()
+                        .includes(query);
+                    return matchesFilter && matchesQuery;
+                });
+
+                softwareGrid.innerHTML = filteredTools.map((tool) => `
+                    <article class="software-card" data-category="${escapeHtml(tool.category)}">
+                        <div class="software-card-top">
+                            <div>
+                                <h3>${escapeHtml(tool.name)}</h3>
+                                <div class="vendor">${escapeHtml(tool.vendor)}</div>
+                            </div>
+                        </div>
+
+                        <div class="software-tags">
+                            ${tool.tags.map((tag) => `<span class="software-tag">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+
+                        <div class="software-link">${escapeHtml(tool.summary)}</div>
+
+                        <div class="software-actions-inline">
+                            <button type="button" class="software-mini-btn primary" data-open-url="${escapeHtml(tool.url)}">Abrir</button>
+                            <button type="button" class="software-mini-btn secondary" data-copy-url="${escapeHtml(tool.url)}">Copiar enlace</button>
+                        </div>
+                    </article>
+                `).join('');
+
+                softwareEmpty.style.display = filteredTools.length ? 'none' : 'block';
+            }
+
+            softwareGrid.addEventListener('click', async (event) => {
+                const button = event.target.closest('button[data-open-url], button[data-copy-url]');
+                if (!button) {
+                    return;
+                }
+
+                const url = button.dataset.openUrl || button.dataset.copyUrl;
+
+                if (button.dataset.openUrl) {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                    return;
+                }
+
+                try {
+                    await navigator.clipboard.writeText(url);
+                    const originalText = button.textContent;
+                    button.textContent = 'Copiado';
+                    window.setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 1200);
+                } catch (error) {
+                    window.prompt('Copia este enlace:', url);
+                }
+            });
+
+            softwareSearchInput.addEventListener('input', renderSoftwareTools);
+
+            filterButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    currentFilter = button.dataset.filter || 'all';
+                    filterButtons.forEach((item) => {
+                        item.style.background = item === button ? 'rgba(0, 33, 120, 0.08)' : 'rgba(255, 255, 255, 0.92)';
+                        item.style.color = item === button ? 'var(--blue)' : 'var(--blue)';
+                    });
+                    renderSoftwareTools();
+                });
+            });
+
+            filterButtons.forEach((button) => {
+                if ((button.dataset.filter || 'all') === 'all') {
+                    button.style.background = 'rgba(0, 33, 120, 0.08)';
+                }
+            });
 
             function calculateCapacity() {
                 const cameras = parsePositiveInt(camerasInput.value, 1);
@@ -534,6 +996,7 @@
             resetButton.addEventListener('click', resetCalculator);
 
             calculateCapacity();
+            renderSoftwareTools();
         }());
     </script>
 </body>
