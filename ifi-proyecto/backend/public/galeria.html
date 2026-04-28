@@ -72,7 +72,7 @@
 
         <section class="gallery-grid container">
             <div class="grid">
-                <!-- Usar imágenes y vídeo existentes en img/galeria -->
+                <!-- Imágenes estáticas existentes -->
                 <figure class="gallery-item"><img src="img/galeria/1.jpeg" alt="Imagen 1"></figure>
                 <figure class="gallery-item"><img src="img/galeria/2.jpeg" alt="Imagen 2"></figure>
                 <figure class="gallery-item"><img src="img/galeria/3.jpeg" alt="Imagen 3"></figure>
@@ -120,7 +120,6 @@
                 <figure class="gallery-item"><img src="img/galeria/45.jpeg" alt="Imagen 45"></figure>
                 <figure class="gallery-item"><img src="img/galeria/46.jpeg" alt="Imagen 46"></figure>
 
-
                 <figure class="gallery-item video-thumb">
                     <video src="img/galeria/video1.mp4" preload="metadata" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block"></video>
                 </figure>
@@ -136,6 +135,9 @@
                 <figure class="gallery-item video-thumb">
                     <video src="img/galeria/video2.mp4" preload="metadata" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block"></video>
                 </figure>
+
+                <!-- Imágenes cargadas dinámicamente desde Payload aparecerán aquí -->
+                <div id="gallery-container"></div>
             </div>
         </section>
     </main>
@@ -188,7 +190,50 @@
     <script src="guias/guias-data.js"></script>
     <script src="guias/guias-shared.js"></script>
     <script>
-        (function(){
+        // Función para cargar imágenes desde Payload
+        async function loadGalleryFromPayload() {
+            try {
+                // Obtener imágenes de Payload ordenadas por el campo 'orden'
+                const response = await fetch('/api/galeria?limit=100&sort=-orden');
+                if (!response.ok) throw new Error('Error al cargar la galería');
+                
+                const data = await response.json();
+                const container = document.getElementById('gallery-container');
+                
+                // Limpiar contenedor
+                container.innerHTML = '';
+                
+                // Renderizar cada elemento de la galería
+                data.docs.forEach(item => {
+                    const imagenData = item.imagen;
+                    
+                    if (imagenData) {
+                        const figure = document.createElement('figure');
+                        figure.className = 'gallery-item';
+                        
+                        const img = document.createElement('img');
+                        img.src = imagenData.url;
+                        img.alt = item.titulo || 'Imagen de galería';
+                        img.style.cursor = 'pointer';
+                        img.style.transition = 'transform .18s ease';
+                        
+                        figure.appendChild(img);
+                        container.appendChild(figure);
+                    }
+                });
+                
+                // Re-inicializar el lightbox después de cargar las imágenes
+                initializeLightbox();
+            } catch (error) {
+                console.error('Error cargando galería:', error);
+                // Mostrar mensaje de error en la galería
+                const container = document.getElementById('gallery-container');
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Error al cargar la galería. Intenta recargar la página.</p>';
+            }
+        }
+
+        // Función para inicializar el lightbox
+        function initializeLightbox() {
             const overlay = document.getElementById('lightbox-overlay');
             const overlayImg = document.getElementById('lightbox-img');
             const overlayVideo = document.getElementById('lightbox-video');
@@ -253,7 +298,10 @@
             document.addEventListener('keydown', e => {
                 if(e.key === 'Escape' && overlay.classList.contains('visible')) close();
             });
-        })();
+        }
+
+        // Cargar la galería cuando se carga la página
+        document.addEventListener('DOMContentLoaded', loadGalleryFromPayload);
     </script>
 </body>
 </html>
