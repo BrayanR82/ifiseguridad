@@ -9,21 +9,20 @@ export const Galeria: CollectionConfig = {
   // Configuración de la interfaz del administrador
   admin: {
     useAsTitle: 'titulo',
-    defaultColumns: ['titulo', 'imagen'],
+    defaultColumns: ['titulo', 'imagenUrl'],
   },
   fields: [
     {
       name: 'titulo',
       type: 'text',
-      required: true,
+      required: false,
       label: 'Título de la Imagen',
     },
     {
-      name: 'imagen',
-      type: 'relationship',
-      relationTo: 'media',
-      required: true,
-      label: 'Imagen',
+      name: 'imagenUrl',
+      type: 'text',
+      required: false,
+      label: 'URL de la Imagen (Link de PostImages)',
     },
     {
       name: 'descripcion',
