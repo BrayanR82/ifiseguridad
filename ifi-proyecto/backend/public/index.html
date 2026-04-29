@@ -6,13 +6,15 @@
     <title>IFI Seguridad | Seguridad Inteligente</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="img/logoifi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
             <a href="index.html" class="logo" style="flex: 0 0 auto;">
-                <img src="img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+                <img src="img/logoifi.png" alt="IFI Seguridad" width="32" height="32" style="height: 32px; width: auto;">
             </a>
             <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
                 <li><a href="#inicio" class="nav-link active">Inicio</a></li>
@@ -449,8 +451,8 @@
         }
     </style>
 
-    <script src="script.js"></script>
-    <script src="app-menu.js"></script>
+    <script src="script.js" defer></script>
+    <script src="app-menu.js" defer></script>
     <script>
         // Detector de sección activa en el viewport
         function updateActiveSection() {
