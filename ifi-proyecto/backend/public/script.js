@@ -2,6 +2,16 @@
  * IFI Seguridad - Frontend Logic con Conexión a CMS (Versión Vercel)
  */
 
+(function loadI18nWidget() {
+    if (document.getElementById('ifi-i18n-script')) return;
+
+    const script = document.createElement('script');
+    script.id = 'ifi-i18n-script';
+    script.src = new URL('i18n.js', window.location.href).href;
+    script.async = true;
+    document.head.appendChild(script);
+}());
+
 // 0. FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA
 function toggleMenu() {
     const hamburger = document.getElementById('hamburger');

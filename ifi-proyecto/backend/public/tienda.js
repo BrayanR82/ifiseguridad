@@ -2,6 +2,16 @@
  * IFI Seguridad - Lógica de la Tienda (Versión Ultra-Segura y Adaptativa)
  */
 
+(function loadI18nWidget() {
+    if (document.getElementById('ifi-i18n-script')) return;
+
+    const script = document.createElement('script');
+    script.id = 'ifi-i18n-script';
+    script.src = new URL('i18n.js', window.location.href).href;
+    script.async = true;
+    document.head.appendChild(script);
+}());
+
 // --- CONFIGURACIÓN ---
 const BASE_URL = 'https://ifiseguridad.vercel.app';
 

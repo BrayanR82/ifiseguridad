@@ -8,6 +8,17 @@ window.toggleMenu = function toggleMenu() {
   }
 };
 
+(function loadI18nWidget() {
+  if (document.getElementById('ifi-i18n-script')) return;
+
+  const script = document.createElement('script');
+  script.id = 'ifi-i18n-script';
+  const sharedScriptUrl = document.currentScript?.src || new URL('guias-shared.js', window.location.href).href;
+  script.src = new URL('../i18n.js', sharedScriptUrl).href;
+  script.async = true;
+  document.head.appendChild(script);
+}());
+
 document.addEventListener('click', (event) => {
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
