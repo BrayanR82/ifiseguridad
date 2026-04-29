@@ -193,6 +193,15 @@ window.addEventListener('scroll', () => {
 
     if (!cleaned) {
       visibleGuides = guides.slice();
+
+      if (isGuideDetailPage && currentGuideId) {
+        const currentGuideIndex = visibleGuides.findIndex((guide) => guide.id === currentGuideId);
+
+        if (currentGuideIndex > 0) {
+          const [currentGuide] = visibleGuides.splice(currentGuideIndex, 1);
+          visibleGuides.unshift(currentGuide);
+        }
+      }
     } else {
       const matches = guides.filter((guide) => {
         const haystack = normalize([guide.title, guide.summary, guide.intro].join(' '));
