@@ -91,47 +91,85 @@
                 <figure class="guide-visual">
                     <img src="images/gitlab-ubuntu-server/1.jpg" alt="Ilustración de gestión de repositorio GitLab desde Ubuntu Server" loading="lazy">
                 </figure>
-                <div class="guide-overview-text">
-                    <h3 class="guias-current-title">Gestión del repositorio con GitLab desde Ubuntu Server</h3>
-                    <p class="guias-current-intro">Guía operativa para administrar repositorios GitLab desde Ubuntu Server con buenas prácticas de ramas, revisión y automatización CI.</p>
-                    <p class="guide-context">En equipos técnicos, este flujo asegura consistencia de cambios, menor fricción al colaborar y mayor control antes de pasar a producción.</p>
-                </div>
-            </div>
+<div class="guide-overview-text">
+    <h3 class="guias-current-title">Subida de repositorio a GitLab desde Ubuntu Server</h3>
+    <p class="guias-current-intro">
+        Guía sencilla para subir un proyecto a GitLab desde Ubuntu Server usando Git, SSH y tokens de acceso.
+    </p>
+    <p class="guide-context">
+        Pensada para trabajar desde servidor, subir código de forma segura y mantener el repositorio actualizado sin complicaciones.
+    </p>
+</div>
+</div>
 
-            <div class="guide-content-grid">
-                <article class="guide-mini-card">
-                    <h3>Antes de empezar</h3>
-                    <ul class="guide-list">
-                        <li>Servidor Ubuntu con acceso SSH y Git instalado correctamente.</li>
-                        <li>Permisos en proyecto GitLab y estrategia de ramas documentada.</li>
-                        <li>Pipeline base para pruebas y validaciones automáticas en merge requests.</li>
-                    </ul>
-                </article>
+<div class="guide-content-grid">
+    <article class="guide-mini-card">
+        <h3>Antes de empezar</h3>
+        <ul class="guide-list">
+            <li>Servidor Ubuntu con acceso por SSH.</li>
+            <li>Git instalado (<code>sudo apt install git</code>).</li>
+            <li>Cuenta en GitLab y repositorio creado.</li>
+            <li>Token de acceso o clave SSH configurada.</li>
+            <li>Proyecto listo en el servidor.</li>
+        </ul>
+    </article>
 
-                <article class="guide-main-card">
-                    <h3>Paso a paso</h3>
-                    <ol class="guias-current-steps">
-                        <li>Instala Git y claves SSH en Ubuntu Server para acceso seguro al remoto.</li>
-                        <li>Clona el repositorio, configura el usuario local y la estrategia de ramas.</li>
-                        <li>Sincroniza cambios con pull --rebase y resuelve conflictos de forma limpia.</li>
-                        <li>Versiona con commits atómicos y mensajes descriptivos orientados a trazabilidad.</li>
-                        <li>Empuja ramas a GitLab y usa merge requests con revisión técnica.</li>
-                        <li>Integra pipeline CI para pruebas y despliegue controlado en producción.</li>
-                    </ol>
-                </article>
+    <article class="guide-main-card">
+        <h3>Paso a paso</h3>
+        <ol class="guias-current-steps">
+            <li>
+                Accede al servidor por SSH.
+            </li>
+            <li>
+                Entra en la carpeta del proyecto.
+            </li>
+            <li>
+                Inicializa Git:
+                <br><code>git init</code>
+            </li>
+            <li>
+                Añade los archivos:
+                <br><code>git add .</code>
+            </li>
+            <li>
+                Haz el primer commit:
+                <br><code>git commit -m "primer commit"</code>
+            </li>
+            <li>
+                Copia los comandos que te da GitLab al crear el repositorio.
+            </li>
+            <li>
+                Añade el repositorio remoto:
+                <br><code>git remote add origin URL_DEL_REPO</code>
+            </li>
+            <li>
+                Sube el proyecto:
+                <br><code>git push -u origin main</code>
+            </li>
+            <li>
+                Si pide acceso:
+                <br>• Usa token (usuario + token como contraseña)
+                <br>• O usa SSH si ya está configurado
+            </li>
+            <li>
+                Verifica en GitLab que los archivos se han subido correctamente.
+            </li>
+        </ol>
+    </article>
 
-                <article class="guide-mini-card">
-                    <h3>Buenas prácticas</h3>
-                    <ul class="guide-list">
-                        <li>Mantén commits pequeños y atómicos para facilitar revisión y rollback.</li>
-                        <li>Protege ramas principales y exige aprobación para fusionar cambios.</li>
-                        <li>Automatiza pruebas mínimas en CI para detectar errores antes del despliegue.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-    </main>
-
+    <article class="guide-mini-card">
+        <h3>Buenas prácticas</h3>
+        <ul class="guide-list">
+            <li>Usar SSH en lugar de usuario/contraseña para más seguridad.</li>
+            <li>Guardar el token en un lugar seguro (no compartirlo).</li>
+            <li>Subir cambios con frecuencia para no perder trabajo.</li>
+            <li>Verificar siempre en GitLab que todo está correcto.</li>
+            <li>Probar conexión antes de trabajar para evitar errores.</li>
+        </ul>
+    </article>
+</div>
+</section>
+</main>
     <footer style="background: linear-gradient(135deg, #1d1d1f 0%, #000000 100%); color: white; padding: 50px 20px 25px 20px;">
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
