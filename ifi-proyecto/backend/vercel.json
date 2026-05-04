@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/tienda", "destination": "/tienda.html" },
+    { "source": "/(.*)", "destination": "/$1" }
+  ]
 }
