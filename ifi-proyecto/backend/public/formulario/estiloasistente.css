@@ -33,19 +33,20 @@
 .back-button-container {
     display: none;
     text-align: center;
-    margin: 20px 0;
+    position: fixed;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    z-index: 9998;
+    width: max-content;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 768px) {
     .back-button-container {
-        position: fixed;
-        top: auto;
-        bottom: calc(10px + env(safe-area-inset-bottom));
+        bottom: 70px;
         left: 50%;
         transform: translateX(-50%);
-        margin: 0;
-        z-index: 9998;
-        width: max-content;
     }
 }
 
