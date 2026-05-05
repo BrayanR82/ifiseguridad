@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=IE9">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Formulario | IFI Seguridad</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../img/logoifi.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./estiloasistente.css" type="text/css">
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function pushNewDataLayer() {}
+        function qAnswering(q) {
+            qShow(q, q.closest('.funnel-q').offset().top);
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="./common-reco.js"></script>
+    <script src="./app-reco.js"></script>
+</head>
+<body id="page" class="lang-es funnel-reco loaded">
+    <nav class="navbar">
+        <div class="container nav-content" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+            <a href="../index.html" class="logo" style="flex: 0 0 auto;">
+                <img src="../img/logoifi.png" alt="IFI Seguridad" style="height: 32px; width: auto;">
+            </a>
+            <ul class="nav-links desktop-nav" style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0;">
+                <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                <li><a href="../tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="../contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-action-links">
+                <a href="../guias.html" class="nav-pill-link">Guías</a>
+            </div>
+            <ul class="nav-links mobile-nav-links" style="display: none; margin: 0;">
+                <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                <li><a href="../tienda.html" class="nav-link">Tienda</a></li>
+                <li><a href="../contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="../guias.html" class="nav-pill-link">Guías</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section style="padding: 70px 20px 20px; text-align: center;">
+        <div class="wrapper">
+            <div class="fade-in" style="display: inline-block; background: rgba(0, 33, 120, 0.08); border-radius: 50px; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; color: var(--blue); font-weight: 600;">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <h1 class="fade-in" style="font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 20px; line-height: 1.2;">Formulario.</h1>
+        </div>
+    </section>
+
+    <div class="survey-layout">
+    <section class="funnel-qs" id="slides">
+        <div class="wrapper">
+            <article id="slide-1" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Que tipo de propiedad deseas proteger?</h3>
+                <form id="preg1" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg1_radio_1" class="vivienda-1">Vivienda</label><input type="radio" name="preg1_respuesta" value="Vivienda" id="preg1_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg1_radio_2" class="negocio-1">Negocio</label><input type="radio" name="preg1_respuesta" value="Negocio" id="preg1_radio_2"></div>
+                </form>
+            </article>
+
+            <article id="slide-2" class="funnel-q funnel-single in-path vivienda-first">
+                <h3 class="funnel-q__title">¿Es tu vivienda habitual o segunda vivienda?</h3>
+                <form id="preg2" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg2_radio_1">Vivienda habitual</label><input type="radio" name="preg2_respuesta" value="Vivienda habitual" id="preg2_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg2_radio_2">Segunda vivienda</label><input type="radio" name="preg2_respuesta" value="Segunda vivienda" id="preg2_radio_2"></div>
+                </form>
+            </article>
+
+            <article id="slide-3" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Como es tu vivienda?</h3>
+                <form id="preg3" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg3_radio_1">Piso</label><input type="radio" name="preg3_respuesta" value="Piso" id="preg3_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg3_radio_2">Chalet</label><input type="radio" name="preg3_respuesta" value="Chalet" id="preg3_radio_2"></div>
+                </form>
+            </article>
+
+            <article id="slide-3a" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Como es tu piso?</h3>
+                <form id="preg3a" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg3a_radio_1">Piso bajo</label><input type="radio" name="preg3a_respuesta" value="Piso bajo" id="preg3a_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg3a_radio_2">Piso intermedio</label><input type="radio" name="preg3a_respuesta" value="Piso intermedio" id="preg3a_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg3a_radio_3">Atico</label><input type="radio" name="preg3a_respuesta" value="Atico" id="preg3a_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-3b" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Como es tu chalet?</h3>
+                <form id="preg3b" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg3b_radio_1">Chalet individual</label><input type="radio" name="preg3b_respuesta" value="Chalet individual" id="preg3b_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg3b_radio_2">Adosado</label><input type="radio" name="preg3b_respuesta" value="Adosado" id="preg3b_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg3b_radio_3">Pareado</label><input type="radio" name="preg3b_respuesta" value="Pareado" id="preg3b_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-4" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Tiene accesos secundarios?</h3>
+                <form id="preg4" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg4_radio_1">Jardin o parcela</label><input type="radio" name="preg4_respuesta" value="Jardin o parcela" id="preg4_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg4_radio_2">Balcon o terraza</label><input type="radio" name="preg4_respuesta" value="Balcon o terraza" id="preg4_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg4_radio_3">No tiene</label><input type="radio" name="preg4_respuesta" value="No tiene" id="preg4_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-5" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cuanto tiempo pasa vacia?</h3>
+                <form id="preg5" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg5_radio_1">Mas de 5 horas al dia</label><input type="radio" name="preg5_respuesta" value="Mas de 5 horas al dia" id="preg5_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg5_radio_2">Entre 2 y 5 horas al dia</label><input type="radio" name="preg5_respuesta" value="Entre 2 y 5 horas al dia" id="preg5_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg5_radio_3">Menos de 2 horas al dia</label><input type="radio" name="preg5_respuesta" value="Menos de 2 horas al dia" id="preg5_radio_3"></div>
+                    <div class="input radio funnel-q__a"><label for="preg5_radio_4">Siempre hay alguien</label><input type="radio" name="preg5_respuesta" value="Siempre hay alguien" id="preg5_radio_4"></div>
+                </form>
+            </article>
+
+            <article id="slide-6" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cuanto tiempo pasa la vivienda deshabitada?</h3>
+                <form id="preg6" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg6_radio_1">Voy una o dos veces al ano</label><input type="radio" name="preg6_respuesta" value="Voy una o dos veces al ano" id="preg6_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg6_radio_2">Voy en vacaciones</label><input type="radio" name="preg6_respuesta" value="Voy en vacaciones" id="preg6_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg6_radio_3">Voy los fines de semana</label><input type="radio" name="preg6_respuesta" value="Voy los fines de semana" id="preg6_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-7" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿La vivienda es de tu propiedad?</h3>
+                <form id="preg7" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg7_radio_1">Soy propietario</label><input type="radio" name="preg7_respuesta" value="Soy propietario" id="preg7_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg7_radio_2">Vivo de alquiler</label><input type="radio" name="preg7_respuesta" value="Vivo de alquiler" id="preg7_radio_2"></div>
+                </form>
+            </article>
+
+            <article id="slide-8" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cual consideras que es el nivel de riesgo de la zona?</h3>
+                <form id="preg8" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg8_radio_1">Bajo (zona tranquila)</label><input type="radio" name="preg8_respuesta" value="Bajo (zona tranquila)" id="preg8_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg8_radio_2">Medio (urbano)</label><input type="radio" name="preg8_respuesta" value="Medio (urbano)" id="preg8_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg8_radio_3">Alto (aislado o conflictivo)</label><input type="radio" name="preg8_respuesta" value="Alto (aislado o conflictivo)" id="preg8_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-9" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Que areas especificas necesitas cubrir?</h3>
+                <form id="preg9" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg9_radio_1">Solo interior</label><input type="radio" name="preg9_respuesta" value="Solo interior" id="preg9_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg9_radio_2">Solo exterior</label><input type="radio" name="preg9_respuesta" value="Solo exterior" id="preg9_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg9_radio_3">Ambos (perimetral e interno)</label><input type="radio" name="preg9_respuesta" value="Ambos (perimetral e interno)" id="preg9_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-10" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Que elementos consideras imprescindibles?</h3>
+                <form id="preg10" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg10_radio_1">Camaras de vigilancia</label><input type="radio" name="preg10_respuesta" value="Camaras de vigilancia" id="preg10_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg10_radio_2">Sistema de alarma</label><input type="radio" name="preg10_respuesta" value="Sistema de alarma" id="preg10_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg10_radio_3">Solucion completa (todo)</label><input type="radio" name="preg10_respuesta" value="Solucion completa (todo)" id="preg10_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-11" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cual es tu rango de presupuesto estimado?</h3>
+                <form id="preg11" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg11_radio_1">Economico</label><input type="radio" name="preg11_respuesta" value="Economico" id="preg11_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg11_radio_2">Estandar</label><input type="radio" name="preg11_respuesta" value="Estandar" id="preg11_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg11_radio_3">Premium</label><input type="radio" name="preg11_respuesta" value="Premium" id="preg11_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-15" class="funnel-q funnel-input funnel-input__end in-path">
+                <h3 class="funnel-q__title">Para enviarte el resultado completo, dejanos tu nombre y email:</h3>
+                <form id="preg15" method="post" action="#" class="telf-cp">
+                    <div class="input radio funnel-q__input">
+                        <input type="text" name="nombre" id="preg15_input_name" autocomplete="name" required placeholder="Nombre">
+                        <input type="email" name="email" id="preg15_input_email" autocomplete="email" required placeholder="Email">
+                        <button class="funnel-btn disabled" disabled>Finalizar</button>
+                        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </div>
+                </form>
+            </article>
+
+            <article id="slide-16" class="funnel-q funnel-single in-path negocio-first">
+                <h3 class="funnel-q__title">¿Como es tu negocio?</h3>
+                <form id="preg16" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg16_radio_1">Negocio a pie de calle</label><input type="radio" name="preg16_respuesta" value="Negocio a pie de calle" id="preg16_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg16_radio_2">Local en centro comercial</label><input type="radio" name="preg16_respuesta" value="Local en centro comercial" id="preg16_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg16_radio_3">Nave en poligono industrial</label><input type="radio" name="preg16_respuesta" value="Nave en poligono industrial" id="preg16_radio_3"></div>
+                    <div class="input radio funnel-q__a"><label for="preg16_radio_4">Oficina en edificio empresarial</label><input type="radio" name="preg16_respuesta" value="Oficina en edificio empresarial" id="preg16_radio_4"></div>
+                </form>
+            </article>
+
+            <article id="slide-17" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Donde se encuentra el negocio?</h3>
+                <form id="preg17" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg17_radio_1">Dentro del nucleo urbano</label><input type="radio" name="preg17_respuesta" value="Dentro del nucleo urbano" id="preg17_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg17_radio_2">Fuera del nucleo urbano</label><input type="radio" name="preg17_respuesta" value="Fuera del nucleo urbano" id="preg17_radio_2"></div>
+                </form>
+            </article>
+
+            <article id="slide-18" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cuantos empleados tiene?</h3>
+                <form id="preg18" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg18_radio_1">Solo yo</label><input type="radio" name="preg18_respuesta" value="Solo yo" id="preg18_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg18_radio_2">De 2 a 5 empleados</label><input type="radio" name="preg18_respuesta" value="De 2 a 5 empleados" id="preg18_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg18_radio_3">Mas de 5 empleados</label><input type="radio" name="preg18_respuesta" value="Mas de 5 empleados" id="preg18_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-19" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Que horario tiene tu negocio?</h3>
+                <form id="preg19" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg19_radio_1">Solo mananas</label><input type="radio" name="preg19_respuesta" value="Solo mananas" id="preg19_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg19_radio_2">Solo tardes</label><input type="radio" name="preg19_respuesta" value="Solo tardes" id="preg19_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg19_radio_3">Mananas y tardes</label><input type="radio" name="preg19_respuesta" value="Mananas y tardes" id="preg19_radio_3"></div>
+                    <div class="input radio funnel-q__a"><label for="preg19_radio_4">Nocturno</label><input type="radio" name="preg19_respuesta" value="Nocturno" id="preg19_radio_4"></div>
+                    <div class="input radio funnel-q__a"><label for="preg19_radio_5">24 horas</label><input type="radio" name="preg19_respuesta" value="24 horas" id="preg19_radio_5"></div>
+                </form>
+            </article>
+
+            <article id="slide-20" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cual es tu rango de presupuesto estimado?</h3>
+                <form id="preg20" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg20_radio_1">Economico</label><input type="radio" name="preg20_respuesta" value="Economico" id="preg20_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg20_radio_2">Estandar</label><input type="radio" name="preg20_respuesta" value="Estandar" id="preg20_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg20_radio_3">Premium</label><input type="radio" name="preg20_respuesta" value="Premium" id="preg20_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-21" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Cual consideras que es el nivel de riesgo de la zona?</h3>
+                <form id="preg21" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg21_radio_1">Bajo (zona tranquila)</label><input type="radio" name="preg21_respuesta" value="Bajo (zona tranquila)" id="preg21_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg21_radio_2">Medio (urbano)</label><input type="radio" name="preg21_respuesta" value="Medio (urbano)" id="preg21_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg21_radio_3">Alto (aislado o conflictivo)</label><input type="radio" name="preg21_respuesta" value="Alto (aislado o conflictivo)" id="preg21_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-22" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Que areas especificas necesitas cubrir?</h3>
+                <form id="preg22" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg22_radio_1">Solo interior</label><input type="radio" name="preg22_respuesta" value="Solo interior" id="preg22_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg22_radio_2">Solo exterior</label><input type="radio" name="preg22_respuesta" value="Solo exterior" id="preg22_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg22_radio_3">Ambos (perimetral e interno)</label><input type="radio" name="preg22_respuesta" value="Ambos (perimetral e interno)" id="preg22_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-23" class="funnel-q funnel-single in-path">
+                <h3 class="funnel-q__title">¿Que elementos consideras imprescindibles?</h3>
+                <form id="preg23" method="post" action="#">
+                    <div class="input radio funnel-q__a"><label for="preg23_radio_1">Camaras de vigilancia</label><input type="radio" name="preg23_respuesta" value="Camaras de vigilancia" id="preg23_radio_1"></div>
+                    <div class="input radio funnel-q__a"><label for="preg23_radio_2">Sistema de alarma</label><input type="radio" name="preg23_respuesta" value="Sistema de alarma" id="preg23_radio_2"></div>
+                    <div class="input radio funnel-q__a"><label for="preg23_radio_3">Solucion completa (todo)</label><input type="radio" name="preg23_respuesta" value="Solucion completa (todo)" id="preg23_radio_3"></div>
+                </form>
+            </article>
+
+            <article id="slide-24" class="funnel-q funnel-input funnel-input__end in-path">
+                <h3 class="funnel-q__title">Para enviarte el resultado completo, dejanos tu nombre y email:</h3>
+                <form id="preg24" method="post" action="#" class="telf-cp">
+                    <div class="input radio funnel-q__input">
+                        <input type="text" name="nombre" id="preg24_input_name" autocomplete="name" required placeholder="Nombre">
+                        <input type="email" name="email" id="preg24_input_email" autocomplete="email" required placeholder="Email">
+                        <button class="funnel-btn disabled" disabled>Finalizar</button>
+                        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </div>
+                </form>
+            </article>
+        </div>
+    </section>
+
+    <div class="back-button-container">
+        <button id="back-btn" class="back-btn">
+            Volver
+        </button>
+    </div>
+
+    <div class="funnel-progress wrapper" style="margin-top: 30px; margin-bottom: 40px;">
+        <ul class="flex-container">
+            <li><div class="funnel-progress__tick"></div>Instalacion</li>
+            <li><div class="funnel-progress__tick"></div>Seguridad</li>
+            <li><div class="funnel-progress__tick"></div>Estudio</li>
+        </ul>
+        <div class="funnel-progress__bar"><div class="funnel-progress__bar-fill"></div></div>
+    </div>
+    </div>
+
+    <script src="../script.js" defer></script>
+    <script src="../i18n.js" defer></script>
+    <script src="../app-menu.js" defer></script>
+</body>
+</html>

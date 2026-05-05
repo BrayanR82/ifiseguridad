@@ -7,8 +7,9 @@
     // Detectar si estamos en una subcarpeta
     const pathname = window.location.pathname.toLowerCase();
     const isInGuiasFolder = pathname.includes('/guias/');
-    const basePath = isInGuiasFolder ? '../' : '';
-    const imgPath = isInGuiasFolder ? '../img/' : 'img/';
+    const isInFormularioFolder = pathname.includes('/formulario/');
+    const basePath = isInGuiasFolder || isInFormularioFolder ? '../' : '';
+    const imgPath = isInGuiasFolder || isInFormularioFolder ? '../img/' : 'img/';
 
     // HTML del menú flotante
     const menuHTML = `
@@ -60,12 +61,12 @@
                         <span>Galería</span>
                     </a>
 
-                    <!-- Asistente -->
-                    <a href="${basePath}asistente.html" class="app-menu-item" role="menuitem">
+                    <!-- Formulario -->
+                    <a href="${basePath}formulario/formulario.html" class="app-menu-item" role="menuitem">
                         <span class="app-menu-icon assistant">
-                            <img src="${imgPath}asistente.png" alt="Asistente">
+                            <img src="${imgPath}asistente.png" alt="Formulario">
                         </span>
-                        <span>Asistente</span>
+                        <span>Formulario</span>
                     </a>
 
                     <!-- Selector de Idioma -->
