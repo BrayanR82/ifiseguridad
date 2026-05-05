@@ -60,6 +60,14 @@
                         <span>Galería</span>
                     </a>
 
+                    <!-- Asistente -->
+                    <a href="${basePath}asistente.html" class="app-menu-item" role="menuitem">
+                        <span class="app-menu-icon assistant">
+                            <img src="${imgPath}asistente.png" alt="Asistente">
+                        </span>
+                        <span>Asistente</span>
+                    </a>
+
                     <!-- Selector de Idioma -->
                     <div class="app-menu-item language-selector-container" role="menuitem">
                         <span class="app-menu-icon language">
