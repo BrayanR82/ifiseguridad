@@ -20,8 +20,6 @@ Este proyecto implementa una solución completa de backend basada en **Payload C
 - ✅ **API GraphQL y REST**: Acceso flexible a los datos
 - ✅ **Containerización**: Completamente dockerizado para facilitar despliegue
 - ✅ **Desarrollo Local**: Soporte para MongoDB local o en contenedor
-- ✅ **Testing**: Suite de tests unitarios y e2e con Vitest y Playwright
-- ✅ **TypeScript**: Tipado completo para mayor seguridad
 
 ---
 
@@ -33,17 +31,11 @@ Este proyecto implementa una solución completa de backend basada en **Payload C
 - **CMS**: Payload CMS 3.78
 - **Base de Datos**: MongoDB
 - **Lenguaje**: TypeScript
-- **API**: GraphQL + REST
 
 ### DevOps
 - **Containerización**: Docker & Docker Compose
 - **Orquestación**: Docker Compose
 
-### Testing & Calidad
-- **Testing Unitario**: Vitest
-- **Testing E2E**: Playwright
-- **Linting**: ESLint
-- **Formateo**: Prettier
 
 ---
 
@@ -226,26 +218,6 @@ pnpm run test:e2e    # Ejecutar tests E2E (Playwright)
 ```bash
 pnpm run payload     # CLI de Payload CMS
 ```
-
----
-
-## 🧪 Testing
-
-El proyecto incluye dos tipos de testing:
-
-### Tests Unitarios (Vitest)
-```bash
-pnpm run test:int
-```
-Ubicados en `backend/tests/`
-
-### Tests E2E (Playwright)
-```bash
-pnpm run test:e2e
-```
-Configurados en `playwright.config.ts`
-
----
 
 ## 🐳 Operaciones con Docker
 
