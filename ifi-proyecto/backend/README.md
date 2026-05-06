@@ -1,67 +1,302 @@
-# Payload Blank Template
+# 🎯 Backend - IFI Seguridad CMS
 
-This template comes configured with the bare minimum to get started on anything you need.
+## 📋 Descripción
 
-## Quick start
+Backend de **IFI Seguridad** construido con **Payload CMS v3.78**, **Next.js 15.4**, **MongoDB** y **TypeScript**.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+Este módulo proporciona:
+- ✅ API REST y GraphQL completa
+- ✅ Panel administrativo intuitivo
+- ✅ Sistema de autenticación de usuarios
+- ✅ Gestión de medios con optimización
+- ✅ Testing automático (unitarios y E2E)
 
-## Quick Start - local setup
+---
 
-To spin up this template locally, follow these steps:
+## 🚀 Inicio Rápido
 
-### Clone
+### Requisitos
+- **Node.js**: v18 o superior
+- **pnpm**: v8 o superior
+- **MongoDB**: v6 o superior
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+### Instalación (Local)
 
-### Development
+1. **Configurar variables de entorno**
+   ```bash
+   cp .env.example .env
+   ```
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+2. **Instalar dependencias**
+   ```bash
+   pnpm install
+   ```
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+3. **Generar tipos**
+   ```bash
+   pnpm run generate:types
+   ```
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+4. **Iniciar desarrollo**
+   ```bash
+   pnpm run dev
+   ```
 
-#### Docker (Optional)
+5. **Acceder a la app**
+   - Frontend: http://localhost:3000
+   - Admin: http://localhost:3000/admin
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+---
 
-To do so, follow these steps:
+## 🐳 Instalación con Docker
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+Desde la carpeta raíz del proyecto (`ifi-proyecto/`):
 
-## How it works
+```bash
+docker-compose up
+```
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+La aplicación estará disponible en http://localhost:3000
 
-### Collections
+---
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+## 📖 Scripts Disponibles
 
-- #### Users (Authentication)
+```bash
+# Desarrollo
+pnpm run dev                    # Servidor de desarrollo
+pnpm run devsafe              # Limpiar cache y reiniciar
 
-  Users are auth-enabled collections that have access to the admin panel.
+# Producción
+pnpm run build                # Compilar para producción
+pnpm run start                # Iniciar servidor
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+# Generación de código
+pnpm run generate:types       # Generar tipos de Payload
+pnpm run generate:importmap   # Generar mapa de importaciones
 
-- #### Media
+# Calidad
+pnpm run lint                 # Ejecutar ESLint
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+# Testing
+pnpm run test               # Ejecutar todos los tests
+pnpm run test:int           # Tests unitarios (Vitest)
+pnpm run test:e2e           # Tests E2E (Playwright)
 
-### Docker
+# CMS
+pnpm run payload            # CLI de Payload
+```
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+---
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+## 📂 Estructura del Proyecto
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+```
+backend/
+├── src/
+│   ├── app/                 # Rutas y layouts Next.js
+│   ├── collections/         # Definiciones de colecciones
+│   │   ├── Media.ts        # Gestión de imágenes
+│   │   ├── Users.ts        # Autenticación y usuarios
+│   │   └── ...
+│   ├── components/          # Componentes React reutilizables
+│   ├── graphic/             # Tipos y grafos de datos
+│   ├── payload.config.ts    # ⚙️ Configuración principal
+│   └── globals.css          # Estilos globales
+├── public/                  # Archivos estáticos
+├── media/                   # Almacenamiento de imágenes
+├── tests/                   # Pruebas unitarias
+├── .env.example             # Variables de entorno
+├── package.json             # Dependencias
+├── tsconfig.json            # Configuración TypeScript
+├── next.config.mjs          # Configuración Next.js
+├── vitest.config.mts        # Testing unitarios
+└── playwright.config.ts     # Testing E2E
+```
 
-## Questions
+---
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+## 🔧 Configuración
+
+### Variables de Entorno (`.env`)
+
+```env
+# Base de datos
+MONGODB_URL=mongodb://localhost:27017/ifi-seguridad
+
+# Seguridad
+PAYLOAD_SECRET=tu_secret_aqui
+
+# API
+NEXT_PUBLIC_API_URL=http://localhost:3000
+
+# Puerto (opcional)
+PORT=3000
+```
+
+Ver `.env.example` para opciones adicionales.
+
+---
+
+## 📚 Colecciones
+
+### Users
+- Sistema de autenticación integrado
+- Acceso al panel administrativo
+- Gestión de roles y permisos
+
+### Media
+- Upload de imágenes
+- Redimensionamiento automático
+- Almacenamiento persistente
+- Optimización con Sharp
+
+---
+
+## 🧪 Testing
+
+### Tests Unitarios
+```bash
+pnpm run test:int
+```
+Configurados con **Vitest** en `vitest.config.mts`
+
+### Tests E2E
+```bash
+pnpm run test:e2e
+```
+Configurados con **Playwright** en `playwright.config.ts`
+
+---
+
+## 📡 API
+
+### REST API
+```bash
+GET    /api/your-collection
+POST   /api/your-collection
+GET    /api/your-collection/:id
+PATCH  /api/your-collection/:id
+DELETE /api/your-collection/:id
+```
+
+### GraphQL API
+```
+POST http://localhost:3000/api/graphql
+```
+
+Acceder a GraphQL Playground en modo desarrollo.
+
+---
+
+## 🔐 Almacenamiento de Medios
+
+Para configurar permisos correctly en Docker/Linux:
+
+```bash
+# Crear carpeta
+mkdir -p media
+
+# Asignar permisos
+sudo chown -R 1000:1000 media
+sudo chmod -R 775 media
+```
+
+En `docker-compose.yml`:
+```yaml
+volumes:
+  - ./backend/media:/home/node/app/media
+```
+
+---
+
+## 🎨 Tipado TypeScript
+
+El proyecto usa TypeScript para máxima seguridad de tipos. Genera tipos de Payload:
+
+```bash
+pnpm run generate:types
+```
+
+---
+
+## 📦 Dependencias Principales
+
+| Paquete | Versión | Propósito |
+|---------|---------|----------|
+| payload | 3.78.0 | CMS headless |
+| next | 15.4 | Framework React |
+| mongoose | - | Driver MongoDB |
+| typescript | 5.7 | Tipado estático |
+| vitest | 4.0 | Testing unitario |
+| @playwright/test | 1.58 | Testing E2E |
+
+---
+
+## 🚀 Deploy
+
+### Payload Cloud
+1. Pushear cambios a GitHub
+2. Conectar repo en Payload Cloud
+3. Deploy automático
+
+### Servidor propio
+```bash
+# Build
+pnpm run build
+
+# Deploy con Docker
+docker build -t ifi-seguridad:latest .
+docker run -p 3000:3000 ifi-seguridad:latest
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### MongoDB no funciona
+```bash
+# Verificar conexión
+# Editar .env con URL correcta
+MONGODB_URL=mongodb://localhost:27017/ifi-seguridad
+```
+
+### Puerto 3000 en uso
+```bash
+# Editar .env
+PORT=3001
+```
+
+### Limpiar cache
+```bash
+rm -rf .next node_modules/.vite
+pnpm run dev
+```
+
+### Permisos de media en Docker
+```bash
+docker-compose exec payload-app chmod -R 775 /home/node/app/media
+```
+
+---
+
+## 📚 Documentación
+
+- **Payload Docs**: https://payloadcms.com/docs
+- **Next.js Docs**: https://nextjs.org/docs
+- **MongoDB**: https://docs.mongodb.com/
+- **TypeScript**: https://www.typescriptlang.org/docs
+
+---
+
+## 📝 Notas de Desarrollo
+
+- Los cambios en `src/` se reflejan automáticamente en modo desarrollo
+- Regenerar tipos después de cambios en colecciones: `pnpm run generate:types`
+- Usar `pnpm` en lugar de `npm` para consistencia
+- Seguir la estructura de carpetas existente
+- Mantener tests actualizados con nuevas funcionalidades
+
+---
+
+**Proyecto Final de SMR** © 2026 Félix Carretero García & Brayan Valencia Rivera
