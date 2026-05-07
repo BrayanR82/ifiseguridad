@@ -1046,7 +1046,16 @@ footer {
 
 @media (max-width: 768px) {
     .navbar {
+        top: 20px;
         padding: 8px 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .navbar.navbar-hidden {
+        transform: none;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
     .nav-content {
@@ -1055,6 +1064,7 @@ footer {
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.78);
         backdrop-filter: blur(14px);
+        transition: none;
     }
 
     .logo,
@@ -1099,6 +1109,12 @@ footer {
 
     .logo {
         font-size: 1.15rem;
+    }
+
+    .hero {
+        height: auto;
+        padding-top: 102px;
+        padding-bottom: 40px;
     }
     
     .bento-grid {

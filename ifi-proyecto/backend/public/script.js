@@ -12,6 +12,14 @@
     document.head.appendChild(script);
 }());
 
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+});
+
 // 0. FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA
 function toggleMenu() {
     const hamburger = document.getElementById('hamburger');
@@ -48,8 +56,6 @@ window.addEventListener('scroll', () => {
     scrollTicking = true;
 
     window.requestAnimationFrame(() => {
-        navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
-
         const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
         navbar.classList.toggle('navbar-hidden', scrollingDown);
 

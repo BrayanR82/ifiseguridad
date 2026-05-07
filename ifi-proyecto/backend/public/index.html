@@ -28,7 +28,7 @@
                 <li><a href="index.html" class="nav-link active">Inicio</a></li>
                 <li><a href="tienda.html" class="nav-link">Tienda</a></li>
                 <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="guias.html" class="nav-pill-link">Guías</a></li>
+                <li><a href="guias.html" class="nav-link">Guías</a></li>
             </ul>
             <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
                 <span></span>
@@ -48,7 +48,7 @@
 
     <header id="inicio" class="hero">
         <div class="hero-content container" style="position: relative; z-index: 1;">
-            <div class="fade-in" style="display: inline-block; background: rgba(0, 33, 120, 0.08); border-radius: 50px; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; color: var(--blue); font-weight: 600;">IFI <span style="color: var(--blue);">Seguridad</span></div>
+            <div class="fade-in" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 33, 120, 0.08); border-radius: 999px; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; color: var(--blue); font-weight: 600;">IFI <span style="color: var(--blue);">Seguridad</span></div>
             <h1 class="fade-in" style="margin-top: 20px; line-height: 1.2;">La seguridad del futuro,<br>diseñada para hoy.</h1>
             <p class="fade-in" style="font-size: 1.35rem; margin-bottom: 45px; max-width: 650px; margin-left: auto; margin-right: auto;">Protección inteligente que aprende, se adapta y te mantiene al mando. Monitoreo 24/7 con tecnología IA que distingue lo que importa.</p>
             <div class="fade-in" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
@@ -470,10 +470,24 @@
                     currentSection = section.getAttribute('id');
                 }
             });
-            
+            // Si no se detecta sección activa y estamos en la página principal,
+            // forzamos que 'inicio' se considere la sección activa.
+            const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+            if (!currentSection && isIndexPage) {
+                currentSection = 'inicio';
+            }
+
             navLinks.forEach(link => {
+                // mantener la lógica normal pero asegurar que el enlace a #inicio
+                // en la página principal (tanto desktop como mobile) reciba la clase `active` permanentemente
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection}`) {
+                const href = link.getAttribute('href');
+                if (href === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+
+                // En móvil el enlace de inicio puede ser 'index.html', '/', o vacío.
+                if (isIndexPage && (href === '#inicio' || href === 'index.html' || href === '/' || href === '')) {
                     link.classList.add('active');
                 }
             });

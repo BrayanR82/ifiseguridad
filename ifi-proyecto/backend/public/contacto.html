@@ -16,9 +16,11 @@
         }
         .contact-header { text-align: center; margin-bottom: 50px; }
         .contact-kicker {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: rgba(0, 33, 120, 0.08);
-            border-radius: 50px;
+            border-radius: 999px;
             padding: 8px 16px;
             margin-bottom: 20px;
             font-size: 0.9rem;
@@ -40,6 +42,7 @@
         }
 
         @media (max-width: 768px) {
+            .contact-container { margin-top: 102px; }
             .contact-header h1 { font-size: 2.5rem; }
             .contact-header p { font-size: 1.2rem; }
         }
@@ -168,7 +171,7 @@
                 <li><a href="index.html" class="nav-link">Inicio</a></li>
                 <li><a href="tienda.html" class="nav-link">Tienda</a></li>
                 <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
-                <li><a href="guias.html" class="nav-pill-link">Guías</a></li>
+                <li><a href="guias.html" class="nav-link">Guías</a></li>
             </ul>
             <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
                 <span></span>
@@ -239,8 +242,6 @@
         scrollTicking = true;
 
         window.requestAnimationFrame(() => {
-            navbar.style.padding = currentScroll > 50 ? '10px 0' : '15px 0';
-
             const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
             navbar.classList.toggle('navbar-hidden', scrollingDown);
 
@@ -312,11 +313,6 @@
     // Efecto scroll navbar
     window.addEventListener('scroll', () => {
         const navbar = document.querySelector('.navbar');
-        if (window.pageYOffset > 50) {
-            navbar.style.padding = '10px';
-        } else {
-            navbar.style.padding = '20px';
-        }
     });
 </script>
 

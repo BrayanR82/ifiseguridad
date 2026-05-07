@@ -103,9 +103,11 @@
         }
 
         .tienda-kicker {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: rgba(0, 33, 120, 0.08);
-            border-radius: 50px;
+            border-radius: 999px;
             padding: 8px 16px;
             margin-bottom: 20px;
             font-size: 0.9rem;
@@ -908,7 +910,7 @@
         /* Responsive mejorado */
         @media (max-width: 768px) {
             .tienda-header {
-                padding: 96px 18px 122px 18px;
+                padding: 102px 18px 122px 18px;
             }
 
             .tienda-header .container::before {
@@ -957,7 +959,7 @@
 
         @media (max-width: 768px) {
             .tienda-header {
-                padding: 82px 15px 112px 15px;
+                padding: 102px 15px 112px 15px;
             }
 
             .tienda-header::before {
@@ -1036,7 +1038,7 @@
                 <li><a href="index.html" class="nav-link">Inicio</a></li>
                 <li><a href="tienda.html" class="nav-link active">Tienda</a></li>
                 <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-                <li><a href="guias.html" class="nav-pill-link">Guías</a></li>
+                <li><a href="guias.html" class="nav-link">Guías</a></li>
             </ul>
             <button class="hamburger" id="hamburger" onclick="toggleMenu()" style="flex: 0 0 auto;">
                 <span></span>

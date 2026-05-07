@@ -4,6 +4,14 @@
  */
 
 (function initAppMenu() {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    window.addEventListener('load', () => {
+        window.scrollTo(0, 0);
+    });
+
     // Detectar si estamos en una subcarpeta
     const pathname = window.location.pathname.toLowerCase();
     const isInGuiasFolder = pathname.includes('/guias/');
