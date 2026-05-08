@@ -44,8 +44,6 @@ window.addEventListener('scroll', () => {
   scrollTicking = true;
 
   window.requestAnimationFrame(() => {
-    navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
-
     const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
     navbar.classList.toggle('navbar-hidden', scrollingDown);
 

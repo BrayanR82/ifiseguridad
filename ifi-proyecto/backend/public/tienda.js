@@ -34,14 +34,11 @@ window.addEventListener('scroll', () => {
     if (!navbar) return;
 
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (scrollTicking) return;
     scrollTicking = true;
 
     window.requestAnimationFrame(() => {
-        navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
-
         const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
         navbar.classList.toggle('navbar-hidden', scrollingDown);
 
