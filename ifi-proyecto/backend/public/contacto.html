@@ -151,6 +151,8 @@
                 transform: translateY(-10px);
             }
         }
+        /* Ocultar elementos (footer / botones flotantes) cuando hay una pantalla modal/overlay */
+        .overlay-hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -204,7 +206,7 @@
         </form>
     </div>
 
-    <div id="success-screen" class="contact-container success-overlay">
+    <div id="success-screen" class="contact-container success-overlay" tabindex="-1">
         <div class="icon-circle">✓</div>
         <h1>¡Mensaje enviado!</h1>
         <p style="color: var(--gray-text); margin: 15px 0 30px;">
@@ -289,6 +291,22 @@
 
                 formWrapper.style.display = 'none';
                 successScreen.style.display = 'block';
+
+
+                // Ocultar footer y botones flotantes mientras se muestra la pantalla de éxito
+                const footer = document.querySelector('footer');
+                const whatsappBtn = document.querySelector('.whatsapp-button');
+                if (footer) footer.classList.add('overlay-hidden');
+                if (whatsappBtn) whatsappBtn.classList.add('overlay-hidden');
+
+                // Asegurarnos de que el mensaje de éxito quede visible sin necesidad de hacer scroll manual
+                try {
+                    successScreen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    successScreen.focus();
+                } catch (err) {
+                    // Fallback: aseguramos que la página vaya arriba
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
 
                 confetti({
                     particleCount: 100,
