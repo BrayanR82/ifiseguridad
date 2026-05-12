@@ -7,7 +7,8 @@
 
     const script = document.createElement('script');
     script.id = 'ifi-i18n-script';
-    script.src = new URL('i18n.js', window.location.href).href;
+    const currentScriptUrl = document.currentScript?.src || new URL('script.js', window.location.href).href;
+    script.src = new URL('i18n.js', currentScriptUrl).href;
     script.async = true;
     document.head.appendChild(script);
 }());

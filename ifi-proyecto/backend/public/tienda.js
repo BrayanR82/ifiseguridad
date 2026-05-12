@@ -7,7 +7,8 @@
 
     const script = document.createElement('script');
     script.id = 'ifi-i18n-script';
-    script.src = new URL('i18n.js', window.location.href).href;
+    const currentScriptUrl = document.currentScript?.src || new URL('tienda.js', window.location.href).href;
+    script.src = new URL('i18n.js', currentScriptUrl).href;
     script.async = true;
     document.head.appendChild(script);
 }());
@@ -34,14 +35,11 @@ window.addEventListener('scroll', () => {
     if (!navbar) return;
 
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (scrollTicking) return;
     scrollTicking = true;
 
     window.requestAnimationFrame(() => {
-        navbar.style.padding = currentScroll > 50 ? '10px' : '20px';
-
         const scrollingDown = currentScroll > lastScroll && currentScroll > 80;
         navbar.classList.toggle('navbar-hidden', scrollingDown);
 
